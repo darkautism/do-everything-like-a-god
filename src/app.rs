@@ -14,7 +14,6 @@ pub fn App() -> impl IntoView {
     let (lang, set_lang) = create_signal(Lang::Zh);
 
     view! {
-        <Stylesheet id="leptos" href="/pkg/do_everything_like_a_god.css"/>
         <Title text="做甚麼都有如神助 | Do Everything Like a God"/>
         
         <Router>
@@ -22,6 +21,7 @@ pub fn App() -> impl IntoView {
                 <div style="display:flex;gap:20px;align-items:center">
                     <A href="/" class="brand" style="text-decoration:none">"GOD MODE"</A>
                     <A href="/base64" class="nav-link">"Base64"</A>
+                    <A href="/html-escape" class="nav-link">"HTML Escape"</A>
                 </div>
                 <button class="lang-switch" on:click=move |_| {
                     set_lang.update(|l| *l = if *l == Lang::En { Lang::Zh } else { Lang::En });
@@ -36,9 +36,67 @@ pub fn App() -> impl IntoView {
                 <Routes>
                     <Route path="" view=move || view! { <HomePage lang=lang /> }/>
                     <Route path="/base64" view=move || view! { <Base64Page lang=lang /> }/>
+                    <Route path="/html-escape" view=move || view! { <HtmlEscapePage lang=lang /> }/>
                 </Routes>
             </main>
         </Router>
+    }
+}
+
+#[component]
+fn HtmlEscapePage(lang: ReadSignal<Lang>) -> impl IntoView {
+    let (input, set_input) = create_signal(String::new());
+    let (output, set_output) = create_signal(String::new());
+
+    let escape = move |val: String| {
+        let escaped = html_escape::encode_safe(&val).to_string();
+        set_input.set(val);
+        set_output.set(escaped);
+    };
+
+    let unescape = move |val: String| {
+        let unescaped = html_escape::decode_html_entities(&val).to_string();
+        set_output.set(val);
+        set_input.set(unescaped);
+    };
+
+    view! {
+        <div class="tool-container">
+            <h2 style="font-size:3rem;font-weight:900;margin:0">
+                {move || match lang.get() {
+                    Lang::En => "HTML Entity Escape",
+                    Lang::Zh => "HTML 實體轉義",
+                }}
+            </h2>
+            <div class="tool-grid">
+                <div class="box">
+                    <div class="box-label">
+                        {move || match lang.get() {
+                            Lang::En => "Unescaped / Raw",
+                            Lang::Zh => "原始 HTML",
+                        }}
+                    </div>
+                    <textarea 
+                        prop:value=input
+                        on:input=move |ev| escape(event_target_value(&ev))
+                        placeholder="<div>...</div>"
+                    ></textarea>
+                </div>
+                <div class="box">
+                    <div class="box-label">
+                        {move || match lang.get() {
+                            Lang::En => "Escaped Entities",
+                            Lang::Zh => "轉義結果",
+                        }}
+                    </div>
+                    <textarea 
+                        prop:value=output
+                        on:input=move |ev| unescape(event_target_value(&ev))
+                        placeholder="&lt;div&gt;...&lt;/div&gt;"
+                    ></textarea>
+                </div>
+            </div>
+        </div>
     }
 }
 
