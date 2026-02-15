@@ -1,0 +1,44 @@
+name: Build and Deploy WASM Tools
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: Install Trunk
+        run: cargo install trunk
+
+      - name: Build with Trunk
+        working-directory: do-everything-like-a-god
+        run: trunk build --release --public-url /do-everything-like-a-god/
+
+      - name: Post-build SEO Optimization
+        working-directory: do-everything-like-a-god/dist
+        run: |
+          # Copy index.html to subdirectories for SEO and direct access
+          for dir in base64 html-escape url-escape json hash jwt uuid regex; do
+            mkdir -p $dir
+            cp index.html $dir/
+          done
+          # Ensure 404.html exists in dist
+          cp ../404.html ./
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./do-everything-like-a-god/dist

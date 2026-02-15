@@ -1,0 +1,2371 @@
+2026-02-15T18:25:43.192475Z  INFO 🚀 Starting trunk 0.21.14
+2026-02-15T18:25:43.535480Z  INFO 📦 starting build
+   Compiling proc-macro2 v1.0.106
+   Compiling quote v1.0.44
+   Compiling serde_core v1.0.228
+   Compiling serde v1.0.228
+   Compiling wasm-bindgen-shared v0.2.108
+   Compiling rustversion v1.0.22
+   Compiling cfg-if v1.0.4
+   Compiling version_check v0.9.5
+   Compiling memchr v2.8.0
+   Compiling once_cell v1.21.3
+   Compiling thiserror v1.0.69
+   Compiling bumpalo v3.19.1
+   Compiling stable_deref_trait v1.2.1
+   Compiling unicode-ident v1.0.23
+   Compiling futures-core v0.3.32
+   Compiling futures-sink v0.3.32
+   Compiling parking_lot_core v0.9.12
+   Compiling pin-project-lite v0.2.16
+   Compiling futures-channel v0.3.32
+   Compiling slab v0.4.12
+   Compiling futures-task v0.3.32
+   Compiling litemap v0.8.1
+   Compiling futures-io v0.3.32
+   Compiling writeable v0.6.2
+   Compiling unicode-xid v0.2.6
+   Compiling libc v0.2.182
+   Compiling smallvec v1.15.1
+   Compiling syn v2.0.116
+   Compiling zmij v1.0.21
+   Compiling icu_normalizer_data v2.1.1
+   Compiling icu_properties_data v2.1.2
+   Compiling proc-macro-error-attr v1.0.4
+   Compiling zerocopy v0.8.39
+   Compiling equivalent v1.0.2
+   Compiling wasm-bindgen v0.2.108
+   Compiling itoa v1.0.17
+   Compiling serde_json v1.0.149
+   Compiling hashbrown v0.16.1
+   Compiling const_format_proc_macros v0.2.34
+   Compiling proc-macro-error v1.0.4
+   Compiling percent-encoding v2.3.2
+   Compiling indexmap v2.13.0
+   Compiling proc-macro-utils v0.10.0
+   Compiling proc-macro-utils v0.8.0
+   Compiling proc-macro2-diagnostics v0.10.1
+   Compiling slotmap v1.1.1
+   Compiling yansi v1.0.1
+   Compiling utf8_iter v1.0.4
+   Compiling ciborium-io v0.2.2
+   Compiling manyhow-macros v0.10.4
+   Compiling bytes v1.11.1
+   Compiling paste v1.0.15
+   Compiling anyhow v1.0.101
+   Compiling const_format v0.2.35
+   Compiling getrandom v0.4.1
+   Compiling synstructure v0.13.2
+   Compiling wasm-bindgen-macro-support v0.2.108
+   Compiling server_fn_macro v0.6.15
+   Compiling camino v1.2.2
+   Compiling scopeguard v1.2.0
+   Compiling manyhow v0.10.4
+   Compiling lock_api v0.4.14
+   Compiling http v1.4.0
+   Compiling form_urlencoded v1.2.2
+   Compiling tracing-core v0.1.36
+   Compiling toml_write v0.1.2
+   Compiling hashbrown v0.14.5
+   Compiling prettyplease v0.2.37
+   Compiling collection_literals v1.0.3
+   Compiling interpolator v0.5.0
+   Compiling same-file v1.0.6
+   Compiling winnow v0.7.14
+   Compiling walkdir v2.5.0
+   Compiling parking_lot v0.12.5
+   Compiling dashmap v5.5.3
+   Compiling proc-macro-error-attr2 v2.0.0
+   Compiling send_wrapper v0.6.0
+   Compiling aho-corasick v1.1.4
+   Compiling serde_derive v1.0.228
+   Compiling zerofrom-derive v0.1.6
+   Compiling yoke-derive v0.8.1
+   Compiling thiserror-impl v1.0.69
+   Compiling zerovec-derive v0.11.2
+   Compiling wasm-bindgen-macro v0.2.108
+   Compiling displaydoc v0.2.5
+   Compiling futures-macro v0.3.32
+   Compiling zerofrom v0.1.6
+   Compiling zerocopy-derive v0.8.39
+   Compiling tracing-attributes v0.1.31
+   Compiling futures-util v0.3.32
+   Compiling js-sys v0.3.85
+   Compiling pin-project-internal v1.1.10
+   Compiling quote-use-macros v0.8.4
+   Compiling yoke v0.8.1
+   Compiling zerovec v0.11.5
+   Compiling tinystr v0.8.2
+   Compiling icu_locale_core v2.1.1
+   Compiling potential_utf v0.1.4
+   Compiling zerotrie v0.2.3
+   Compiling icu_collections v2.1.1
+   Compiling icu_provider v2.1.1
+   Compiling futures-executor v0.3.32
+   Compiling icu_normalizer v2.1.1
+   Compiling icu_properties v2.1.2
+   Compiling futures v0.3.32
+   Compiling quote-use v0.8.4
+   Compiling syn_derive v0.1.8
+   Compiling attribute-derive-macro v0.9.2
+   Compiling pin-project v1.1.10
+   Compiling tracing v0.1.44
+   Compiling idna_adapter v1.2.1
+   Compiling idna v1.1.0
+   Compiling toml_datetime v0.6.11
+   Compiling serde_spanned v0.6.9
+   Compiling toml_edit v0.22.27
+   Compiling url v2.5.8
+   Compiling web-sys v0.3.85
+   Compiling wasm-bindgen-futures v0.4.58
+   Compiling rstml v0.11.2
+   Compiling serde-wasm-bindgen v0.6.5
+   Compiling oco_ref v0.1.1
+   Compiling serde_qs v0.12.0
+   Compiling derive-where v1.6.0
+   Compiling server_fn_macro_default v0.6.15
+   Compiling half v2.7.1
+   Compiling unicode-segmentation v1.12.0
+   Compiling ciborium-ll v0.2.2
+   Compiling minimal-lexical v0.2.1
+   Compiling ciborium v0.2.2
+   Compiling self_cell v1.2.2
+   Compiling regex-syntax v0.8.9
+   Compiling xxhash-rust v0.8.15
+   Compiling rustc-hash v1.1.0
+   Compiling base64 v0.22.1
+   Compiling nom v7.1.3
+   Compiling convert_case v0.6.0
+   Compiling toml v0.8.23
+   Compiling leptos_hot_reload v0.6.15
+   Compiling proc-macro-error2 v2.0.1
+   Compiling typed-builder-macro v0.18.2
+   Compiling uuid v1.21.0
+   Compiling regex-automata v0.4.14
+   Compiling either v1.15.0
+   Compiling pathdiff v0.2.3
+   Compiling utf8-width v0.1.8
+   Compiling html-escape v0.2.13
+   Compiling config v0.14.1
+   Compiling attribute-derive v0.9.2
+   Compiling itertools v0.12.1
+   Compiling getrandom v0.2.17
+   Compiling async-recursion v1.1.1
+   Compiling inventory v0.3.21
+   Compiling typed-builder v0.18.2
+   Compiling pad-adapter v0.1.1
+   Compiling lazy_static v1.5.0
+   Compiling drain_filter_polyfill v0.1.3
+   Compiling serde_test v1.0.177
+   Compiling serde_qs v0.13.0
+   Compiling linear-map v1.2.0
+   Compiling console_error_panic_hook v0.1.7
+   Compiling leptos_macro v0.6.15
+   Compiling regex v1.12.3
+   Compiling leptos_config v0.6.15
+   Compiling gloo-utils v0.2.0
+   Compiling leptos_reactive v0.6.15
+   Compiling gloo-net v0.6.0
+   Compiling wasm-streams v0.4.2
+   Compiling server_fn v0.6.15
+   Compiling leptos_server v0.6.15
+   Compiling leptos_dom v0.6.15
+   Compiling leptos v0.6.15
+   Compiling leptos_router v0.6.15
+   Compiling leptos_meta v0.6.15
+   Compiling do-everything-like-a-god v0.1.0 (/home/kautism/do-everything-like-a-god)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1m 29s
+2026-02-15T18:27:14.720985Z  INFO applying new distribution
+2026-02-15T18:27:14.721947Z  INFO ✅ success
+2026-02-15T18:27:14.722227Z  INFO 📡 serving static assets at -> /
+2026-02-15T18:27:14.723158Z  INFO 📡 server listening at:
+2026-02-15T18:27:14.723197Z  INFO     🏠 http://127.0.0.1:8080/
+2026-02-15T18:27:14.723221Z  INFO     🏠 http://[::1]:8080/
+2026-02-15T18:27:14.723652Z  INFO     🏠 http://localhost.:8080/
+2026-02-15T18:27:14.723715Z  INFO     🏠 http://ip6-localhost.:8080/
+2026-02-15T18:27:14.723739Z  INFO     🏠 http://ip6-loopback.:8080/
+2026-02-15T18:27:14.890292Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:16.393603Z  INFO applying new distribution
+2026-02-15T18:27:16.395783Z  INFO ✅ success
+2026-02-15T18:27:16.395836Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:17.936157Z  INFO applying new distribution
+2026-02-15T18:27:17.938434Z  INFO ✅ success
+2026-02-15T18:27:17.938494Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:19.476368Z  INFO applying new distribution
+2026-02-15T18:27:19.478286Z  INFO ✅ success
+2026-02-15T18:27:19.478342Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:21.044115Z  INFO applying new distribution
+2026-02-15T18:27:21.046102Z  INFO ✅ success
+2026-02-15T18:27:21.046140Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:22.552544Z  INFO applying new distribution
+2026-02-15T18:27:22.554842Z  INFO ✅ success
+2026-02-15T18:27:22.554902Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:24.064535Z  INFO applying new distribution
+2026-02-15T18:27:24.066990Z  INFO ✅ success
+2026-02-15T18:27:24.067065Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:25.650051Z  INFO applying new distribution
+2026-02-15T18:27:25.652587Z  INFO ✅ success
+2026-02-15T18:27:25.652651Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:27.193276Z  INFO applying new distribution
+2026-02-15T18:27:27.195015Z  INFO ✅ success
+2026-02-15T18:27:27.195104Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:28.747263Z  INFO applying new distribution
+2026-02-15T18:27:28.749080Z  INFO ✅ success
+2026-02-15T18:27:28.749146Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:30.317325Z  INFO applying new distribution
+2026-02-15T18:27:30.318985Z  INFO ✅ success
+2026-02-15T18:27:30.319046Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:31.837744Z  INFO applying new distribution
+2026-02-15T18:27:31.839631Z  INFO ✅ success
+2026-02-15T18:27:31.839660Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:33.364225Z  INFO applying new distribution
+2026-02-15T18:27:33.366071Z  INFO ✅ success
+2026-02-15T18:27:33.366135Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:34.865654Z  INFO applying new distribution
+2026-02-15T18:27:34.867231Z  INFO ✅ success
+2026-02-15T18:27:34.867312Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:36.357517Z  INFO applying new distribution
+2026-02-15T18:27:36.359324Z  INFO ✅ success
+2026-02-15T18:27:36.359409Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:37.891333Z  INFO applying new distribution
+2026-02-15T18:27:37.893093Z  INFO ✅ success
+2026-02-15T18:27:37.893174Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:39.365415Z  INFO applying new distribution
+2026-02-15T18:27:39.367210Z  INFO ✅ success
+2026-02-15T18:27:39.367286Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:40.856607Z  INFO applying new distribution
+2026-02-15T18:27:40.858386Z  INFO ✅ success
+2026-02-15T18:27:40.858457Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:42.385118Z  INFO applying new distribution
+2026-02-15T18:27:42.386982Z  INFO ✅ success
+2026-02-15T18:27:42.387054Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:43.880470Z  INFO applying new distribution
+2026-02-15T18:27:43.882065Z  INFO ✅ success
+2026-02-15T18:27:43.882133Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:45.771247Z  INFO applying new distribution
+2026-02-15T18:27:45.773145Z  INFO ✅ success
+2026-02-15T18:27:45.773288Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:47.262424Z  INFO applying new distribution
+2026-02-15T18:27:47.264192Z  INFO ✅ success
+2026-02-15T18:27:47.264256Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:48.775058Z  INFO applying new distribution
+2026-02-15T18:27:48.776886Z  INFO ✅ success
+2026-02-15T18:27:48.776960Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:50.257826Z  INFO applying new distribution
+2026-02-15T18:27:50.259521Z  INFO ✅ success
+2026-02-15T18:27:50.259589Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:51.771416Z  INFO applying new distribution
+2026-02-15T18:27:51.773677Z  INFO ✅ success
+2026-02-15T18:27:51.773714Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:53.295276Z  INFO applying new distribution
+2026-02-15T18:27:53.296826Z  INFO ✅ success
+2026-02-15T18:27:53.296888Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:54.794210Z  INFO applying new distribution
+2026-02-15T18:27:54.796494Z  INFO ✅ success
+2026-02-15T18:27:54.796553Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:56.323264Z  INFO applying new distribution
+2026-02-15T18:27:56.325009Z  INFO ✅ success
+2026-02-15T18:27:56.325071Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:57.841753Z  INFO applying new distribution
+2026-02-15T18:27:57.843527Z  INFO ✅ success
+2026-02-15T18:27:57.843598Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:27:59.356141Z  INFO applying new distribution
+2026-02-15T18:27:59.358079Z  INFO ✅ success
+2026-02-15T18:27:59.358116Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:01.113753Z  INFO applying new distribution
+2026-02-15T18:28:02.266641Z  INFO ✅ success
+2026-02-15T18:28:02.266731Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:03.783647Z  INFO applying new distribution
+2026-02-15T18:28:03.785440Z  INFO ✅ success
+2026-02-15T18:28:03.785505Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:05.307851Z  INFO applying new distribution
+2026-02-15T18:28:05.309380Z  INFO ✅ success
+2026-02-15T18:28:05.309436Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:06.781819Z  INFO applying new distribution
+2026-02-15T18:28:06.783336Z  INFO ✅ success
+2026-02-15T18:28:06.783370Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:08.286727Z  INFO applying new distribution
+2026-02-15T18:28:08.288130Z  INFO ✅ success
+2026-02-15T18:28:08.288159Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:09.786167Z  INFO applying new distribution
+2026-02-15T18:28:09.787947Z  INFO ✅ success
+2026-02-15T18:28:09.788038Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:11.255146Z  INFO applying new distribution
+2026-02-15T18:28:11.256950Z  INFO ✅ success
+2026-02-15T18:28:11.257021Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:12.724972Z  INFO applying new distribution
+2026-02-15T18:28:12.726286Z  INFO ✅ success
+2026-02-15T18:28:12.726319Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:14.229900Z  INFO applying new distribution
+2026-02-15T18:28:14.231649Z  INFO ✅ success
+2026-02-15T18:28:14.231711Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:15.736052Z  INFO applying new distribution
+2026-02-15T18:28:15.737896Z  INFO ✅ success
+2026-02-15T18:28:15.737970Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:17.257639Z  INFO applying new distribution
+2026-02-15T18:28:17.259310Z  INFO ✅ success
+2026-02-15T18:28:17.259391Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:18.773309Z  INFO applying new distribution
+2026-02-15T18:28:18.775360Z  INFO ✅ success
+2026-02-15T18:28:18.775425Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:20.272316Z  INFO applying new distribution
+2026-02-15T18:28:20.275808Z  INFO ✅ success
+2026-02-15T18:28:20.275877Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:21.757939Z  INFO applying new distribution
+2026-02-15T18:28:21.759246Z  INFO ✅ success
+2026-02-15T18:28:21.759269Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:23.325982Z  INFO applying new distribution
+2026-02-15T18:28:23.328353Z  INFO ✅ success
+2026-02-15T18:28:23.328413Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:24.848864Z  INFO applying new distribution
+2026-02-15T18:28:24.851396Z  INFO ✅ success
+2026-02-15T18:28:24.851475Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:26.355988Z  INFO applying new distribution
+2026-02-15T18:28:26.358429Z  INFO ✅ success
+2026-02-15T18:28:26.358498Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:27.855633Z  INFO applying new distribution
+2026-02-15T18:28:27.857474Z  INFO ✅ success
+2026-02-15T18:28:27.857543Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:29.388916Z  INFO applying new distribution
+2026-02-15T18:28:29.391532Z  INFO ✅ success
+2026-02-15T18:28:29.391606Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:30.915206Z  INFO applying new distribution
+2026-02-15T18:28:30.916555Z  INFO ✅ success
+2026-02-15T18:28:30.916585Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:32.445264Z  INFO applying new distribution
+2026-02-15T18:28:32.503535Z  INFO ✅ success
+2026-02-15T18:28:32.503616Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:34.023942Z  INFO applying new distribution
+2026-02-15T18:28:34.026237Z  INFO ✅ success
+2026-02-15T18:28:34.026266Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:35.529115Z  INFO applying new distribution
+2026-02-15T18:28:35.531023Z  INFO ✅ success
+2026-02-15T18:28:35.531050Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:36.986933Z  INFO applying new distribution
+2026-02-15T18:28:36.988781Z  INFO ✅ success
+2026-02-15T18:28:36.988853Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:38.474503Z  INFO applying new distribution
+2026-02-15T18:28:38.476193Z  INFO ✅ success
+2026-02-15T18:28:38.476267Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:39.964727Z  INFO applying new distribution
+2026-02-15T18:28:39.966421Z  INFO ✅ success
+2026-02-15T18:28:39.966486Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:41.464210Z  INFO applying new distribution
+2026-02-15T18:28:41.466182Z  INFO ✅ success
+2026-02-15T18:28:41.466244Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:42.956013Z  INFO applying new distribution
+2026-02-15T18:28:42.957833Z  INFO ✅ success
+2026-02-15T18:28:42.957894Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:44.462679Z  INFO applying new distribution
+2026-02-15T18:28:44.464556Z  INFO ✅ success
+2026-02-15T18:28:44.464627Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:45.965076Z  INFO applying new distribution
+2026-02-15T18:28:45.967026Z  INFO ✅ success
+2026-02-15T18:28:45.967105Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:47.473884Z  INFO applying new distribution
+2026-02-15T18:28:47.475704Z  INFO ✅ success
+2026-02-15T18:28:47.475766Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:49.018704Z  INFO applying new distribution
+2026-02-15T18:28:49.020566Z  INFO ✅ success
+2026-02-15T18:28:49.020634Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:50.532943Z  INFO applying new distribution
+2026-02-15T18:28:50.534793Z  INFO ✅ success
+2026-02-15T18:28:50.534856Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:52.027957Z  INFO applying new distribution
+2026-02-15T18:28:52.029570Z  INFO ✅ success
+2026-02-15T18:28:52.029603Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:53.498186Z  INFO applying new distribution
+2026-02-15T18:28:53.500174Z  INFO ✅ success
+2026-02-15T18:28:53.500212Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:55.008302Z  INFO applying new distribution
+2026-02-15T18:28:55.009660Z  INFO ✅ success
+2026-02-15T18:28:55.009687Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:56.500808Z  INFO applying new distribution
+2026-02-15T18:28:56.502687Z  INFO ✅ success
+2026-02-15T18:28:56.502758Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:57.963829Z  INFO applying new distribution
+2026-02-15T18:28:57.965620Z  INFO ✅ success
+2026-02-15T18:28:57.965653Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:28:59.478722Z  INFO applying new distribution
+2026-02-15T18:28:59.481048Z  INFO ✅ success
+2026-02-15T18:28:59.481083Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:01.059385Z  INFO applying new distribution
+2026-02-15T18:29:01.061597Z  INFO ✅ success
+2026-02-15T18:29:01.061665Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:02.622208Z  INFO applying new distribution
+2026-02-15T18:29:02.625026Z  INFO ✅ success
+2026-02-15T18:29:02.625103Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:04.179845Z  INFO applying new distribution
+2026-02-15T18:29:04.182068Z  INFO ✅ success
+2026-02-15T18:29:04.182139Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:05.741232Z  INFO applying new distribution
+2026-02-15T18:29:05.743920Z  INFO ✅ success
+2026-02-15T18:29:05.743994Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:07.247513Z  INFO applying new distribution
+2026-02-15T18:29:07.249436Z  INFO ✅ success
+2026-02-15T18:29:07.249464Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:08.776359Z  INFO applying new distribution
+2026-02-15T18:29:08.778214Z  INFO ✅ success
+2026-02-15T18:29:08.778279Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:10.352297Z  INFO applying new distribution
+2026-02-15T18:29:10.354178Z  INFO ✅ success
+2026-02-15T18:29:10.354256Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:11.874146Z  INFO applying new distribution
+2026-02-15T18:29:11.875948Z  INFO ✅ success
+2026-02-15T18:29:11.876023Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:13.393431Z  INFO applying new distribution
+2026-02-15T18:29:13.394746Z  INFO ✅ success
+2026-02-15T18:29:13.394815Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:14.877289Z  INFO applying new distribution
+2026-02-15T18:29:14.878783Z  INFO ✅ success
+2026-02-15T18:29:14.878816Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:16.451249Z  INFO applying new distribution
+2026-02-15T18:29:16.453136Z  INFO ✅ success
+2026-02-15T18:29:16.453207Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:17.940654Z  INFO applying new distribution
+2026-02-15T18:29:17.942297Z  INFO ✅ success
+2026-02-15T18:29:17.942357Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:19.451513Z  INFO applying new distribution
+2026-02-15T18:29:19.453273Z  INFO ✅ success
+2026-02-15T18:29:19.453339Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:21.374500Z  INFO applying new distribution
+2026-02-15T18:29:21.376185Z  INFO ✅ success
+2026-02-15T18:29:21.376250Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:23.913447Z  INFO applying new distribution
+2026-02-15T18:29:23.915782Z  INFO ✅ success
+2026-02-15T18:29:23.915808Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:25.464946Z  INFO applying new distribution
+2026-02-15T18:29:25.467615Z  INFO ✅ success
+2026-02-15T18:29:25.467696Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:27.016325Z  INFO applying new distribution
+2026-02-15T18:29:27.018114Z  INFO ✅ success
+2026-02-15T18:29:27.018175Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:28.506312Z  INFO applying new distribution
+2026-02-15T18:29:28.508359Z  INFO ✅ success
+2026-02-15T18:29:28.508419Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:29.991074Z  INFO applying new distribution
+2026-02-15T18:29:29.992926Z  INFO ✅ success
+2026-02-15T18:29:29.992970Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:31.526741Z  INFO applying new distribution
+2026-02-15T18:29:31.528579Z  INFO ✅ success
+2026-02-15T18:29:31.528646Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:33.031373Z  INFO applying new distribution
+2026-02-15T18:29:33.032882Z  INFO ✅ success
+2026-02-15T18:29:33.032965Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:34.551180Z  INFO applying new distribution
+2026-02-15T18:29:34.553003Z  INFO ✅ success
+2026-02-15T18:29:34.553035Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:36.124335Z  INFO applying new distribution
+2026-02-15T18:29:36.126882Z  INFO ✅ success
+2026-02-15T18:29:36.126946Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:37.704483Z  INFO applying new distribution
+2026-02-15T18:29:37.705830Z  INFO ✅ success
+2026-02-15T18:29:37.705866Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:39.224666Z  INFO applying new distribution
+2026-02-15T18:29:39.226551Z  INFO ✅ success
+2026-02-15T18:29:39.226624Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:40.766281Z  INFO applying new distribution
+2026-02-15T18:29:40.767619Z  INFO ✅ success
+2026-02-15T18:29:40.767644Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:42.280002Z  INFO applying new distribution
+2026-02-15T18:29:42.281878Z  INFO ✅ success
+2026-02-15T18:29:42.281942Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:43.821614Z  INFO applying new distribution
+2026-02-15T18:29:43.823653Z  INFO ✅ success
+2026-02-15T18:29:43.823725Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:45.331424Z  INFO applying new distribution
+2026-02-15T18:29:45.333183Z  INFO ✅ success
+2026-02-15T18:29:45.333217Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:46.831847Z  INFO applying new distribution
+2026-02-15T18:29:46.833402Z  INFO ✅ success
+2026-02-15T18:29:46.833439Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:48.465269Z  INFO applying new distribution
+2026-02-15T18:29:48.467334Z  INFO ✅ success
+2026-02-15T18:29:48.467445Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:49.999824Z  INFO applying new distribution
+2026-02-15T18:29:50.001527Z  INFO ✅ success
+2026-02-15T18:29:50.001597Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:51.515383Z  INFO applying new distribution
+2026-02-15T18:29:51.517350Z  INFO ✅ success
+2026-02-15T18:29:51.517410Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:53.034803Z  INFO applying new distribution
+2026-02-15T18:29:53.036639Z  INFO ✅ success
+2026-02-15T18:29:53.036718Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:54.581992Z  INFO applying new distribution
+2026-02-15T18:29:54.583771Z  INFO ✅ success
+2026-02-15T18:29:54.583838Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:56.039644Z  INFO applying new distribution
+2026-02-15T18:29:56.041374Z  INFO ✅ success
+2026-02-15T18:29:56.041439Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:57.538128Z  INFO applying new distribution
+2026-02-15T18:29:57.539571Z  INFO ✅ success
+2026-02-15T18:29:57.539601Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:29:59.083321Z  INFO applying new distribution
+2026-02-15T18:29:59.085283Z  INFO ✅ success
+2026-02-15T18:29:59.085360Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:00.608820Z  INFO applying new distribution
+2026-02-15T18:30:00.610858Z  INFO ✅ success
+2026-02-15T18:30:00.610923Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:02.117626Z  INFO applying new distribution
+2026-02-15T18:30:02.119249Z  INFO ✅ success
+2026-02-15T18:30:02.119341Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:03.623966Z  INFO applying new distribution
+2026-02-15T18:30:03.625679Z  INFO ✅ success
+2026-02-15T18:30:03.625742Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:05.149488Z  INFO applying new distribution
+2026-02-15T18:30:05.151299Z  INFO ✅ success
+2026-02-15T18:30:05.151362Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:06.655158Z  INFO applying new distribution
+2026-02-15T18:30:06.656968Z  INFO ✅ success
+2026-02-15T18:30:06.657040Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:08.113991Z  INFO applying new distribution
+2026-02-15T18:30:08.116022Z  INFO ✅ success
+2026-02-15T18:30:08.116051Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:09.615784Z  INFO applying new distribution
+2026-02-15T18:30:09.617691Z  INFO ✅ success
+2026-02-15T18:30:09.617757Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:11.180129Z  INFO applying new distribution
+2026-02-15T18:30:11.182546Z  INFO ✅ success
+2026-02-15T18:30:11.182616Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:12.728979Z  INFO applying new distribution
+2026-02-15T18:30:12.730936Z  INFO ✅ success
+2026-02-15T18:30:12.731007Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:14.215195Z  INFO applying new distribution
+2026-02-15T18:30:14.217191Z  INFO ✅ success
+2026-02-15T18:30:14.217260Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:15.714086Z  INFO applying new distribution
+2026-02-15T18:30:15.715856Z  INFO ✅ success
+2026-02-15T18:30:15.715913Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:17.214344Z  INFO applying new distribution
+2026-02-15T18:30:17.216226Z  INFO ✅ success
+2026-02-15T18:30:17.216297Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:18.694753Z  INFO applying new distribution
+2026-02-15T18:30:18.696355Z  INFO ✅ success
+2026-02-15T18:30:18.696415Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:20.232405Z  INFO applying new distribution
+2026-02-15T18:30:20.234343Z  INFO ✅ success
+2026-02-15T18:30:20.234402Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:21.748060Z  INFO applying new distribution
+2026-02-15T18:30:21.749890Z  INFO ✅ success
+2026-02-15T18:30:21.749954Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:23.293060Z  INFO applying new distribution
+2026-02-15T18:30:23.294937Z  INFO ✅ success
+2026-02-15T18:30:23.294994Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:24.792086Z  INFO applying new distribution
+2026-02-15T18:30:24.794984Z  INFO ✅ success
+2026-02-15T18:30:24.795056Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:26.308959Z  INFO applying new distribution
+2026-02-15T18:30:26.310623Z  INFO ✅ success
+2026-02-15T18:30:26.310690Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:27.817394Z  INFO applying new distribution
+2026-02-15T18:30:27.819582Z  INFO ✅ success
+2026-02-15T18:30:27.819655Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:29.381560Z  INFO applying new distribution
+2026-02-15T18:30:29.383411Z  INFO ✅ success
+2026-02-15T18:30:29.383478Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:30.890074Z  INFO applying new distribution
+2026-02-15T18:30:30.891971Z  INFO ✅ success
+2026-02-15T18:30:30.892028Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:32.394995Z  INFO applying new distribution
+2026-02-15T18:30:32.396699Z  INFO ✅ success
+2026-02-15T18:30:32.396772Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:33.909899Z  INFO applying new distribution
+2026-02-15T18:30:33.911635Z  INFO ✅ success
+2026-02-15T18:30:33.911732Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:35.468541Z  INFO applying new distribution
+2026-02-15T18:30:35.470874Z  INFO ✅ success
+2026-02-15T18:30:35.470945Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:36.982410Z  INFO applying new distribution
+2026-02-15T18:30:36.984182Z  INFO ✅ success
+2026-02-15T18:30:36.984251Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:39.992717Z  INFO applying new distribution
+2026-02-15T18:30:39.994526Z  INFO ✅ success
+2026-02-15T18:30:39.994609Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:41.514056Z  INFO applying new distribution
+2026-02-15T18:30:41.515577Z  INFO ✅ success
+2026-02-15T18:30:41.515635Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:43.025489Z  INFO applying new distribution
+2026-02-15T18:30:43.027467Z  INFO ✅ success
+2026-02-15T18:30:43.027531Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:44.540888Z  INFO applying new distribution
+2026-02-15T18:30:44.542223Z  INFO ✅ success
+2026-02-15T18:30:44.542248Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:46.040853Z  INFO applying new distribution
+2026-02-15T18:30:46.042170Z  INFO ✅ success
+2026-02-15T18:30:46.042202Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:47.541566Z  INFO applying new distribution
+2026-02-15T18:30:47.543352Z  INFO ✅ success
+2026-02-15T18:30:47.543426Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:49.048956Z  INFO applying new distribution
+2026-02-15T18:30:49.050628Z  INFO ✅ success
+2026-02-15T18:30:49.050693Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:50.531123Z  INFO applying new distribution
+2026-02-15T18:30:50.532805Z  INFO ✅ success
+2026-02-15T18:30:50.532874Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:52.039515Z  INFO applying new distribution
+2026-02-15T18:30:52.041501Z  INFO ✅ success
+2026-02-15T18:30:52.041535Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:53.507887Z  INFO applying new distribution
+2026-02-15T18:30:53.509275Z  INFO ✅ success
+2026-02-15T18:30:53.509317Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:55.018214Z  INFO applying new distribution
+2026-02-15T18:30:55.020336Z  INFO ✅ success
+2026-02-15T18:30:55.020402Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:56.524252Z  INFO applying new distribution
+2026-02-15T18:30:56.525713Z  INFO ✅ success
+2026-02-15T18:30:56.525782Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:58.088348Z  INFO applying new distribution
+2026-02-15T18:30:58.089817Z  INFO ✅ success
+2026-02-15T18:30:58.089853Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:30:59.616179Z  INFO applying new distribution
+2026-02-15T18:30:59.618004Z  INFO ✅ success
+2026-02-15T18:30:59.618069Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:01.085602Z  INFO applying new distribution
+2026-02-15T18:31:01.086995Z  INFO ✅ success
+2026-02-15T18:31:01.087079Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:02.594643Z  INFO applying new distribution
+2026-02-15T18:31:02.596680Z  INFO ✅ success
+2026-02-15T18:31:02.596746Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:04.087910Z  INFO applying new distribution
+2026-02-15T18:31:04.089672Z  INFO ✅ success
+2026-02-15T18:31:04.089746Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:05.609922Z  INFO applying new distribution
+2026-02-15T18:31:05.611666Z  INFO ✅ success
+2026-02-15T18:31:05.611724Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:07.148600Z  INFO applying new distribution
+2026-02-15T18:31:07.150053Z  INFO ✅ success
+2026-02-15T18:31:07.150090Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:08.697193Z  INFO applying new distribution
+2026-02-15T18:31:08.699033Z  INFO ✅ success
+2026-02-15T18:31:08.699091Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:10.221431Z  INFO applying new distribution
+2026-02-15T18:31:10.223643Z  INFO ✅ success
+2026-02-15T18:31:10.223714Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:11.761025Z  INFO applying new distribution
+2026-02-15T18:31:11.762656Z  INFO ✅ success
+2026-02-15T18:31:11.762685Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:13.275251Z  INFO applying new distribution
+2026-02-15T18:31:13.277083Z  INFO ✅ success
+2026-02-15T18:31:13.277182Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:14.813762Z  INFO applying new distribution
+2026-02-15T18:31:14.815792Z  INFO ✅ success
+2026-02-15T18:31:14.815817Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:16.368594Z  INFO applying new distribution
+2026-02-15T18:31:16.371118Z  INFO ✅ success
+2026-02-15T18:31:16.371189Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:17.909921Z  INFO applying new distribution
+2026-02-15T18:31:17.911645Z  INFO ✅ success
+2026-02-15T18:31:17.911737Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:19.423785Z  INFO applying new distribution
+2026-02-15T18:31:19.425654Z  INFO ✅ success
+2026-02-15T18:31:19.425687Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:20.950611Z  INFO applying new distribution
+2026-02-15T18:31:20.953057Z  INFO ✅ success
+2026-02-15T18:31:20.953134Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:22.441037Z  INFO applying new distribution
+2026-02-15T18:31:22.442992Z  INFO ✅ success
+2026-02-15T18:31:22.443025Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:23.975362Z  INFO applying new distribution
+2026-02-15T18:31:23.977314Z  INFO ✅ success
+2026-02-15T18:31:23.977390Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:25.495664Z  INFO applying new distribution
+2026-02-15T18:31:25.497760Z  INFO ✅ success
+2026-02-15T18:31:25.497789Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:26.991423Z  INFO applying new distribution
+2026-02-15T18:31:26.993527Z  INFO ✅ success
+2026-02-15T18:31:26.993564Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:28.522218Z  INFO applying new distribution
+2026-02-15T18:31:28.524689Z  INFO ✅ success
+2026-02-15T18:31:28.524758Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:30.034603Z  INFO applying new distribution
+2026-02-15T18:31:30.035920Z  INFO ✅ success
+2026-02-15T18:31:30.035950Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:31.570508Z  INFO applying new distribution
+2026-02-15T18:31:31.572292Z  INFO ✅ success
+2026-02-15T18:31:31.572358Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:33.085280Z  INFO applying new distribution
+2026-02-15T18:31:33.087241Z  INFO ✅ success
+2026-02-15T18:31:33.087314Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:34.634086Z  INFO applying new distribution
+2026-02-15T18:31:34.635428Z  INFO ✅ success
+2026-02-15T18:31:34.635454Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:36.156173Z  INFO applying new distribution
+2026-02-15T18:31:36.157882Z  INFO ✅ success
+2026-02-15T18:31:36.157946Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:37.635706Z  INFO applying new distribution
+2026-02-15T18:31:37.637672Z  INFO ✅ success
+2026-02-15T18:31:37.637749Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:39.144258Z  INFO applying new distribution
+2026-02-15T18:31:39.146274Z  INFO ✅ success
+2026-02-15T18:31:39.146345Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:40.659995Z  INFO applying new distribution
+2026-02-15T18:31:40.661885Z  INFO ✅ success
+2026-02-15T18:31:40.661978Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:42.176615Z  INFO applying new distribution
+2026-02-15T18:31:42.178094Z  INFO ✅ success
+2026-02-15T18:31:42.178124Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:43.672413Z  INFO applying new distribution
+2026-02-15T18:31:43.674094Z  INFO ✅ success
+2026-02-15T18:31:43.674160Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:45.202778Z  INFO applying new distribution
+2026-02-15T18:31:45.204547Z  INFO ✅ success
+2026-02-15T18:31:45.204609Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:46.679346Z  INFO applying new distribution
+2026-02-15T18:31:46.681082Z  INFO ✅ success
+2026-02-15T18:31:46.681146Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:48.131622Z  INFO applying new distribution
+2026-02-15T18:31:48.133140Z  INFO ✅ success
+2026-02-15T18:31:48.133176Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:49.689109Z  INFO applying new distribution
+2026-02-15T18:31:49.690870Z  INFO ✅ success
+2026-02-15T18:31:49.690936Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:51.212078Z  INFO applying new distribution
+2026-02-15T18:31:51.213933Z  INFO ✅ success
+2026-02-15T18:31:51.214009Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:52.689170Z  INFO applying new distribution
+2026-02-15T18:31:52.690807Z  INFO ✅ success
+2026-02-15T18:31:52.690870Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:54.198162Z  INFO applying new distribution
+2026-02-15T18:31:54.200080Z  INFO ✅ success
+2026-02-15T18:31:54.200146Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:55.711380Z  INFO applying new distribution
+2026-02-15T18:31:55.713441Z  INFO ✅ success
+2026-02-15T18:31:55.713512Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:57.241114Z  INFO applying new distribution
+2026-02-15T18:31:57.243031Z  INFO ✅ success
+2026-02-15T18:31:57.243097Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:31:58.721271Z  INFO applying new distribution
+2026-02-15T18:31:58.722764Z  INFO ✅ success
+2026-02-15T18:31:58.722795Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:00.213651Z  INFO applying new distribution
+2026-02-15T18:32:00.216148Z  INFO ✅ success
+2026-02-15T18:32:00.216220Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:01.721995Z  INFO applying new distribution
+2026-02-15T18:32:01.723947Z  INFO ✅ success
+2026-02-15T18:32:01.724011Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:03.229908Z  INFO applying new distribution
+2026-02-15T18:32:03.231881Z  INFO ✅ success
+2026-02-15T18:32:03.231951Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:04.774320Z  INFO applying new distribution
+2026-02-15T18:32:04.776279Z  INFO ✅ success
+2026-02-15T18:32:04.776356Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:06.308830Z  INFO applying new distribution
+2026-02-15T18:32:06.310691Z  INFO ✅ success
+2026-02-15T18:32:06.310751Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:07.838107Z  INFO applying new distribution
+2026-02-15T18:32:07.840080Z  INFO ✅ success
+2026-02-15T18:32:07.840143Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:09.370901Z  INFO applying new distribution
+2026-02-15T18:32:09.373436Z  INFO ✅ success
+2026-02-15T18:32:09.373495Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:10.887196Z  INFO applying new distribution
+2026-02-15T18:32:10.892471Z  INFO ✅ success
+2026-02-15T18:32:10.892542Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:12.443041Z  INFO applying new distribution
+2026-02-15T18:32:12.445099Z  INFO ✅ success
+2026-02-15T18:32:12.445170Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:13.950788Z  INFO applying new distribution
+2026-02-15T18:32:13.952510Z  INFO ✅ success
+2026-02-15T18:32:13.952567Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:15.414004Z  INFO applying new distribution
+2026-02-15T18:32:15.415838Z  INFO ✅ success
+2026-02-15T18:32:15.415899Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:17.032011Z  INFO applying new distribution
+2026-02-15T18:32:17.033846Z  INFO ✅ success
+2026-02-15T18:32:17.033909Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:18.547901Z  INFO applying new distribution
+2026-02-15T18:32:18.549230Z  INFO ✅ success
+2026-02-15T18:32:18.549256Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:20.051888Z  INFO applying new distribution
+2026-02-15T18:32:20.053696Z  INFO ✅ success
+2026-02-15T18:32:20.053762Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:21.536884Z  INFO applying new distribution
+2026-02-15T18:32:21.538223Z  INFO ✅ success
+2026-02-15T18:32:21.538258Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:23.098460Z  INFO applying new distribution
+2026-02-15T18:32:23.100325Z  INFO ✅ success
+2026-02-15T18:32:23.100395Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:24.605935Z  INFO applying new distribution
+2026-02-15T18:32:24.607947Z  INFO ✅ success
+2026-02-15T18:32:24.608022Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:26.101011Z  INFO applying new distribution
+2026-02-15T18:32:26.103097Z  INFO ✅ success
+2026-02-15T18:32:26.103166Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:27.595782Z  INFO applying new distribution
+2026-02-15T18:32:27.597902Z  INFO ✅ success
+2026-02-15T18:32:27.597979Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:29.114398Z  INFO applying new distribution
+2026-02-15T18:32:29.116795Z  INFO ✅ success
+2026-02-15T18:32:29.116883Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:30.592351Z  INFO applying new distribution
+2026-02-15T18:32:30.594119Z  INFO ✅ success
+2026-02-15T18:32:30.594187Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:32.112153Z  INFO applying new distribution
+2026-02-15T18:32:32.113935Z  INFO ✅ success
+2026-02-15T18:32:32.114000Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:33.643485Z  INFO applying new distribution
+2026-02-15T18:32:33.645114Z  INFO ✅ success
+2026-02-15T18:32:33.645173Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:35.156163Z  INFO applying new distribution
+2026-02-15T18:32:35.158226Z  INFO ✅ success
+2026-02-15T18:32:35.158303Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:36.641180Z  INFO applying new distribution
+2026-02-15T18:32:36.642498Z  INFO ✅ success
+2026-02-15T18:32:36.642522Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:38.157947Z  INFO applying new distribution
+2026-02-15T18:32:38.159717Z  INFO ✅ success
+2026-02-15T18:32:38.159783Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:39.676381Z  INFO applying new distribution
+2026-02-15T18:32:39.678113Z  INFO ✅ success
+2026-02-15T18:32:39.678171Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:41.252243Z  INFO applying new distribution
+2026-02-15T18:32:41.254235Z  INFO ✅ success
+2026-02-15T18:32:41.254308Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:42.764198Z  INFO applying new distribution
+2026-02-15T18:32:42.766067Z  INFO ✅ success
+2026-02-15T18:32:42.766095Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:44.316185Z  INFO applying new distribution
+2026-02-15T18:32:44.318006Z  INFO ✅ success
+2026-02-15T18:32:44.318067Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:45.850774Z  INFO applying new distribution
+2026-02-15T18:32:45.852369Z  INFO ✅ success
+2026-02-15T18:32:45.852420Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:47.379416Z  INFO applying new distribution
+2026-02-15T18:32:47.381295Z  INFO ✅ success
+2026-02-15T18:32:47.381326Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:48.910395Z  INFO applying new distribution
+2026-02-15T18:32:48.912211Z  INFO ✅ success
+2026-02-15T18:32:48.912242Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:50.440218Z  INFO applying new distribution
+2026-02-15T18:32:50.442449Z  INFO ✅ success
+2026-02-15T18:32:50.442484Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:51.961618Z  INFO applying new distribution
+2026-02-15T18:32:51.963598Z  INFO ✅ success
+2026-02-15T18:32:51.963701Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:53.510529Z  INFO applying new distribution
+2026-02-15T18:32:53.512965Z  INFO ✅ success
+2026-02-15T18:32:53.513035Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:55.024824Z  INFO applying new distribution
+2026-02-15T18:32:55.026811Z  INFO ✅ success
+2026-02-15T18:32:55.026882Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:56.502422Z  INFO applying new distribution
+2026-02-15T18:32:56.504156Z  INFO ✅ success
+2026-02-15T18:32:56.504221Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:58.074240Z  INFO applying new distribution
+2026-02-15T18:32:58.076082Z  INFO ✅ success
+2026-02-15T18:32:58.076121Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:32:59.587276Z  INFO applying new distribution
+2026-02-15T18:32:59.589152Z  INFO ✅ success
+2026-02-15T18:32:59.589221Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:01.122918Z  INFO applying new distribution
+2026-02-15T18:33:01.124837Z  INFO ✅ success
+2026-02-15T18:33:01.124898Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:02.623455Z  INFO applying new distribution
+2026-02-15T18:33:02.625400Z  INFO ✅ success
+2026-02-15T18:33:02.625457Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:04.132394Z  INFO applying new distribution
+2026-02-15T18:33:04.134214Z  INFO ✅ success
+2026-02-15T18:33:04.134284Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:05.645321Z  INFO applying new distribution
+2026-02-15T18:33:05.647047Z  INFO ✅ success
+2026-02-15T18:33:05.647079Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:07.157092Z  INFO applying new distribution
+2026-02-15T18:33:07.159983Z  INFO ✅ success
+2026-02-15T18:33:07.160047Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:08.704195Z  INFO applying new distribution
+2026-02-15T18:33:08.705943Z  INFO ✅ success
+2026-02-15T18:33:08.706020Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:10.258918Z  INFO applying new distribution
+2026-02-15T18:33:10.260518Z  INFO ✅ success
+2026-02-15T18:33:10.260579Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:11.755372Z  INFO applying new distribution
+2026-02-15T18:33:11.757226Z  INFO ✅ success
+2026-02-15T18:33:11.757292Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:13.311261Z  INFO applying new distribution
+2026-02-15T18:33:13.312581Z  INFO ✅ success
+2026-02-15T18:33:13.312612Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:14.868998Z  INFO applying new distribution
+2026-02-15T18:33:14.870862Z  INFO ✅ success
+2026-02-15T18:33:14.870926Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:16.375435Z  INFO applying new distribution
+2026-02-15T18:33:16.377262Z  INFO ✅ success
+2026-02-15T18:33:16.377356Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:17.951760Z  INFO applying new distribution
+2026-02-15T18:33:17.953504Z  INFO ✅ success
+2026-02-15T18:33:17.953571Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:19.430405Z  INFO applying new distribution
+2026-02-15T18:33:19.431772Z  INFO ✅ success
+2026-02-15T18:33:19.431803Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:20.932047Z  INFO applying new distribution
+2026-02-15T18:33:20.933469Z  INFO ✅ success
+2026-02-15T18:33:20.933498Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:22.424265Z  INFO applying new distribution
+2026-02-15T18:33:22.426129Z  INFO ✅ success
+2026-02-15T18:33:22.426204Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:23.950306Z  INFO applying new distribution
+2026-02-15T18:33:23.952219Z  INFO ✅ success
+2026-02-15T18:33:23.952292Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:25.441228Z  INFO applying new distribution
+2026-02-15T18:33:25.443207Z  INFO ✅ success
+2026-02-15T18:33:25.443273Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:26.964626Z  INFO applying new distribution
+2026-02-15T18:33:26.966297Z  INFO ✅ success
+2026-02-15T18:33:26.966359Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:28.503751Z  INFO applying new distribution
+2026-02-15T18:33:28.505375Z  INFO ✅ success
+2026-02-15T18:33:28.505410Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:30.018794Z  INFO applying new distribution
+2026-02-15T18:33:30.020621Z  INFO ✅ success
+2026-02-15T18:33:30.020688Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:31.517492Z  INFO applying new distribution
+2026-02-15T18:33:31.519183Z  INFO ✅ success
+2026-02-15T18:33:31.519242Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:33.009291Z  INFO applying new distribution
+2026-02-15T18:33:33.011676Z  INFO ✅ success
+2026-02-15T18:33:33.011701Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:34.580443Z  INFO applying new distribution
+2026-02-15T18:33:34.582467Z  INFO ✅ success
+2026-02-15T18:33:34.582493Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:36.111787Z  INFO applying new distribution
+2026-02-15T18:33:36.113453Z  INFO ✅ success
+2026-02-15T18:33:36.113519Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:37.560944Z  INFO applying new distribution
+2026-02-15T18:33:37.563328Z  INFO ✅ success
+2026-02-15T18:33:37.563354Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:39.138248Z  INFO applying new distribution
+2026-02-15T18:33:39.141092Z  INFO ✅ success
+2026-02-15T18:33:39.141161Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:40.649426Z  INFO applying new distribution
+2026-02-15T18:33:40.651424Z  INFO ✅ success
+2026-02-15T18:33:40.651489Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:42.158005Z  INFO applying new distribution
+2026-02-15T18:33:42.159870Z  INFO ✅ success
+2026-02-15T18:33:42.159946Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:43.656852Z  INFO applying new distribution
+2026-02-15T18:33:43.658615Z  INFO ✅ success
+2026-02-15T18:33:43.658674Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:45.149274Z  INFO applying new distribution
+2026-02-15T18:33:45.151190Z  INFO ✅ success
+2026-02-15T18:33:45.151253Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:46.692757Z  INFO applying new distribution
+2026-02-15T18:33:46.694699Z  INFO ✅ success
+2026-02-15T18:33:46.694766Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:48.172976Z  INFO applying new distribution
+2026-02-15T18:33:48.174769Z  INFO ✅ success
+2026-02-15T18:33:48.174834Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:49.673662Z  INFO applying new distribution
+2026-02-15T18:33:49.675321Z  INFO ✅ success
+2026-02-15T18:33:49.675385Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:51.312754Z  INFO applying new distribution
+2026-02-15T18:33:51.314350Z  INFO ✅ success
+2026-02-15T18:33:51.314440Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:52.844307Z  INFO applying new distribution
+2026-02-15T18:33:52.846953Z  INFO ✅ success
+2026-02-15T18:33:52.847044Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:54.408796Z  INFO applying new distribution
+2026-02-15T18:33:54.410609Z  INFO ✅ success
+2026-02-15T18:33:54.410680Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:55.875310Z  INFO applying new distribution
+2026-02-15T18:33:55.877139Z  INFO ✅ success
+2026-02-15T18:33:55.877210Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:57.427191Z  INFO applying new distribution
+2026-02-15T18:33:57.429066Z  INFO ✅ success
+2026-02-15T18:33:57.429121Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:33:58.918526Z  INFO applying new distribution
+2026-02-15T18:33:58.920354Z  INFO ✅ success
+2026-02-15T18:33:58.920417Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:00.415705Z  INFO applying new distribution
+2026-02-15T18:34:00.417754Z  INFO ✅ success
+2026-02-15T18:34:00.417829Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:01.981451Z  INFO applying new distribution
+2026-02-15T18:34:01.983195Z  INFO ✅ success
+2026-02-15T18:34:01.983266Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:03.500035Z  INFO applying new distribution
+2026-02-15T18:34:03.501864Z  INFO ✅ success
+2026-02-15T18:34:03.501921Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:05.040435Z  INFO applying new distribution
+2026-02-15T18:34:05.042337Z  INFO ✅ success
+2026-02-15T18:34:05.042425Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:06.535302Z  INFO applying new distribution
+2026-02-15T18:34:06.537232Z  INFO ✅ success
+2026-02-15T18:34:06.537294Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:08.054367Z  INFO applying new distribution
+2026-02-15T18:34:08.056374Z  INFO ✅ success
+2026-02-15T18:34:08.056443Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:09.599137Z  INFO applying new distribution
+2026-02-15T18:34:09.600817Z  INFO ✅ success
+2026-02-15T18:34:09.600883Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:11.091405Z  INFO applying new distribution
+2026-02-15T18:34:11.093190Z  INFO ✅ success
+2026-02-15T18:34:11.093256Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:12.574409Z  INFO applying new distribution
+2026-02-15T18:34:12.576374Z  INFO ✅ success
+2026-02-15T18:34:12.576468Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:14.038151Z  INFO applying new distribution
+2026-02-15T18:34:14.040193Z  INFO ✅ success
+2026-02-15T18:34:14.040221Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:15.580958Z  INFO applying new distribution
+2026-02-15T18:34:15.582539Z  INFO ✅ success
+2026-02-15T18:34:15.582602Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:17.105651Z  INFO applying new distribution
+2026-02-15T18:34:17.107452Z  INFO ✅ success
+2026-02-15T18:34:17.107496Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:18.614593Z  INFO applying new distribution
+2026-02-15T18:34:18.616533Z  INFO ✅ success
+2026-02-15T18:34:18.616603Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:20.152904Z  INFO applying new distribution
+2026-02-15T18:34:20.154634Z  INFO ✅ success
+2026-02-15T18:34:20.154700Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:21.675508Z  INFO applying new distribution
+2026-02-15T18:34:21.677230Z  INFO ✅ success
+2026-02-15T18:34:21.677303Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:23.582923Z  INFO applying new distribution
+2026-02-15T18:34:23.584851Z  INFO ✅ success
+2026-02-15T18:34:23.584909Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:25.368577Z  INFO applying new distribution
+2026-02-15T18:34:25.370461Z  INFO ✅ success
+2026-02-15T18:34:25.370523Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:26.864092Z  INFO applying new distribution
+2026-02-15T18:34:26.865670Z  INFO ✅ success
+2026-02-15T18:34:26.865754Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:28.377566Z  INFO applying new distribution
+2026-02-15T18:34:28.379576Z  INFO ✅ success
+2026-02-15T18:34:28.379655Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:29.898175Z  INFO applying new distribution
+2026-02-15T18:34:29.899764Z  INFO ✅ success
+2026-02-15T18:34:29.899829Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:31.412438Z  INFO applying new distribution
+2026-02-15T18:34:31.414653Z  INFO ✅ success
+2026-02-15T18:34:31.414721Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:32.906336Z  INFO applying new distribution
+2026-02-15T18:34:32.908181Z  INFO ✅ success
+2026-02-15T18:34:32.908244Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:34.412291Z  INFO applying new distribution
+2026-02-15T18:34:34.414154Z  INFO ✅ success
+2026-02-15T18:34:34.414229Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:35.947106Z  INFO applying new distribution
+2026-02-15T18:34:35.949261Z  INFO ✅ success
+2026-02-15T18:34:35.949285Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:37.486795Z  INFO applying new distribution
+2026-02-15T18:34:37.488740Z  INFO ✅ success
+2026-02-15T18:34:37.488773Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:39.020357Z  INFO applying new distribution
+2026-02-15T18:34:39.022758Z  INFO ✅ success
+2026-02-15T18:34:39.022834Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:40.536741Z  INFO applying new distribution
+2026-02-15T18:34:40.539455Z  INFO ✅ success
+2026-02-15T18:34:40.539525Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:42.067008Z  INFO applying new distribution
+2026-02-15T18:34:42.069706Z  INFO ✅ success
+2026-02-15T18:34:42.069792Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:43.588179Z  INFO applying new distribution
+2026-02-15T18:34:43.590893Z  INFO ✅ success
+2026-02-15T18:34:43.590969Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:45.143611Z  INFO applying new distribution
+2026-02-15T18:34:45.145393Z  INFO ✅ success
+2026-02-15T18:34:45.145461Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:46.662999Z  INFO applying new distribution
+2026-02-15T18:34:46.664696Z  INFO ✅ success
+2026-02-15T18:34:46.664755Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:48.182193Z  INFO applying new distribution
+2026-02-15T18:34:48.183968Z  INFO ✅ success
+2026-02-15T18:34:48.184043Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:49.690858Z  INFO applying new distribution
+2026-02-15T18:34:49.692750Z  INFO ✅ success
+2026-02-15T18:34:49.692824Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:51.227615Z  INFO applying new distribution
+2026-02-15T18:34:51.229437Z  INFO ✅ success
+2026-02-15T18:34:51.229517Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:52.803839Z  INFO applying new distribution
+2026-02-15T18:34:52.805618Z  INFO ✅ success
+2026-02-15T18:34:52.805677Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:54.338581Z  INFO applying new distribution
+2026-02-15T18:34:54.340386Z  INFO ✅ success
+2026-02-15T18:34:54.340461Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:55.874683Z  INFO applying new distribution
+2026-02-15T18:34:55.876821Z  INFO ✅ success
+2026-02-15T18:34:55.876893Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:57.417266Z  INFO applying new distribution
+2026-02-15T18:34:57.419391Z  INFO ✅ success
+2026-02-15T18:34:57.419417Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:34:58.922395Z  INFO applying new distribution
+2026-02-15T18:34:58.924919Z  INFO ✅ success
+2026-02-15T18:34:58.924987Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:00.438898Z  INFO applying new distribution
+2026-02-15T18:35:00.440676Z  INFO ✅ success
+2026-02-15T18:35:00.440742Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:01.952031Z  INFO applying new distribution
+2026-02-15T18:35:01.954507Z  INFO ✅ success
+2026-02-15T18:35:01.954580Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:03.498361Z  INFO applying new distribution
+2026-02-15T18:35:03.500999Z  INFO ✅ success
+2026-02-15T18:35:03.501031Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:05.044939Z  INFO applying new distribution
+2026-02-15T18:35:05.046834Z  INFO ✅ success
+2026-02-15T18:35:05.046906Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:06.599954Z  INFO applying new distribution
+2026-02-15T18:35:06.602451Z  INFO ✅ success
+2026-02-15T18:35:06.602516Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:08.155183Z  INFO applying new distribution
+2026-02-15T18:35:08.157686Z  INFO ✅ success
+2026-02-15T18:35:08.157747Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:09.687697Z  INFO applying new distribution
+2026-02-15T18:35:09.689732Z  INFO ✅ success
+2026-02-15T18:35:09.689798Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:11.191852Z  INFO applying new distribution
+2026-02-15T18:35:11.193731Z  INFO ✅ success
+2026-02-15T18:35:11.193801Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:12.704290Z  INFO applying new distribution
+2026-02-15T18:35:12.706249Z  INFO ✅ success
+2026-02-15T18:35:12.706326Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:14.245937Z  INFO applying new distribution
+2026-02-15T18:35:14.247983Z  INFO ✅ success
+2026-02-15T18:35:14.248054Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:15.764290Z  INFO applying new distribution
+2026-02-15T18:35:15.766352Z  INFO ✅ success
+2026-02-15T18:35:15.766422Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:17.318992Z  INFO applying new distribution
+2026-02-15T18:35:17.320794Z  INFO ✅ success
+2026-02-15T18:35:17.320855Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:18.824672Z  INFO applying new distribution
+2026-02-15T18:35:18.826497Z  INFO ✅ success
+2026-02-15T18:35:18.826557Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:20.297527Z  INFO applying new distribution
+2026-02-15T18:35:20.299456Z  INFO ✅ success
+2026-02-15T18:35:20.299526Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:21.820352Z  INFO applying new distribution
+2026-02-15T18:35:21.822303Z  INFO ✅ success
+2026-02-15T18:35:21.822360Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:23.304471Z  INFO applying new distribution
+2026-02-15T18:35:23.306994Z  INFO ✅ success
+2026-02-15T18:35:23.307060Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:24.854247Z  INFO applying new distribution
+2026-02-15T18:35:24.856198Z  INFO ✅ success
+2026-02-15T18:35:24.856268Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:26.392684Z  INFO applying new distribution
+2026-02-15T18:35:26.394589Z  INFO ✅ success
+2026-02-15T18:35:26.394649Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:27.915160Z  INFO applying new distribution
+2026-02-15T18:35:27.917118Z  INFO ✅ success
+2026-02-15T18:35:27.917189Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:29.391398Z  INFO applying new distribution
+2026-02-15T18:35:29.393404Z  INFO ✅ success
+2026-02-15T18:35:29.393473Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:30.879210Z  INFO applying new distribution
+2026-02-15T18:35:30.881122Z  INFO ✅ success
+2026-02-15T18:35:30.881191Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:32.414545Z  INFO applying new distribution
+2026-02-15T18:35:32.416417Z  INFO ✅ success
+2026-02-15T18:35:32.416481Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:33.925415Z  INFO applying new distribution
+2026-02-15T18:35:33.927121Z  INFO ✅ success
+2026-02-15T18:35:33.927210Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:35.455832Z  INFO applying new distribution
+2026-02-15T18:35:35.457597Z  INFO ✅ success
+2026-02-15T18:35:35.457661Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:37.005383Z  INFO applying new distribution
+2026-02-15T18:35:37.007320Z  INFO ✅ success
+2026-02-15T18:35:37.007399Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:38.503206Z  INFO applying new distribution
+2026-02-15T18:35:38.505108Z  INFO ✅ success
+2026-02-15T18:35:38.505131Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:40.241940Z  INFO applying new distribution
+2026-02-15T18:35:40.243775Z  INFO ✅ success
+2026-02-15T18:35:40.243836Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:41.801669Z  INFO applying new distribution
+2026-02-15T18:35:41.803022Z  INFO ✅ success
+2026-02-15T18:35:41.803059Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:43.326447Z  INFO applying new distribution
+2026-02-15T18:35:43.328318Z  INFO ✅ success
+2026-02-15T18:35:43.328413Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:44.884174Z  INFO applying new distribution
+2026-02-15T18:35:44.885977Z  INFO ✅ success
+2026-02-15T18:35:44.886048Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:46.402129Z  INFO applying new distribution
+2026-02-15T18:35:46.404016Z  INFO ✅ success
+2026-02-15T18:35:46.404085Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:47.919430Z  INFO applying new distribution
+2026-02-15T18:35:47.921192Z  INFO ✅ success
+2026-02-15T18:35:47.921250Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:49.425352Z  INFO applying new distribution
+2026-02-15T18:35:49.427275Z  INFO ✅ success
+2026-02-15T18:35:49.427340Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:50.917345Z  INFO applying new distribution
+2026-02-15T18:35:50.919174Z  INFO ✅ success
+2026-02-15T18:35:50.919234Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:52.398941Z  INFO applying new distribution
+2026-02-15T18:35:52.400966Z  INFO ✅ success
+2026-02-15T18:35:52.401040Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:53.950916Z  INFO applying new distribution
+2026-02-15T18:35:53.953414Z  INFO ✅ success
+2026-02-15T18:35:53.953486Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:55.498686Z  INFO applying new distribution
+2026-02-15T18:35:55.501015Z  INFO ✅ success
+2026-02-15T18:35:55.501080Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:57.047264Z  INFO applying new distribution
+2026-02-15T18:35:57.048816Z  INFO ✅ success
+2026-02-15T18:35:57.048841Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:35:58.553974Z  INFO applying new distribution
+2026-02-15T18:35:58.555943Z  INFO ✅ success
+2026-02-15T18:35:58.556022Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:00.104208Z  INFO applying new distribution
+2026-02-15T18:36:00.105609Z  INFO ✅ success
+2026-02-15T18:36:00.105641Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:01.636537Z  INFO applying new distribution
+2026-02-15T18:36:01.638568Z  INFO ✅ success
+2026-02-15T18:36:01.638593Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:03.164964Z  INFO applying new distribution
+2026-02-15T18:36:03.166326Z  INFO ✅ success
+2026-02-15T18:36:03.166354Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:04.730882Z  INFO applying new distribution
+2026-02-15T18:36:04.732557Z  INFO ✅ success
+2026-02-15T18:36:04.732764Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:06.287992Z  INFO applying new distribution
+2026-02-15T18:36:06.289730Z  INFO ✅ success
+2026-02-15T18:36:06.289801Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:07.806242Z  INFO applying new distribution
+2026-02-15T18:36:07.807727Z  INFO ✅ success
+2026-02-15T18:36:07.807765Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:09.287629Z  INFO applying new distribution
+2026-02-15T18:36:09.289460Z  INFO ✅ success
+2026-02-15T18:36:09.289556Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:10.803510Z  INFO applying new distribution
+2026-02-15T18:36:10.805416Z  INFO ✅ success
+2026-02-15T18:36:10.805472Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:12.320777Z  INFO applying new distribution
+2026-02-15T18:36:12.322764Z  INFO ✅ success
+2026-02-15T18:36:12.322828Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:13.855000Z  INFO applying new distribution
+2026-02-15T18:36:13.856903Z  INFO ✅ success
+2026-02-15T18:36:13.856971Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:15.374395Z  INFO applying new distribution
+2026-02-15T18:36:15.375869Z  INFO ✅ success
+2026-02-15T18:36:15.375900Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:16.886979Z  INFO applying new distribution
+2026-02-15T18:36:16.888564Z  INFO ✅ success
+2026-02-15T18:36:16.888596Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:18.340609Z  INFO applying new distribution
+2026-02-15T18:36:18.341950Z  INFO ✅ success
+2026-02-15T18:36:18.341980Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:19.836210Z  INFO applying new distribution
+2026-02-15T18:36:19.838096Z  INFO ✅ success
+2026-02-15T18:36:19.838175Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:21.359425Z  INFO applying new distribution
+2026-02-15T18:36:21.361043Z  INFO ✅ success
+2026-02-15T18:36:21.361105Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:22.877128Z  INFO applying new distribution
+2026-02-15T18:36:22.878899Z  INFO ✅ success
+2026-02-15T18:36:22.878965Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:24.422726Z  INFO applying new distribution
+2026-02-15T18:36:24.424513Z  INFO ✅ success
+2026-02-15T18:36:24.424577Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:25.949273Z  INFO applying new distribution
+2026-02-15T18:36:25.951125Z  INFO ✅ success
+2026-02-15T18:36:25.951183Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:27.458295Z  INFO applying new distribution
+2026-02-15T18:36:27.460217Z  INFO ✅ success
+2026-02-15T18:36:27.460285Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:28.940091Z  INFO applying new distribution
+2026-02-15T18:36:28.941751Z  INFO ✅ success
+2026-02-15T18:36:28.941803Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:30.473876Z  INFO applying new distribution
+2026-02-15T18:36:30.475702Z  INFO ✅ success
+2026-02-15T18:36:30.475795Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:32.032080Z  INFO applying new distribution
+2026-02-15T18:36:32.033943Z  INFO ✅ success
+2026-02-15T18:36:32.034011Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:33.563750Z  INFO applying new distribution
+2026-02-15T18:36:33.566329Z  INFO ✅ success
+2026-02-15T18:36:33.566403Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:35.164471Z  INFO applying new distribution
+2026-02-15T18:36:35.166493Z  INFO ✅ success
+2026-02-15T18:36:35.166558Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:36.681806Z  INFO applying new distribution
+2026-02-15T18:36:36.683657Z  INFO ✅ success
+2026-02-15T18:36:36.683725Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:38.177355Z  INFO applying new distribution
+2026-02-15T18:36:38.179456Z  INFO ✅ success
+2026-02-15T18:36:38.179530Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:39.700117Z  INFO applying new distribution
+2026-02-15T18:36:39.701911Z  INFO ✅ success
+2026-02-15T18:36:39.701975Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:41.204394Z  INFO applying new distribution
+2026-02-15T18:36:41.205891Z  INFO ✅ success
+2026-02-15T18:36:41.205922Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:42.753245Z  INFO applying new distribution
+2026-02-15T18:36:42.755764Z  INFO ✅ success
+2026-02-15T18:36:42.755831Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:44.307872Z  INFO applying new distribution
+2026-02-15T18:36:44.309636Z  INFO ✅ success
+2026-02-15T18:36:44.309700Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:45.845926Z  INFO applying new distribution
+2026-02-15T18:36:45.847753Z  INFO ✅ success
+2026-02-15T18:36:45.847815Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:47.384827Z  INFO applying new distribution
+2026-02-15T18:36:47.386853Z  INFO ✅ success
+2026-02-15T18:36:47.386933Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:48.895167Z  INFO applying new distribution
+2026-02-15T18:36:48.897115Z  INFO ✅ success
+2026-02-15T18:36:48.897185Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:50.423537Z  INFO applying new distribution
+2026-02-15T18:36:50.425536Z  INFO ✅ success
+2026-02-15T18:36:50.425608Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:51.935728Z  INFO applying new distribution
+2026-02-15T18:36:51.937686Z  INFO ✅ success
+2026-02-15T18:36:51.937751Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:53.569594Z  INFO applying new distribution
+2026-02-15T18:36:53.571574Z  INFO ✅ success
+2026-02-15T18:36:53.571634Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:55.057563Z  INFO applying new distribution
+2026-02-15T18:36:55.059048Z  INFO ✅ success
+2026-02-15T18:36:55.059091Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:56.591997Z  INFO applying new distribution
+2026-02-15T18:36:56.593416Z  INFO ✅ success
+2026-02-15T18:36:56.593446Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:58.090918Z  INFO applying new distribution
+2026-02-15T18:36:58.092550Z  INFO ✅ success
+2026-02-15T18:36:58.092627Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:36:59.633208Z  INFO applying new distribution
+2026-02-15T18:36:59.634951Z  INFO ✅ success
+2026-02-15T18:36:59.635010Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:01.180816Z  INFO applying new distribution
+2026-02-15T18:37:01.182828Z  INFO ✅ success
+2026-02-15T18:37:01.182895Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:02.714460Z  INFO applying new distribution
+2026-02-15T18:37:02.716318Z  INFO ✅ success
+2026-02-15T18:37:02.716391Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:04.261489Z  INFO applying new distribution
+2026-02-15T18:37:04.263244Z  INFO ✅ success
+2026-02-15T18:37:04.263314Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:05.762922Z  INFO applying new distribution
+2026-02-15T18:37:05.764975Z  INFO ✅ success
+2026-02-15T18:37:05.765004Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:07.277403Z  INFO applying new distribution
+2026-02-15T18:37:07.279074Z  INFO ✅ success
+2026-02-15T18:37:07.279130Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:08.769654Z  INFO applying new distribution
+2026-02-15T18:37:08.771643Z  INFO ✅ success
+2026-02-15T18:37:08.771709Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:10.248528Z  INFO applying new distribution
+2026-02-15T18:37:10.250310Z  INFO ✅ success
+2026-02-15T18:37:10.250379Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:11.737626Z  INFO applying new distribution
+2026-02-15T18:37:11.739453Z  INFO ✅ success
+2026-02-15T18:37:11.739526Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.38s
+2026-02-15T18:37:13.478864Z  INFO applying new distribution
+2026-02-15T18:37:13.480705Z  INFO ✅ success
+2026-02-15T18:37:13.480733Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:15.017963Z  INFO applying new distribution
+2026-02-15T18:37:15.019317Z  INFO ✅ success
+2026-02-15T18:37:15.019347Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:16.528181Z  INFO applying new distribution
+2026-02-15T18:37:16.529546Z  INFO ✅ success
+2026-02-15T18:37:16.529572Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:18.039338Z  INFO applying new distribution
+2026-02-15T18:37:18.041182Z  INFO ✅ success
+2026-02-15T18:37:18.041245Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:19.559089Z  INFO applying new distribution
+2026-02-15T18:37:19.560492Z  INFO ✅ success
+2026-02-15T18:37:19.560525Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:21.080539Z  INFO applying new distribution
+2026-02-15T18:37:21.082334Z  INFO ✅ success
+2026-02-15T18:37:21.082401Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:22.634734Z  INFO applying new distribution
+2026-02-15T18:37:22.636145Z  INFO ✅ success
+2026-02-15T18:37:22.636226Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:24.153553Z  INFO applying new distribution
+2026-02-15T18:37:24.155431Z  INFO ✅ success
+2026-02-15T18:37:24.155476Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:25.681367Z  INFO applying new distribution
+2026-02-15T18:37:25.683341Z  INFO ✅ success
+2026-02-15T18:37:25.683404Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:27.204979Z  INFO applying new distribution
+2026-02-15T18:37:27.206762Z  INFO ✅ success
+2026-02-15T18:37:27.206833Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:28.699246Z  INFO applying new distribution
+2026-02-15T18:37:28.700794Z  INFO ✅ success
+2026-02-15T18:37:28.700830Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:30.235424Z  INFO applying new distribution
+2026-02-15T18:37:30.237155Z  INFO ✅ success
+2026-02-15T18:37:30.237196Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:31.743318Z  INFO applying new distribution
+2026-02-15T18:37:31.745823Z  INFO ✅ success
+2026-02-15T18:37:31.745892Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:33.257881Z  INFO applying new distribution
+2026-02-15T18:37:33.259763Z  INFO ✅ success
+2026-02-15T18:37:33.259797Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:34.750700Z  INFO applying new distribution
+2026-02-15T18:37:34.752422Z  INFO ✅ success
+2026-02-15T18:37:34.752449Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:36.257212Z  INFO applying new distribution
+2026-02-15T18:37:36.259047Z  INFO ✅ success
+2026-02-15T18:37:36.259126Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:37.717159Z  INFO applying new distribution
+2026-02-15T18:37:37.719015Z  INFO ✅ success
+2026-02-15T18:37:37.719083Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:39.236762Z  INFO applying new distribution
+2026-02-15T18:37:39.238436Z  INFO ✅ success
+2026-02-15T18:37:39.238493Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:40.753492Z  INFO applying new distribution
+2026-02-15T18:37:40.754969Z  INFO ✅ success
+2026-02-15T18:37:40.754999Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:42.275134Z  INFO applying new distribution
+2026-02-15T18:37:42.276975Z  INFO ✅ success
+2026-02-15T18:37:42.277055Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:43.761474Z  INFO applying new distribution
+2026-02-15T18:37:43.763496Z  INFO ✅ success
+2026-02-15T18:37:43.763567Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:45.304974Z  INFO applying new distribution
+2026-02-15T18:37:45.306907Z  INFO ✅ success
+2026-02-15T18:37:45.306982Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:46.832967Z  INFO applying new distribution
+2026-02-15T18:37:46.834792Z  INFO ✅ success
+2026-02-15T18:37:46.834848Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:48.374770Z  INFO applying new distribution
+2026-02-15T18:37:48.376655Z  INFO ✅ success
+2026-02-15T18:37:48.376729Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:49.929332Z  INFO applying new distribution
+2026-02-15T18:37:49.931876Z  INFO ✅ success
+2026-02-15T18:37:49.931938Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:51.472973Z  INFO applying new distribution
+2026-02-15T18:37:51.474897Z  INFO ✅ success
+2026-02-15T18:37:51.474957Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:52.980416Z  INFO applying new distribution
+2026-02-15T18:37:52.982373Z  INFO ✅ success
+2026-02-15T18:37:52.982440Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:54.518548Z  INFO applying new distribution
+2026-02-15T18:37:54.520447Z  INFO ✅ success
+2026-02-15T18:37:54.520479Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:56.044017Z  INFO applying new distribution
+2026-02-15T18:37:56.045359Z  INFO ✅ success
+2026-02-15T18:37:56.045382Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:57.559667Z  INFO applying new distribution
+2026-02-15T18:37:57.562291Z  INFO ✅ success
+2026-02-15T18:37:57.562366Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:37:59.126946Z  INFO applying new distribution
+2026-02-15T18:37:59.129446Z  INFO ✅ success
+2026-02-15T18:37:59.129521Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:38:00.686797Z  INFO applying new distribution
+2026-02-15T18:38:00.704003Z  INFO ✅ success
+2026-02-15T18:38:00.704071Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:38:02.204339Z  INFO applying new distribution
+2026-02-15T18:38:02.206403Z  INFO ✅ success
+2026-02-15T18:38:02.206475Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:38:03.695387Z  INFO applying new distribution
+2026-02-15T18:38:03.696851Z  INFO ✅ success
+2026-02-15T18:38:03.696884Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:38:05.252862Z  INFO applying new distribution
+2026-02-15T18:38:05.254535Z  INFO ✅ success
+2026-02-15T18:38:05.254630Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:38:06.798452Z  INFO applying new distribution
+2026-02-15T18:38:06.800286Z  INFO ✅ success
+2026-02-15T18:38:06.800363Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:38:08.312706Z  INFO applying new distribution
+2026-02-15T18:38:08.314595Z  INFO ✅ success
+2026-02-15T18:38:08.314662Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:38:09.806902Z  INFO applying new distribution
+2026-02-15T18:38:09.808254Z  INFO ✅ success
+2026-02-15T18:38:09.808280Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:38:11.333594Z  INFO applying new distribution
+2026-02-15T18:38:11.335301Z  INFO ✅ success
+2026-02-15T18:38:11.335369Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:38:12.912156Z  INFO applying new distribution
+2026-02-15T18:38:12.914073Z  INFO ✅ success
+2026-02-15T18:38:12.914138Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:38:14.409980Z  INFO applying new distribution
+2026-02-15T18:38:14.411839Z  INFO ✅ success
+2026-02-15T18:38:14.411895Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:38:15.939804Z  INFO applying new distribution
+2026-02-15T18:38:15.941448Z  INFO ✅ success
+2026-02-15T18:38:15.941547Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:38:17.508858Z  INFO applying new distribution
+2026-02-15T18:38:17.510741Z  INFO ✅ success
+2026-02-15T18:38:17.510782Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:38:19.043597Z  INFO applying new distribution
+2026-02-15T18:38:19.045531Z  INFO ✅ success
+2026-02-15T18:38:19.045592Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:38:23.570263Z  INFO applying new distribution
+2026-02-15T18:38:23.572568Z  INFO ✅ success
+2026-02-15T18:38:23.572667Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:38:25.210744Z  INFO applying new distribution
+2026-02-15T18:38:25.213233Z  INFO ✅ success
+2026-02-15T18:38:25.213313Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:38:26.828345Z  INFO applying new distribution
+2026-02-15T18:38:26.830305Z  INFO ✅ success
+2026-02-15T18:38:26.830383Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:38:28.640360Z  INFO applying new distribution
+2026-02-15T18:38:28.654342Z  INFO ✅ success
+2026-02-15T18:38:28.654457Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.23s
+2026-02-15T18:38:30.916030Z  INFO applying new distribution
+2026-02-15T18:38:30.919833Z  INFO ✅ success
+2026-02-15T18:38:30.919955Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.20s
+2026-02-15T18:38:33.383152Z  INFO applying new distribution
+2026-02-15T18:38:33.409292Z  INFO ✅ success
+2026-02-15T18:38:33.409362Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.30s
+2026-02-15T18:38:35.959584Z  INFO applying new distribution
+2026-02-15T18:38:35.972023Z  INFO ✅ success
+2026-02-15T18:38:35.972077Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.20s
+2026-02-15T18:38:38.185086Z  INFO applying new distribution
+2026-02-15T18:38:38.196640Z  INFO ✅ success
+2026-02-15T18:38:38.196689Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.21s
+2026-02-15T18:38:40.784664Z  INFO applying new distribution
+2026-02-15T18:38:40.793742Z  INFO ✅ success
+2026-02-15T18:38:40.793867Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.20s
+2026-02-15T18:38:43.230007Z  INFO applying new distribution
+2026-02-15T18:38:43.251930Z  INFO ✅ success
+2026-02-15T18:38:43.252052Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.21s
+2026-02-15T18:38:45.685372Z  INFO applying new distribution
+2026-02-15T18:38:45.710210Z  INFO ✅ success
+2026-02-15T18:38:45.710286Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.22s
+2026-02-15T18:38:48.952492Z  INFO applying new distribution
+2026-02-15T18:38:48.970040Z  INFO ✅ success
+2026-02-15T18:38:48.970105Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.73s
+2026-02-15T18:38:51.775210Z  INFO applying new distribution
+2026-02-15T18:38:51.796141Z  INFO ✅ success
+2026-02-15T18:38:51.796224Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.26s
+2026-02-15T18:38:56.023174Z  INFO applying new distribution
+2026-02-15T18:38:56.272640Z  INFO ✅ success
+2026-02-15T18:38:56.272793Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.20s
+2026-02-15T18:38:59.350755Z  INFO applying new distribution
+2026-02-15T18:38:59.369665Z  INFO ✅ success
+2026-02-15T18:38:59.369729Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.77s
+2026-02-15T18:39:02.872551Z  INFO applying new distribution
+2026-02-15T18:39:02.903052Z  INFO ✅ success
+2026-02-15T18:39:02.903115Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.35s
+2026-02-15T18:39:05.634670Z  INFO applying new distribution
+2026-02-15T18:39:05.653335Z  INFO ✅ success
+2026-02-15T18:39:05.653397Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.22s
+2026-02-15T18:39:07.930350Z  INFO applying new distribution
+2026-02-15T18:39:07.932304Z  INFO ✅ success
+2026-02-15T18:39:07.932397Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.18s
+2026-02-15T18:39:09.871331Z  INFO applying new distribution
+2026-02-15T18:39:09.874464Z  INFO ✅ success
+2026-02-15T18:39:09.874555Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:39:11.511559Z  INFO applying new distribution
+2026-02-15T18:39:11.513592Z  INFO ✅ success
+2026-02-15T18:39:11.513660Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.22s
+2026-02-15T18:39:14.113864Z  INFO applying new distribution
+2026-02-15T18:39:14.133391Z  INFO ✅ success
+2026-02-15T18:39:14.133456Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.25s
+2026-02-15T18:39:16.608314Z  INFO applying new distribution
+2026-02-15T18:39:16.623964Z  INFO ✅ success
+2026-02-15T18:39:16.632813Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.28s
+2026-02-15T18:39:19.013789Z  INFO applying new distribution
+2026-02-15T18:39:19.038700Z  INFO ✅ success
+2026-02-15T18:39:19.038764Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.24s
+2026-02-15T18:39:22.211888Z  INFO applying new distribution
+2026-02-15T18:39:22.215045Z  INFO ✅ success
+2026-02-15T18:39:22.215126Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.18s
+2026-02-15T18:39:24.039805Z  INFO applying new distribution
+2026-02-15T18:39:24.042075Z  INFO ✅ success
+2026-02-15T18:39:24.042165Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:39:25.847906Z  INFO applying new distribution
+2026-02-15T18:39:25.850397Z  INFO ✅ success
+2026-02-15T18:39:25.850476Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:39:27.467478Z  INFO applying new distribution
+2026-02-15T18:39:27.469347Z  INFO ✅ success
+2026-02-15T18:39:27.469420Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:39:29.113709Z  INFO applying new distribution
+2026-02-15T18:39:29.115433Z  INFO ✅ success
+2026-02-15T18:39:29.115468Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:39:30.772403Z  INFO applying new distribution
+2026-02-15T18:39:30.774551Z  INFO ✅ success
+2026-02-15T18:39:30.774624Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:39:32.412488Z  INFO applying new distribution
+2026-02-15T18:39:32.414815Z  INFO ✅ success
+2026-02-15T18:39:32.414908Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:39:34.021425Z  INFO applying new distribution
+2026-02-15T18:39:34.023911Z  INFO ✅ success
+2026-02-15T18:39:34.024011Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:39:35.710722Z  INFO applying new distribution
+2026-02-15T18:39:35.712640Z  INFO ✅ success
+2026-02-15T18:39:35.712676Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:39:37.358054Z  INFO applying new distribution
+2026-02-15T18:39:37.360508Z  INFO ✅ success
+2026-02-15T18:39:37.360590Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:39:38.943871Z  INFO applying new distribution
+2026-02-15T18:39:38.945712Z  INFO ✅ success
+2026-02-15T18:39:38.945790Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:39:40.546349Z  INFO applying new distribution
+2026-02-15T18:39:40.548281Z  INFO ✅ success
+2026-02-15T18:39:40.548360Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:39:42.141204Z  INFO applying new distribution
+2026-02-15T18:39:42.143397Z  INFO ✅ success
+2026-02-15T18:39:42.143474Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:39:43.751444Z  INFO applying new distribution
+2026-02-15T18:39:43.753509Z  INFO ✅ success
+2026-02-15T18:39:43.753586Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:39:45.317038Z  INFO applying new distribution
+2026-02-15T18:39:45.319400Z  INFO ✅ success
+2026-02-15T18:39:45.319476Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:39:46.911266Z  INFO applying new distribution
+2026-02-15T18:39:46.913691Z  INFO ✅ success
+2026-02-15T18:39:46.913793Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:39:48.523605Z  INFO applying new distribution
+2026-02-15T18:39:48.525595Z  INFO ✅ success
+2026-02-15T18:39:48.525636Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:39:50.414403Z  INFO applying new distribution
+2026-02-15T18:39:50.526010Z  INFO ✅ success
+2026-02-15T18:39:50.526108Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:39:52.151395Z  INFO applying new distribution
+2026-02-15T18:39:52.153240Z  INFO ✅ success
+2026-02-15T18:39:52.153317Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:39:53.838606Z  INFO applying new distribution
+2026-02-15T18:39:53.840505Z  INFO ✅ success
+2026-02-15T18:39:53.840580Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:39:55.408915Z  INFO applying new distribution
+2026-02-15T18:39:55.412524Z  INFO ✅ success
+2026-02-15T18:39:55.412556Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:39:56.968636Z  INFO applying new distribution
+2026-02-15T18:39:56.971058Z  INFO ✅ success
+2026-02-15T18:39:56.971096Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:39:58.586395Z  INFO applying new distribution
+2026-02-15T18:39:58.588513Z  INFO ✅ success
+2026-02-15T18:39:58.588582Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:40:00.185160Z  INFO applying new distribution
+2026-02-15T18:40:00.187466Z  INFO ✅ success
+2026-02-15T18:40:00.187542Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:40:01.890550Z  INFO applying new distribution
+2026-02-15T18:40:01.893802Z  INFO ✅ success
+2026-02-15T18:40:01.893880Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+2026-02-15T18:40:03.579904Z  INFO applying new distribution
+2026-02-15T18:40:03.581834Z  INFO ✅ success
+2026-02-15T18:40:03.581905Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:40:05.235287Z  INFO applying new distribution
+2026-02-15T18:40:06.276403Z  INFO ✅ success
+2026-02-15T18:40:06.276513Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:40:07.944433Z  INFO applying new distribution
+2026-02-15T18:40:07.946526Z  INFO ✅ success
+2026-02-15T18:40:07.946634Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:40:10.172841Z  INFO applying new distribution
+2026-02-15T18:40:10.198971Z  INFO ✅ success
+2026-02-15T18:40:10.199026Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.22s
+2026-02-15T18:40:12.522553Z  INFO applying new distribution
+2026-02-15T18:40:12.529986Z  INFO ✅ success
+2026-02-15T18:40:12.530039Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.22s
+2026-02-15T18:40:15.010510Z  INFO applying new distribution
+2026-02-15T18:40:15.041670Z  INFO ✅ success
+2026-02-15T18:40:15.041776Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.26s
+2026-02-15T18:40:18.117630Z  INFO applying new distribution
+2026-02-15T18:40:18.138593Z  INFO ✅ success
+2026-02-15T18:40:18.138657Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.26s
+2026-02-15T18:40:21.233505Z  INFO applying new distribution
+2026-02-15T18:40:21.235726Z  INFO ✅ success
+2026-02-15T18:40:21.235837Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.19s
+2026-02-15T18:40:23.143549Z  INFO applying new distribution
+2026-02-15T18:40:23.145732Z  INFO ✅ success
+2026-02-15T18:40:23.145786Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.18s
+2026-02-15T18:40:24.917939Z  INFO applying new distribution
+2026-02-15T18:40:24.920127Z  INFO ✅ success
+2026-02-15T18:40:24.920174Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:40:26.620664Z  INFO applying new distribution
+2026-02-15T18:40:26.622469Z  INFO ✅ success
+2026-02-15T18:40:26.622502Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:40:28.321878Z  INFO applying new distribution
+2026-02-15T18:40:28.325313Z  INFO ✅ success
+2026-02-15T18:40:28.325354Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:40:30.000985Z  INFO applying new distribution
+2026-02-15T18:40:30.002706Z  INFO ✅ success
+2026-02-15T18:40:30.002786Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.18s
+2026-02-15T18:40:31.645234Z  INFO applying new distribution
+2026-02-15T18:40:31.647608Z  INFO ✅ success
+2026-02-15T18:40:31.647651Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.18s
+2026-02-15T18:40:33.376913Z  INFO applying new distribution
+2026-02-15T18:40:33.378802Z  INFO ✅ success
+2026-02-15T18:40:33.378893Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:40:35.063479Z  INFO applying new distribution
+2026-02-15T18:40:35.065281Z  INFO ✅ success
+2026-02-15T18:40:35.065366Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:40:36.750863Z  INFO applying new distribution
+2026-02-15T18:40:36.752669Z  INFO ✅ success
+2026-02-15T18:40:36.752751Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.18s
+2026-02-15T18:40:38.437099Z  INFO applying new distribution
+2026-02-15T18:40:38.439107Z  INFO ✅ success
+2026-02-15T18:40:38.439154Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:40:40.265602Z  INFO applying new distribution
+2026-02-15T18:40:40.267510Z  INFO ✅ success
+2026-02-15T18:40:40.267598Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.18s
+2026-02-15T18:40:41.953807Z  INFO applying new distribution
+2026-02-15T18:40:41.955655Z  INFO ✅ success
+2026-02-15T18:40:41.955738Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:40:43.608800Z  INFO applying new distribution
+2026-02-15T18:40:43.612666Z  INFO ✅ success
+2026-02-15T18:40:43.612764Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:40:45.279763Z  INFO applying new distribution
+2026-02-15T18:40:45.281586Z  INFO ✅ success
+2026-02-15T18:40:45.281662Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:40:46.926467Z  INFO applying new distribution
+2026-02-15T18:40:46.928377Z  INFO ✅ success
+2026-02-15T18:40:46.928463Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:40:48.966098Z  INFO applying new distribution
+2026-02-15T18:40:48.982766Z  INFO ✅ success
+2026-02-15T18:40:48.982930Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.22s
+2026-02-15T18:40:51.512852Z  INFO applying new distribution
+2026-02-15T18:40:51.525539Z  INFO ✅ success
+2026-02-15T18:40:51.525593Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.26s
+2026-02-15T18:40:54.231672Z  INFO applying new distribution
+2026-02-15T18:40:54.233487Z  INFO ✅ success
+2026-02-15T18:40:54.233540Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.27s
+2026-02-15T18:40:57.153250Z  INFO applying new distribution
+2026-02-15T18:40:57.179472Z  INFO ✅ success
+2026-02-15T18:40:57.179631Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.59s
+2026-02-15T18:41:00.053301Z  INFO applying new distribution
+2026-02-15T18:41:00.086981Z  INFO ✅ success
+2026-02-15T18:41:00.087065Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.25s
+2026-02-15T18:41:02.604679Z  INFO applying new distribution
+2026-02-15T18:41:02.614987Z  INFO ✅ success
+2026-02-15T18:41:02.615042Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.26s
+2026-02-15T18:41:05.008955Z  INFO applying new distribution
+2026-02-15T18:41:05.016054Z  INFO ✅ success
+2026-02-15T18:41:05.016122Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.27s
+2026-02-15T18:41:08.506044Z  INFO applying new distribution
+2026-02-15T18:41:08.511851Z  INFO ✅ success
+2026-02-15T18:41:08.511972Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.19s
+2026-02-15T18:41:10.781667Z  INFO applying new distribution
+2026-02-15T18:41:10.783712Z  INFO ✅ success
+2026-02-15T18:41:10.783803Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.18s
+2026-02-15T18:41:12.508406Z  INFO applying new distribution
+2026-02-15T18:41:12.510727Z  INFO ✅ success
+2026-02-15T18:41:12.510834Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.18s
+2026-02-15T18:41:14.242592Z  INFO applying new distribution
+2026-02-15T18:41:14.244316Z  INFO ✅ success
+2026-02-15T18:41:14.244354Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:41:15.924082Z  INFO applying new distribution
+2026-02-15T18:41:15.927984Z  INFO ✅ success
+2026-02-15T18:41:15.928030Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:41:17.565987Z  INFO applying new distribution
+2026-02-15T18:41:17.569197Z  INFO ✅ success
+2026-02-15T18:41:17.569298Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:41:19.181677Z  INFO applying new distribution
+2026-02-15T18:41:19.185264Z  INFO ✅ success
+2026-02-15T18:41:19.185337Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:41:20.832974Z  INFO applying new distribution
+2026-02-15T18:41:20.835255Z  INFO ✅ success
+2026-02-15T18:41:20.835329Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:41:22.494560Z  INFO applying new distribution
+2026-02-15T18:41:22.497233Z  INFO ✅ success
+2026-02-15T18:41:22.497322Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:41:24.168885Z  INFO applying new distribution
+2026-02-15T18:41:24.170673Z  INFO ✅ success
+2026-02-15T18:41:24.170757Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:41:25.843035Z  INFO applying new distribution
+2026-02-15T18:41:25.844922Z  INFO ✅ success
+2026-02-15T18:41:25.845005Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:41:27.486529Z  INFO applying new distribution
+2026-02-15T18:41:27.488640Z  INFO ✅ success
+2026-02-15T18:41:27.488717Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:41:29.127974Z  INFO applying new distribution
+2026-02-15T18:41:29.129840Z  INFO ✅ success
+2026-02-15T18:41:29.129876Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:41:30.749198Z  INFO applying new distribution
+2026-02-15T18:41:30.750698Z  INFO ✅ success
+2026-02-15T18:41:30.750728Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:41:32.383375Z  INFO applying new distribution
+2026-02-15T18:41:32.439604Z  INFO ✅ success
+2026-02-15T18:41:32.439701Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:41:34.059589Z  INFO applying new distribution
+2026-02-15T18:41:34.063565Z  INFO ✅ success
+2026-02-15T18:41:34.063600Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:41:35.741535Z  INFO applying new distribution
+2026-02-15T18:41:35.745392Z  INFO ✅ success
+2026-02-15T18:41:35.745472Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:41:37.472343Z  INFO applying new distribution
+2026-02-15T18:41:37.474208Z  INFO ✅ success
+2026-02-15T18:41:37.474285Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:41:39.110098Z  INFO applying new distribution
+2026-02-15T18:41:39.111751Z  INFO ✅ success
+2026-02-15T18:41:39.111844Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:41:40.707315Z  INFO applying new distribution
+2026-02-15T18:41:40.709282Z  INFO ✅ success
+2026-02-15T18:41:40.709357Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:41:42.329279Z  INFO applying new distribution
+2026-02-15T18:41:42.331374Z  INFO ✅ success
+2026-02-15T18:41:42.331441Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:41:43.937242Z  INFO applying new distribution
+2026-02-15T18:41:43.941258Z  INFO ✅ success
+2026-02-15T18:41:43.941289Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:41:45.577077Z  INFO applying new distribution
+2026-02-15T18:41:45.581064Z  INFO ✅ success
+2026-02-15T18:41:45.581231Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:41:47.842662Z  INFO applying new distribution
+2026-02-15T18:41:47.868091Z  INFO ✅ success
+2026-02-15T18:41:47.868239Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.27s
+2026-02-15T18:41:50.346169Z  INFO applying new distribution
+2026-02-15T18:41:50.370070Z  INFO ✅ success
+2026-02-15T18:41:50.370134Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.27s
+2026-02-15T18:41:52.836037Z  INFO applying new distribution
+2026-02-15T18:41:52.847861Z  INFO ✅ success
+2026-02-15T18:41:52.847921Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.23s
+2026-02-15T18:41:55.601882Z  INFO applying new distribution
+2026-02-15T18:41:55.604415Z  INFO ✅ success
+2026-02-15T18:41:55.604543Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.18s
+2026-02-15T18:41:57.322080Z  INFO applying new distribution
+2026-02-15T18:41:57.324821Z  INFO ✅ success
+2026-02-15T18:41:57.324902Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.21s
+2026-02-15T18:41:59.517958Z  INFO applying new distribution
+2026-02-15T18:41:59.542693Z  INFO ✅ success
+2026-02-15T18:41:59.542765Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.27s
+2026-02-15T18:42:02.062702Z  INFO applying new distribution
+2026-02-15T18:42:02.072026Z  INFO ✅ success
+2026-02-15T18:42:02.076923Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.35s
+2026-02-15T18:42:05.057183Z  INFO applying new distribution
+2026-02-15T18:42:05.076330Z  INFO ✅ success
+2026-02-15T18:42:05.076391Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.27s
+2026-02-15T18:42:08.073932Z  INFO applying new distribution
+2026-02-15T18:42:08.102940Z  INFO ✅ success
+2026-02-15T18:42:08.103086Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.20s
+2026-02-15T18:42:10.927890Z  INFO applying new distribution
+2026-02-15T18:42:10.931862Z  INFO ✅ success
+2026-02-15T18:42:10.931954Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:42:12.591275Z  INFO applying new distribution
+2026-02-15T18:42:12.594853Z  INFO ✅ success
+2026-02-15T18:42:12.594946Z  INFO 📦 starting build
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+2026-02-15T18:42:14.206501Z  INFO applying new distribution
+2026-02-15T18:42:14.208435Z  INFO ✅ success
+2026-02-15T18:42:14.208463Z  INFO 📦 starting build
