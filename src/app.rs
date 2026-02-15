@@ -19,7 +19,7 @@ pub fn App() -> impl IntoView {
         <Router>
             <nav class="nav">
                 <div style="display:flex;gap:20px;align-items:center">
-                    <A href="/" class="brand" style="text-decoration:none">"GOD MODE"</A>
+                    <A href="/" class="brand">"GOD MODE"</A>
                     <A href="/base64" class="nav-link">"Base64"</A>
                     <A href="/html-escape" class="nav-link">"HTML Escape"</A>
                 </div>
@@ -64,8 +64,8 @@ fn HtmlEscapePage(lang: ReadSignal<Lang>) -> impl IntoView {
         <div class="tool-container">
             <h2 style="font-size:3rem;font-weight:900;margin:0">
                 {move || match lang.get() {
-                    Lang::En => "HTML Entity Escape",
-                    Lang::Zh => "HTML 實體轉義",
+                    Lang::En => "HTML Escape Like a God",
+                    Lang::Zh => "HTML Escape 有如神助",
                 }}
             </h2>
             <div class="tool-grid">
@@ -126,8 +126,8 @@ fn Base64Page(lang: ReadSignal<Lang>) -> impl IntoView {
         <div class="tool-container">
             <h2 style="font-size:3rem;font-weight:900;margin:0">
                 {move || match lang.get() {
-                    Lang::En => "Base64 Converter",
-                    Lang::Zh => "Base64 編解碼",
+                    Lang::En => "Base64 Like a God",
+                    Lang::Zh => "Base64 有如神助",
                 }}
             </h2>
             <div class="tool-grid">
