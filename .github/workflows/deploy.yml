@@ -23,11 +23,10 @@ jobs:
         run: cargo install trunk
 
       - name: Build with Trunk
-        working-directory: do-everything-like-a-god
         run: trunk build --release --public-url /do-everything-like-a-god/
 
       - name: Post-build SEO Optimization
-        working-directory: do-everything-like-a-god/dist
+        working-directory: dist
         run: |
           # Copy index.html to subdirectories for SEO and direct access
           for dir in base64 html-escape url-escape json hash jwt uuid regex; do
@@ -41,4 +40,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./do-everything-like-a-god/dist
+          publish_dir: ./dist
