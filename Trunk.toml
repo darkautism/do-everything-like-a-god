@@ -1,0 +1,4 @@
+[build]
+target = "index.html"
+dist = "dist"
+public_url = "/do-everything-like-a-god/"

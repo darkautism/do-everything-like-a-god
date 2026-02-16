@@ -17,7 +17,7 @@ pub fn App() -> impl IntoView {
         <Title text="工具箱 | Useful Tools"/>
         <Meta name="description" content="High-performance WASM developer tools: Base64, JSON Formatter, JWT Decoder, Regex Tester and more. Fast and private."/>
         
-        <Router trailing_slash=TrailingSlash::Redirect>
+        <Router trailing_slash=TrailingSlash::Redirect base="/do-everything-like-a-god">
             <nav class="nav">
                 <div style="display:flex;gap:20px;align-items:center">
                     <A href="/" class="brand">"UTILITIES"</A>
@@ -29,6 +29,9 @@ pub fn App() -> impl IntoView {
                     <A href="/jwt" class="nav-link">"JWT"</A>
                     <A href="/uuid" class="nav-link">"UUID"</A>
                     <A href="/regex" class="nav-link">"Regex"</A>
+                    <A href="/timestamp" class="nav-link">"Timestamp"</A>
+                    <A href="/base-conv" class="nav-link">"Base"</A>
+                    <A href="/diff" class="nav-link">"Diff"</A>
                 </div>
                 <button class="lang-switch" on:click=move |_| {
                     set_lang.update(|l| *l = if *l == Lang::En { Lang::Zh } else { Lang::En });
@@ -50,9 +53,139 @@ pub fn App() -> impl IntoView {
                     <Route path="/jwt" view=move || view! { <JwtPage lang=lang /> }/>
                     <Route path="/uuid" view=move || view! { <UuidPage lang=lang /> }/>
                     <Route path="/regex" view=move || view! { <RegexPage lang=lang /> }/>
+                    <Route path="/timestamp" view=move || view! { <TimestampPage lang=lang /> }/>
+                    <Route path="/base-conv" view=move || view! { <BaseConvPage lang=lang /> }/>
+                    <Route path="/diff" view=move || view! { <DiffPage lang=lang /> }/>
                 </Routes>
             </main>
         </Router>
+    }
+}
+
+#[component]
+fn DiffPage(lang: ReadSignal<Lang>) -> impl IntoView {
+    use similar::{ChangeTag, TextDiff};
+
+    let (old_text, set_old) = create_signal(String::new());
+    let (new_text, set_new) = create_signal(String::new());
+
+    let diff_view = move || {
+        let old = old_text.get();
+        let new = new_text.get();
+        let diff = TextDiff::from_lines(&old, &new);
+        diff.iter_all_changes().map(|change| {
+            let (sign, color) = match change.tag() {
+                ChangeTag::Delete => ("-", "#f00"),
+                ChangeTag::Insert => ("+", "#0f0"),
+                ChangeTag::Equal => (" ", "#888"),
+            };
+            view! { <div style=format!("color:{}", color)> {sign} {change.value().to_string()} </div> }
+        }).collect_view()
+    };
+
+    view! {
+        <div class="tool-container">
+            <Title text="Diff Checker - 工具箱"/>
+            <Meta name="description" content="High-performance text comparison tool powered by Rust WASM. Fast diffing for large documents."/>
+            <h2 style="font-size:3rem;font-weight:900;margin:0">
+                {move || match lang.get() {
+                    Lang::En => "Text Diff",
+                    Lang::Zh => "文本比對",
+                }}
+            </h2>
+            <div class="tool-grid">
+                <div class="box">
+                    <div class="box-label">"Original"</div>
+                    <textarea on:input=move |ev| set_old.set(event_target_value(&ev))></textarea>
+                </div>
+                <div class="box">
+                    <div class="box-label">"Modified"</div>
+                    <textarea on:input=move |ev| set_new.set(event_target_value(&ev))></textarea>
+                </div>
+            </div>
+            <div class="box" style="margin-top:20px; font-family:monospace; background:#111; overflow-x:auto; white-space:pre-wrap">
+                {diff_view}
+            </div>
+        </div>
+    }
+}
+
+#[component]
+fn BaseConvPage(lang: ReadSignal<Lang>) -> impl IntoView {
+    let _ = lang;
+    let (val, set_val) = create_signal(String::new());
+    let (from_base, set_from) = create_signal(10u32);
+
+    let get_val = move |base: u32| {
+        let current = val.get();
+        if current.is_empty() { return String::new(); }
+        u128::from_str_radix(&current, from_base.get())
+            .map(|n| {
+                match base {
+                    2 => format!("{:b}", n),
+                    8 => format!("{:o}", n),
+                    10 => format!("{}", n),
+                    16 => format!("{:x}", n),
+                    _ => String::new(),
+                }
+            }).unwrap_or_else(|_| "Error".to_string())
+    };
+
+    view! {
+        <div class="tool-container">
+            <Title text="Number Base Converter - 工具箱"/>
+            <h2 style="font-size:3rem;font-weight:900;margin:0">"Base Converter"</h2>
+            <div class="box">
+                <div class="box-label">"Source Value"</div>
+                <div style="display:flex; gap:10px">
+                    <input type="text" on:input=move |ev| set_val.set(event_target_value(&ev)) style="flex:1; padding:10px; background:#111; color:#fff; border:1px solid #333" />
+                    <select on:change=move |ev| set_from.set(event_target_value(&ev).parse().unwrap()) style="background:#111; color:#fff; border:1px solid #333">
+                        <option value="10">"Dec"</option>
+                        <option value="16">"Hex"</option>
+                        <option value="2">"Bin"</option>
+                        <option value="8">"Oct"</option>
+                    </select>
+                </div>
+            </div>
+            <div class="tool-grid">
+                <div class="box"><div class="box-label">"Decimal"</div><div style="color:#0f0">{move || get_val(10)}</div></div>
+                <div class="box"><div class="box-label">"Hex"</div><div style="color:#0f0">{move || get_val(16)}</div></div>
+                <div class="box"><div class="box-label">"Binary"</div><div style="color:#0f0; font-size:0.8rem; word-break:break-all">{move || get_val(2)}</div></div>
+                <div class="box"><div class="box-label">"Octal"</div><div style="color:#0f0">{move || get_val(8)}</div></div>
+            </div>
+        </div>
+    }
+}
+
+#[component]
+fn TimestampPage(lang: ReadSignal<Lang>) -> impl IntoView {
+    let _ = lang;
+    use chrono::{Utc, TimeZone};
+
+    let (ts, set_ts) = create_signal(Utc::now().timestamp().to_string());
+    
+    let date_str = move || {
+        let s = ts.get();
+        s.parse::<i64>().ok()
+            .and_then(|val| Utc.timestamp_opt(val, 0).single())
+            .map(|dt| dt.to_rfc3339())
+            .unwrap_or_else(|| "Invalid Timestamp".to_string())
+    };
+
+    view! {
+        <div class="tool-container">
+            <Title text="Unix Timestamp Converter - 工具箱"/>
+            <h2 style="font-size:3rem;font-weight:900;margin:0">"Timestamp"</h2>
+            <div class="box">
+                <div class="box-label">"Unix Timestamp"</div>
+                <input type="text" prop:value=ts on:input=move |ev| set_ts.set(event_target_value(&ev)) style="width:100%; padding:10px; background:#111; color:#fff; border:1px solid #333" />
+                <button class="btn" on:click=move |_| set_ts.set(Utc::now().timestamp().to_string()) style="margin-top:10px">"Current Time"</button>
+            </div>
+            <div class="box">
+                <div class="box-label">"UTC ISO 8601"</div>
+                <div style="font-size:1.5rem; color:#0f0">{date_str}</div>
+            </div>
+        </div>
     }
 }
 
@@ -280,53 +413,104 @@ fn JsonPage(lang: ReadSignal<Lang>) -> impl IntoView {
 #[component]
 fn HashPage(lang: ReadSignal<Lang>) -> impl IntoView {
     use sha2::{Sha256, Digest};
+    use sha1::Sha1;
     use md5::Md5;
+    use wasm_bindgen::JsCast;
 
     let (input, set_input) = create_signal(String::new());
     let (md5_res, set_md5) = create_signal(String::new());
+    let (sha1_res, set_sha1) = create_signal(String::new());
     let (sha256_res, set_sha256) = create_signal(String::new());
+    let (is_loading, set_loading) = create_signal(false);
 
-    let compute = move |val: String| {
+    let compute_hashes = move |data: &[u8]| {
+        let mut md5_hasher = Md5::new();
+        md5_hasher.update(data);
+        set_md5.set(hex::encode(md5_hasher.finalize()));
+
+        let mut sha1_hasher = Sha1::new();
+        sha1_hasher.update(data);
+        set_sha1.set(hex::encode(sha1_hasher.finalize()));
+
+        let mut sha256_hasher = Sha256::new();
+        sha256_hasher.update(data);
+        set_sha256.set(hex::encode(sha256_hasher.finalize()));
+    };
+
+    let on_text_input = move |val: String| {
         set_input.set(val.clone());
         if val.is_empty() {
             set_md5.set(String::new());
+            set_sha1.set(String::new());
             set_sha256.set(String::new());
             return;
         }
+        compute_hashes(val.as_bytes());
+    };
 
-        let mut md5_hasher = Md5::new();
-        md5_hasher.update(&val);
-        set_md5.set(hex::encode(md5_hasher.finalize()));
-
-        let mut sha256_hasher = Sha256::new();
-        sha256_hasher.update(&val);
-        set_sha256.set(hex::encode(sha256_hasher.finalize()));
+    let on_file_change = move |ev: ev::Event| {
+        let target = event_target::<web_sys::HtmlInputElement>(&ev);
+        if let Some(files) = target.files() {
+            if let Some(file) = files.get(0) {
+                set_loading.set(true);
+                let reader = web_sys::FileReader::new().unwrap();
+                let reader_c = reader.clone();
+                
+                let onload = wasm_bindgen::closure::Closure::wrap(Box::new(move |_e: web_sys::Event| {
+                    let array_buffer = reader_c.result().unwrap();
+                    let uint8_array = js_sys::Uint8Array::new(&array_buffer);
+                    let bytes = uint8_array.to_vec();
+                    compute_hashes(&bytes);
+                    set_loading.set(false);
+                }) as Box<dyn FnMut(_)>);
+                
+                reader.set_onload(Some(onload.as_ref().unchecked_ref()));
+                reader.read_as_array_buffer(&file).unwrap();
+                onload.forget();
+            }
+        }
     };
 
     view! {
         <div class="tool-container">
             <h2 style="font-size:3rem;font-weight:900;margin:0">
                 {move || match lang.get() {
-                    Lang::En => "Hash Generator",
-                    Lang::Zh => "Hash 生成器",
+                    Lang::En => "Hash Utility",
+                    Lang::Zh => "Hash 工具",
                 }}
             </h2>
-            <div class="box">
-                <div class="box-label">"Input Text"</div>
-                <textarea 
-                    prop:value=input
-                    on:input=move |ev| compute(event_target_value(&ev))
-                    placeholder="Enter text to hash..."
-                ></textarea>
-            </div>
             <div class="tool-grid">
                 <div class="box">
+                    <div class="box-label">"Input Text"</div>
+                    <textarea 
+                        prop:value=input
+                        on:input=move |ev| on_text_input(event_target_value(&ev))
+                        placeholder="Enter text to hash..."
+                    ></textarea>
+                </div>
+                <div class="box">
+                    <div class="box-label">"Or Upload File"</div>
+                    <input 
+                        type="file" 
+                        on:change=on_file_change 
+                        style="width:100%; padding:20px; background:#111; border:2px dashed #333; color:#fff; border-radius:12px"
+                    />
+                    {move || if is_loading.get() { view! { <div style="color:#38bdf8; margin-top:10px">"Processing large file..."</div> } } else { view! { <div></div> } }}
+                </div>
+            </div>
+            
+            <div style="margin-top:40px; display:flex; flex-direction:column; gap:20px">
+                <div class="box">
                     <div class="box-label">"MD5"</div>
-                    <input type="text" prop:value=md5_res readonly style="width:100%; background:#111; color:#0f0; border:1px solid #333; padding:10px" />
+                    <input type="text" prop:value=md5_res readonly style="width:100%; background:#111; color:#0f0; border:1px solid #333; padding:10px; font-family:monospace" />
+                </div>
+                <div class="box">
+                    <div class="box-label">"SHA1"</div>
+                    <input type="text" prop:value=sha1_res readonly style="width:100%; background:#111; color:#0f0; border:1px solid #333; padding:10px; font-family:monospace" />
                 </div>
                 <div class="box">
                     <div class="box-label">"SHA256"</div>
-                    <input type="text" prop:value=sha256_res readonly style="width:100%; background:#111; color:#0f0; border:1px solid #333; padding:10px" />
+                    <input type="text" prop:value=sha256_res readonly style="width:100%; background:#111; color:#0f0; border:1px solid #333; padding:10px; font-family:monospace" />
                 </div>
             </div>
         </div>
@@ -338,15 +522,13 @@ fn UrlEscapePage(lang: ReadSignal<Lang>) -> impl IntoView {
     let (input, set_input) = create_signal(String::new());
     let (output, set_output) = create_signal(String::new());
 
-    let encode = move |val: String| {
-        let encoded = urlencoding::encode(&val).to_string();
-        set_input.set(val);
+    let encode = move |_| {
+        let encoded = urlencoding::encode(&input.get()).to_string();
         set_output.set(encoded);
     };
 
-    let decode = move |val: String| {
-        set_output.set(val.clone());
-        if let Ok(decoded) = urlencoding::decode(&val) {
+    let decode = move |_| {
+        if let Ok(decoded) = urlencoding::decode(&output.get()) {
             set_input.set(decoded.into_owned());
         }
     };
@@ -355,8 +537,8 @@ fn UrlEscapePage(lang: ReadSignal<Lang>) -> impl IntoView {
         <div class="tool-container">
             <h2 style="font-size:3rem;font-weight:900;margin:0">
                 {move || match lang.get() {
-                    Lang::En => "URL Encode / Decode",
-                    Lang::Zh => "URL 編碼 / 解碼",
+                    Lang::En => "URL Utility",
+                    Lang::Zh => "URL 工具",
                 }}
             </h2>
             <div class="tool-grid">
@@ -364,17 +546,29 @@ fn UrlEscapePage(lang: ReadSignal<Lang>) -> impl IntoView {
                     <div class="box-label">"Raw Text"</div>
                     <textarea 
                         prop:value=input
-                        on:input=move |ev| encode(event_target_value(&ev))
+                        on:input=move |ev| set_input.set(event_target_value(&ev))
                         placeholder="https://example.com/測試"
                     ></textarea>
+                    <button class="btn" style="margin-top:10px; width:100%" on:click=encode>
+                        {move || match lang.get() {
+                            Lang::En => "Encode ➔",
+                            Lang::Zh => "編碼 ➔",
+                        }}
+                    </button>
                 </div>
                 <div class="box">
                     <div class="box-label">"Encoded"</div>
                     <textarea 
                         prop:value=output
-                        on:input=move |ev| decode(event_target_value(&ev))
+                        on:input=move |ev| set_output.set(event_target_value(&ev))
                         placeholder="https%3A%2F%2Fexample.com%2F%E6%B8%AC%E8%A9%A6"
                     ></textarea>
+                    <button class="btn" style="margin-top:10px; width:100%" on:click=decode>
+                        {move || match lang.get() {
+                            Lang::En => "⬅ Decode",
+                            Lang::Zh => "⬅ 解碼",
+                        }}
+                    </button>
                 </div>
             </div>
         </div>
@@ -386,15 +580,13 @@ fn HtmlEscapePage(lang: ReadSignal<Lang>) -> impl IntoView {
     let (input, set_input) = create_signal(String::new());
     let (output, set_output) = create_signal(String::new());
 
-    let escape = move |val: String| {
-        let escaped = html_escape::encode_safe(&val).to_string();
-        set_input.set(val);
+    let escape = move |_| {
+        let escaped = html_escape::encode_safe(&input.get()).to_string();
         set_output.set(escaped);
     };
 
-    let unescape = move |val: String| {
-        let unescaped = html_escape::decode_html_entities(&val).to_string();
-        set_output.set(val);
+    let unescape = move |_| {
+        let unescaped = html_escape::decode_html_entities(&output.get()).to_string();
         set_input.set(unescaped);
     };
 
@@ -402,8 +594,8 @@ fn HtmlEscapePage(lang: ReadSignal<Lang>) -> impl IntoView {
         <div class="tool-container">
             <h2 style="font-size:3rem;font-weight:900;margin:0">
                 {move || match lang.get() {
-                    Lang::En => "HTML Escape Like a God",
-                    Lang::Zh => "HTML Escape 有如神助",
+                    Lang::En => "HTML Escape Utility",
+                    Lang::Zh => "HTML 轉義工具",
                 }}
             </h2>
             <div class="tool-grid">
@@ -416,9 +608,15 @@ fn HtmlEscapePage(lang: ReadSignal<Lang>) -> impl IntoView {
                     </div>
                     <textarea 
                         prop:value=input
-                        on:input=move |ev| escape(event_target_value(&ev))
+                        on:input=move |ev| set_input.set(event_target_value(&ev))
                         placeholder="<div>...</div>"
                     ></textarea>
+                    <button class="btn" style="margin-top:10px; width:100%" on:click=escape>
+                        {move || match lang.get() {
+                            Lang::En => "Escape ➔",
+                            Lang::Zh => "轉義 ➔",
+                        }}
+                    </button>
                 </div>
                 <div class="box">
                     <div class="box-label">
@@ -429,9 +627,15 @@ fn HtmlEscapePage(lang: ReadSignal<Lang>) -> impl IntoView {
                     </div>
                     <textarea 
                         prop:value=output
-                        on:input=move |ev| unescape(event_target_value(&ev))
+                        on:input=move |ev| set_output.set(event_target_value(&ev))
                         placeholder="&lt;div&gt;...&lt;/div&gt;"
                     ></textarea>
+                    <button class="btn" style="margin-top:10px; width:100%" on:click=unescape>
+                        {move || match lang.get() {
+                            Lang::En => "⬅ Unescape",
+                            Lang::Zh => "⬅ 還原",
+                        }}
+                    </button>
                 </div>
             </div>
         </div>
@@ -472,15 +676,13 @@ fn Base64Page(lang: ReadSignal<Lang>) -> impl IntoView {
     let (input, set_input) = create_signal(String::new());
     let (output, set_output) = create_signal(String::new());
 
-    let encode = move |val: String| {
-        let encoded = general_purpose::STANDARD.encode(val.as_bytes());
-        set_input.set(val);
+    let encode = move |_| {
+        let encoded = general_purpose::STANDARD.encode(input.get().as_bytes());
         set_output.set(encoded);
     };
 
-    let decode = move |val: String| {
-        set_output.set(val.clone());
-        if let Ok(bytes) = general_purpose::STANDARD.decode(val.trim()) {
+    let decode = move |_| {
+        if let Ok(bytes) = general_purpose::STANDARD.decode(output.get().trim()) {
             if let Ok(s) = String::from_utf8(bytes) {
                 set_input.set(s);
             }
@@ -493,8 +695,8 @@ fn Base64Page(lang: ReadSignal<Lang>) -> impl IntoView {
             <Meta name="description" content="Encode and decode text to Base64 format with high performance WASM logic. Secure and local processing."/>
             <h2 style="font-size:3rem;font-weight:900;margin:0">
                 {move || match lang.get() {
-                    Lang::En => "Base64 Like a God",
-                    Lang::Zh => "Base64 有如神助",
+                    Lang::En => "Base64 Utility",
+                    Lang::Zh => "Base64 工具",
                 }}
             </h2>
             <div class="tool-grid">
@@ -507,9 +709,15 @@ fn Base64Page(lang: ReadSignal<Lang>) -> impl IntoView {
                     </div>
                     <textarea 
                         prop:value=input
-                        on:input=move |ev| encode(event_target_value(&ev))
+                        on:input=move |ev| set_input.set(event_target_value(&ev))
                         placeholder="..."
                     ></textarea>
+                    <button class="btn" style="margin-top:10px; width:100%" on:click=encode>
+                        {move || match lang.get() {
+                            Lang::En => "Encode ➔",
+                            Lang::Zh => "編碼 ➔",
+                        }}
+                    </button>
                 </div>
                 <div class="box">
                     <div class="box-label">
@@ -520,9 +728,15 @@ fn Base64Page(lang: ReadSignal<Lang>) -> impl IntoView {
                     </div>
                     <textarea 
                         prop:value=output
-                        on:input=move |ev| decode(event_target_value(&ev))
+                        on:input=move |ev| set_output.set(event_target_value(&ev))
                         placeholder="..."
                     ></textarea>
+                    <button class="btn" style="margin-top:10px; width:100%" on:click=decode>
+                        {move || match lang.get() {
+                            Lang::En => "⬅ Decode",
+                            Lang::Zh => "⬅ 解碼",
+                        }}
+                    </button>
                 </div>
             </div>
         </div>
