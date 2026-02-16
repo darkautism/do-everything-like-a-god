@@ -311,6 +311,7 @@ dependencies = [
  "console_error_panic_hook",
  "hex",
  "html-escape",
+ "js-sys",
  "leptos",
  "leptos_meta",
  "leptos_router",
