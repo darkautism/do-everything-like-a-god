@@ -18,7 +18,7 @@ pub fn App() -> impl IntoView {
         <Title text="工具箱 | Useful Tools"/>
         <Meta name="description" content="High-performance WASM developer tools: Base64, JSON Formatter, JWT Decoder, Regex Tester and more. Fast and private."/>
         
-        <Router trailing_slash=TrailingSlash::Redirect>
+        <Router trailing_slash=TrailingSlash::Redirect base="/do-everything-like-a-god">
             <div class="layout">
                 // Mobile Header
                 <div class="mobile-header">
