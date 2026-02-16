@@ -673,6 +673,9 @@ fn HtmlEscapePage(lang: ReadSignal<Lang>) -> impl IntoView {
 #[cfg(test)]
 mod tests {
     use base64::{Engine as _, engine::general_purpose};
+    use sha2::{Sha256, Digest};
+    use sha1::Sha1;
+    use md5::Md5;
 
     #[test]
     fn test_base64_logic() {
@@ -689,11 +692,37 @@ mod tests {
     fn test_html_escape_logic() {
         let input = "<script>alert('god')</script>";
         let escaped = html_escape::encode_safe(input).to_string();
-        // html-escape encodes quotes and slashes for safety
         assert_eq!(escaped, "&lt;script&gt;alert(&#x27;god&#x27;)&lt;&#x2F;script&gt;");
         
         let unescaped = html_escape::decode_html_entities(&escaped).to_string();
         assert_eq!(unescaped, input);
+    }
+
+    #[test]
+    fn test_url_encoding() {
+        let input = "https://example.com/測試?a=1&b=2";
+        let encoded = urlencoding::encode(input);
+        assert_eq!(encoded, "https%3A%2F%2Fexample.com%2F%E6%B8%AC%E8%A9%A6%3Fa%3D1%26b%3D2");
+        
+        let decoded = urlencoding::decode(&encoded).unwrap();
+        assert_eq!(decoded, input);
+    }
+
+    #[test]
+    fn test_hashes() {
+        let input = "godmode";
+        
+        let mut md5 = Md5::new();
+        md5.update(input);
+        assert_eq!(hex::encode(md5.finalize()), "70b47b4d69f4c312098b57b8ee0c718b");
+
+        let mut sha256 = Sha256::new();
+        sha256.update(input);
+        assert_eq!(hex::encode(sha256.finalize()), "e150c2e5c5421f42105081b58c282ad5a89c30781c99bcfe71913a5adaa88b52");
+
+        let mut sha1 = Sha1::new();
+        sha1.update(input);
+        assert_eq!(hex::encode(sha1.finalize()), "56b9ebeed4b0c26531b7cbf7aeea2c99afc2e4f0");
     }
 }
 
