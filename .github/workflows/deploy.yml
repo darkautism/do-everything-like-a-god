@@ -3,7 +3,7 @@ name: Build and Deploy WASM Tools
 on:
   push:
     branches:
-      - main
+      - master
 
 permissions:
   contents: write
