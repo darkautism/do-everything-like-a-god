@@ -27,11 +27,10 @@ pub fn App() -> impl IntoView {
                     </button>
                     <div class="mobile-brand">"UTILITIES"</div>
                 </div>
-
                 // Sidebar
                 <nav class=move || if is_sidebar_open.get() { "sidebar open" } else { "sidebar" }>
                     <div class="sidebar-header">
-                        <A href="/" class="brand" on:click=move |_| set_sidebar_open.set(false)>"GOD MODE"</A>
+                        <A href="/do-everything-like-a-god/" class="brand" on:click=move |_| set_sidebar_open.set(false)>"GOD MODE"</A>
                         <button class="lang-switch" on:click=move |_| {
                             set_lang.update(|l| *l = if *l == Lang::En { Lang::Zh } else { Lang::En });
                         }>
@@ -44,25 +43,25 @@ pub fn App() -> impl IntoView {
 
                     <div class="category">
                         <div class="category-title">"Converters"</div>
-                        <A href="/base64" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Base64"</A>
-                        <A href="/html-escape" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"HTML Escape"</A>
-                        <A href="/url-escape" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"URL Escape"</A>
-                        <A href="/base-conv" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Base Converter"</A>
+                        <A href="/do-everything-like-a-god/base64" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Base64"</A>
+                        <A href="/do-everything-like-a-god/html-escape" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"HTML Escape"</A>
+                        <A href="/do-everything-like-a-god/url-escape" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"URL Escape"</A>
+                        <A href="/do-everything-like-a-god/base-conv" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Base Converter"</A>
                     </div>
 
                     <div class="category">
                         <div class="category-title">"Development"</div>
-                        <A href="/json" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"JSON Tool"</A>
-                        <A href="/jwt" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"JWT Decoder"</A>
-                        <A href="/regex" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Regex Tester"</A>
-                        <A href="/diff" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Diff Checker"</A>
+                        <A href="/do-everything-like-a-god/json" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"JSON Tool"</A>
+                        <A href="/do-everything-like-a-god/jwt" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"JWT Decoder"</A>
+                        <A href="/do-everything-like-a-god/regex" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Regex Tester"</A>
+                        <A href="/do-everything-like-a-god/diff" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Diff Checker"</A>
                     </div>
 
                     <div class="category">
                         <div class="category-title">"Security & Data"</div>
-                        <A href="/hash" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Hash Utility"</A>
-                        <A href="/uuid" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"UUID Gen"</A>
-                        <A href="/timestamp" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Timestamp"</A>
+                        <A href="/do-everything-like-a-god/hash" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Hash Utility"</A>
+                        <A href="/do-everything-like-a-god/uuid" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"UUID Gen"</A>
+                        <A href="/do-everything-like-a-god/timestamp" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Timestamp"</A>
                     </div>
                 </nav>
 
@@ -73,17 +72,17 @@ pub fn App() -> impl IntoView {
                 <main class="main-content">
                     <Routes>
                         <Route path="" view=move || view! { <HomePage lang=lang /> }/>
-                        <Route path="/base64" view=move || view! { <Base64Page lang=lang /> }/>
-                        <Route path="/html-escape" view=move || view! { <HtmlEscapePage lang=lang /> }/>
-                        <Route path="/url-escape" view=move || view! { <UrlEscapePage lang=lang /> }/>
-                        <Route path="/json" view=move || view! { <JsonPage lang=lang /> }/>
-                        <Route path="/hash" view=move || view! { <HashPage lang=lang /> }/>
-                        <Route path="/jwt" view=move || view! { <JwtPage lang=lang /> }/>
-                        <Route path="/uuid" view=move || view! { <UuidPage lang=lang /> }/>
-                        <Route path="/regex" view=move || view! { <RegexPage lang=lang /> }/>
-                        <Route path="/timestamp" view=move || view! { <TimestampPage lang=lang /> }/>
-                        <Route path="/base-conv" view=move || view! { <BaseConvPage lang=lang /> }/>
-                        <Route path="/diff" view=move || view! { <DiffPage lang=lang /> }/>
+                        <Route path="base64" view=move || view! { <Base64Page lang=lang /> }/>
+                        <Route path="html-escape" view=move || view! { <HtmlEscapePage lang=lang /> }/>
+                        <Route path="url-escape" view=move || view! { <UrlEscapePage lang=lang /> }/>
+                        <Route path="json" view=move || view! { <JsonPage lang=lang /> }/>
+                        <Route path="hash" view=move || view! { <HashPage lang=lang /> }/>
+                        <Route path="jwt" view=move || view! { <JwtPage lang=lang /> }/>
+                        <Route path="uuid" view=move || view! { <UuidPage lang=lang /> }/>
+                        <Route path="regex" view=move || view! { <RegexPage lang=lang /> }/>
+                        <Route path="timestamp" view=move || view! { <TimestampPage lang=lang /> }/>
+                        <Route path="base-conv" view=move || view! { <BaseConvPage lang=lang /> }/>
+                        <Route path="diff" view=move || view! { <DiffPage lang=lang /> }/>
                     </Routes>
                 </main>
             </div>
