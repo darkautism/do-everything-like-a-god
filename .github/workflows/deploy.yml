@@ -28,10 +28,8 @@ jobs:
       - name: Post-build SEO Optimization
         working-directory: dist
         run: |
-          # Inject Base URL for GitHub Pages
-          sed -i 's|<base href="/"|<base href="/do-everything-like-a-god/"|' index.html
-          
-          # Define pages and their specific titles/descriptions
+          declare -A titles
+          declare -A descs
           
           titles["base64"]="Base64 Decoder/Encoder - 高性能 WASM 工具"
           descs["base64"]="極速 Base64 編解碼工具，支援大型文本，純本地運算，隱私安全。"
@@ -66,15 +64,17 @@ jobs:
           titles["diff"]="Text Diff Checker - 文本比對"
           descs["diff"]="高性能文本比對工具，秒級找出大型文件差異。"
 
+          # Base index.html modification
+          # Inject base tag for relative navigation stability
+          sed -i 's|<head>|<head><base href="/do-everything-like-a-god/">|' index.html
+
           for dir in "${!titles[@]}"; do
             mkdir -p "$dir"
-            # Inject specific SEO tags into index.html for each directory
-            # We use a temp file to avoid reading and writing to the same file in a pipe
             sed "s|<title>.*</title>|<title>${titles[$dir]}</title>|" index.html > "$dir/index.html"
-            sed -i "s|content=\"All-in-one developer toolbox.*\"|content=\"${descs[$dir]}\"|" "$dir/index.html"
+            sed -i "s|<meta name=\"description\" content=\".*\"/>|<meta name=\"description\" content=\"${descs[$dir]}\"/>|" "$dir/index.html"
           done
           
-          echo "Build Structure:"
+          echo "Final Structure:"
           ls -R
 
       - name: Deploy to GitHub Pages
