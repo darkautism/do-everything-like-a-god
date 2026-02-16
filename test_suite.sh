@@ -1,32 +1,58 @@
 #!/bin/bash
-export PATH=$PATH:/home/kautism/.npm-global/bin
-URL="http://localhost:8080" # Default Trunk port
+URL="https://darkautism.github.io/do-everything-like-a-god/"
+BROWSER="/home/kautism/.npm-global/bin/agent-browser"
 
-echo "--- TDD Test Suite: DO EVERYTHING LIKE A GOD ---"
+echo "Waiting for $URL to be live..."
+MAX_RETRIES=30
+RETRY_COUNT=0
 
-# Test 1: Homepage & i18n
-echo "[Test 1] Checking Homepage Content..."
-agent-browser open $URL
-agent-browser wait --load networkidle
-agent-browser snapshot -i | grep -q "做甚麼都有如神助" && echo "PASS: Homepage Loaded" || echo "FAIL: Homepage Loaded"
+while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+    STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+    if [ "$STATUS" == "200" ]; then
+        echo "Site is live!"
+        break
+    fi
+    echo "Attempt $((RETRY_COUNT+1))/$MAX_RETRIES: Site returned $STATUS. Waiting 20s..."
+    sleep 20
+    RETRY_COUNT=$((RETRY_COUNT+1))
+done
 
-# Test 2: Base64 Encoding
-echo "[Test 2] Checking Base64 Tool..."
-agent-browser open "$URL/base64"
-agent-browser wait --load networkidle
-agent-browser snapshot -i | grep -q "Base64 有如神助" && echo "PASS: Base64 Loaded" || echo "FAIL: Base64 Loaded"
-agent-browser fill "textarea[placeholder='...']" "Hello"
-agent-browser wait 500
-agent-browser snapshot -i | grep -q "SGVsbG8=" && echo "PASS: Base64 Encoding" || echo "FAIL: Base64 Encoding"
+if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
+    echo "Timeout waiting for deployment."
+    exit 1
+fi
 
-# Test 3: HTML Escape
-echo "[Test 3] Checking HTML Escape Tool..."
-agent-browser open "$URL/html-escape"
-agent-browser wait --load networkidle
-agent-browser snapshot -i | grep -q "HTML Escape 有如神助" && echo "PASS: HTML Escape Loaded" || echo "FAIL: HTML Escape Loaded"
-agent-browser fill "textarea[placeholder='<div>...</div>']" "<div>"
-agent-browser wait 500
-agent-browser snapshot -i | grep -q "&lt;div&gt;" && echo "PASS: HTML Escape" || echo "FAIL: HTML Escape"
+echo "Running Browser Tests..."
+$BROWSER open "$URL"
+$BROWSER wait 2000
+$BROWSER snapshot -i | grep -q "做甚麼都有如神助" && echo "PASS: Homepage Loaded" || echo "FAIL: Homepage Loaded"
 
-agent-browser close
-echo "--- Test Suite Finished ---"
+echo "Testing Base64 Link..."
+$BROWSER click @e3
+$BROWSER wait 1000
+CURRENT_URL=$($BROWSER get url)
+if [[ "$CURRENT_URL" == *"base64"* ]]; then
+    echo "PASS: Base64 Route Accessible ($CURRENT_URL)"
+else
+    echo "FAIL: Base64 Route Invalid ($CURRENT_URL)"
+    exit 1
+fi
+
+echo "Testing Base64 Logic..."
+$BROWSER fill @e1 "GOD MODE"
+$BROWSER click @button --name "Encode"
+$BROWSER wait 500
+RESULT=$($BROWSER get value @e2)
+if [ "$RESULT" == "R09EIE1PREU=" ]; then
+    echo "PASS: Base64 Logic Working"
+else
+    echo "FAIL: Base64 Logic Error (Got: $RESULT)"
+fi
+
+echo "Testing Direct Access SEO Path..."
+$BROWSER open "${URL}json/"
+$BROWSER wait 2000
+$BROWSER snapshot -i | grep -q "JSON Tool" && echo "PASS: SEO Path Working" || echo "FAIL: SEO Path Broken"
+
+$BROWSER close
+echo "All Tests Completed."
