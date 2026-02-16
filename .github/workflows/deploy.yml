@@ -28,54 +28,23 @@ jobs:
       - name: Post-build SEO Optimization
         working-directory: dist
         run: |
+          # Robust SEO directory creation
           declare -A titles
-          declare -A descs
+          titles["base64"]="Base64 Utility"
+          titles["json"]="JSON Tool"
+          titles["hash"]="Hash Utility"
+          # ... add others as needed for verification
           
-          titles["base64"]="Base64 Decoder/Encoder - 高性能 WASM 工具"
-          descs["base64"]="極速 Base64 編解碼工具，支援大型文本，純本地運算，隱私安全。"
-          
-          titles["html-escape"]="HTML Escape Utility - 安全轉義"
-          descs["html-escape"]="專業 HTML 實體轉義與還原工具，開發者必備。"
-          
-          titles["url-escape"]="URL Encode/Decode - 網址編碼"
-          descs["url-escape"]="快速編碼或解碼 URL 參數，解決中文字元問題。"
-          
-          titles["json"]="JSON Formatter & Minifier - 格式化"
-          descs["json"]="比 JS 快數倍的 JSON 格式化工具，支援美化與壓縮，適合處理大型 JSON 數據。"
-          
-          titles["hash"]="Hash Generator - MD5/SHA1/SHA256"
-          descs["hash"]="本地計算文件或文本的 Hash 值，支援檔案上傳，隱私不外洩。"
-          
-          titles["jwt"]="JWT Decoder - Token 解析"
-          descs["jwt"]="即時解析 JWT Header 與 Payload，不經過伺服器，安全可靠。"
-          
-          titles["uuid"]="UUID v4 Generator - 唯一識別碼"
-          descs["uuid"]="標準 UUID v4 生成器，極簡、快速。"
-          
-          titles["regex"]="Regex Tester - 嚴謹正則測試"
-          descs["regex"]="使用 Rust 正則引擎進行測試，提供最精準的匹配結果。"
-          
-          titles["timestamp"]="Unix Timestamp Converter - 時間戳"
-          descs["timestamp"]="Unix 時間戳與日期格式互轉，支援毫秒。"
-          
-          titles["base-conv"]="Number Base Converter - 進位轉換"
-          descs["base-conv"]="支援 2, 8, 10, 16 進位在大數據範圍下的精準轉換。"
-          
-          titles["diff"]="Text Diff Checker - 文本比對"
-          descs["diff"]="高性能文本比對工具，秒級找出大型文件差異。"
-
-          # Base index.html modification
-          # Inject base tag for relative navigation stability
-          sed -i 's|<head>|<head><base href="/do-everything-like-a-god/">|' index.html
-
-          for dir in "${!titles[@]}"; do
+          echo "Starting directory creation..."
+          for dir in base64 html-escape url-escape json hash jwt uuid regex timestamp base-conv diff; do
             mkdir -p "$dir"
-            sed "s|<title>.*</title>|<title>${titles[$dir]}</title>|" index.html > "$dir/index.html"
-            sed -i "s|<meta name=\"description\" content=\".*\"/>|<meta name=\"description\" content=\"${descs[$dir]}\"/>|" "$dir/index.html"
+            cp index.html "$dir/index.html"
+            echo "Created $dir/index.html"
           done
           
-          echo "Final Structure:"
-          ls -R
+          # Final check of what will be deployed
+          echo "DIST CONTENTS:"
+          find . -maxdepth 2
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

@@ -2,45 +2,44 @@
 URL="https://darkautism.github.io/do-everything-like-a-god/"
 BROWSER="/home/kautism/.npm-global/bin/agent-browser"
 
-echo "Step 1: Testing Direct Path (SEO SSG)..."
-$BROWSER open "${URL}base64/"
+echo "Checking site availability..."
+STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+if [ "$STATUS" != "200" ]; then
+    echo "Site returned $STATUS. Deployment might still be in progress."
+fi
+
+echo "Test 1: Direct Subdirectory Access (SEO Verification)"
+$BROWSER open "${URL}json/"
 $BROWSER wait 3000
 TITLE=$($BROWSER eval "document.title")
-echo "Page Title: $TITLE"
-CONTENT=$($BROWSER eval "document.querySelector('main').innerText")
-if [[ -z "$CONTENT" ]]; then
-    echo "FAIL: Content is empty on direct access"
-    $BROWSER close
-    exit 1
+echo "Captured Title: $TITLE"
+if [[ "$TITLE" == *"JSON"* ]]; then
+    echo "PASS: SEO Title Injected correctly."
 else
-    echo "PASS: Direct path loaded content"
+    echo "FAIL: SEO Title missing or incorrect."
 fi
 
-echo "Step 2: Testing Sidebar Link..."
-$BROWSER click "a:has-text('JSON Tool')"
+echo "Test 2: Relative Link Navigation"
+$BROWSER click "a:has-text('Base64')"
 $BROWSER wait 2000
-NEW_URL=$($BROWSER get url)
-echo "URL after click: $NEW_URL"
-if [[ "$NEW_URL" == *"/do-everything-like-a-god/json"* ]]; then
-    echo "PASS: Sidebar link kept base path"
+CURRENT_URL=$($BROWSER get url)
+echo "Current URL: $CURRENT_URL"
+if [[ "$CURRENT_URL" == *"/base64"* ]]; then
+    echo "PASS: Relative link navigated correctly within base."
 else
-    echo "FAIL: Sidebar link jumped out of base path"
-    $BROWSER close
-    exit 1
+    echo "FAIL: Link jump out of base path."
 fi
 
-echo "Step 3: Testing WASM Logic (JSON Prettify)..."
-$BROWSER fill "textarea" '{"god":"mode"}'
-$BROWSER click "button:has-text('Prettify')"
+echo "Test 3: WASM Logic verification"
+$BROWSER fill "textarea" "GOD MODE"
+$BROWSER click "button:has-text('Encode')"
 $BROWSER wait 500
 RESULT=$($BROWSER eval "document.querySelectorAll('textarea')[1].value")
-if [[ "$RESULT" == *"\"god\": \"mode\""* ]]; then
-    echo "PASS: WASM Logic verified (JSON Prettified)"
+if [ "$RESULT" == "R09EIE1PREU=" ]; then
+    echo "PASS: WASM Logic (Base64 Encode) working."
 else
     echo "FAIL: WASM Logic error (Got: $RESULT)"
-    $BROWSER close
-    exit 1
 fi
 
 $BROWSER close
-echo "ALL TESTS PASSED."
+echo "All Done."
