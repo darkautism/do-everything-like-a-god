@@ -72,17 +72,17 @@ pub fn App() -> impl IntoView {
                 <main class="main-content">
                     <Routes>
                         <Route path="" view=move || view! { <HomePage lang=lang /> }/>
-                        <Route path="base64" view=move || view! { <Base64Page lang=lang /> }/>
-                        <Route path="html-escape" view=move || view! { <HtmlEscapePage lang=lang /> }/>
-                        <Route path="url-escape" view=move || view! { <UrlEscapePage lang=lang /> }/>
-                        <Route path="json" view=move || view! { <JsonPage lang=lang /> }/>
-                        <Route path="hash" view=move || view! { <HashPage lang=lang /> }/>
-                        <Route path="jwt" view=move || view! { <JwtPage lang=lang /> }/>
-                        <Route path="uuid" view=move || view! { <UuidPage lang=lang /> }/>
-                        <Route path="regex" view=move || view! { <RegexPage lang=lang /> }/>
-                        <Route path="timestamp" view=move || view! { <TimestampPage lang=lang /> }/>
-                        <Route path="base-conv" view=move || view! { <BaseConvPage lang=lang /> }/>
-                        <Route path="diff" view=move || view! { <DiffPage lang=lang /> }/>
+                        <Route path="/base64" view=move || view! { <Base64Page lang=lang /> }/>
+                        <Route path="/html-escape" view=move || view! { <HtmlEscapePage lang=lang /> }/>
+                        <Route path="/url-escape" view=move || view! { <UrlEscapePage lang=lang /> }/>
+                        <Route path="/json" view=move || view! { <JsonPage lang=lang /> }/>
+                        <Route path="/hash" view=move || view! { <HashPage lang=lang /> }/>
+                        <Route path="/jwt" view=move || view! { <JwtPage lang=lang /> }/>
+                        <Route path="/uuid" view=move || view! { <UuidPage lang=lang /> }/>
+                        <Route path="/regex" view=move || view! { <RegexPage lang=lang /> }/>
+                        <Route path="/timestamp" view=move || view! { <TimestampPage lang=lang /> }/>
+                        <Route path="/base-conv" view=move || view! { <BaseConvPage lang=lang /> }/>
+                        <Route path="/diff" view=move || view! { <DiffPage lang=lang /> }/>
                     </Routes>
                 </main>
             </div>
