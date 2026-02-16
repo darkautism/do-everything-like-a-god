@@ -44,25 +44,25 @@ pub fn App() -> impl IntoView {
 
                     <div class="category">
                         <div class="category-title">"Converters"</div>
-                        <A href="/base64" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Base64"</A>
-                        <A href="/html-escape" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"HTML Escape"</A>
-                        <A href="/url-escape" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"URL Escape"</A>
-                        <A href="/base-conv" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Base Converter"</A>
+                        <A href="base64" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Base64"</A>
+                        <A href="html-escape" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"HTML Escape"</A>
+                        <A href="url-escape" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"URL Escape"</A>
+                        <A href="base-conv" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Base Converter"</A>
                     </div>
 
                     <div class="category">
                         <div class="category-title">"Development"</div>
-                        <A href="/json" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"JSON Tool"</A>
-                        <A href="/jwt" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"JWT Decoder"</A>
-                        <A href="/regex" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Regex Tester"</A>
-                        <A href="/diff" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Diff Checker"</A>
+                        <A href="json" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"JSON Tool"</A>
+                        <A href="jwt" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"JWT Decoder"</A>
+                        <A href="regex" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Regex Tester"</A>
+                        <A href="diff" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Diff Checker"</A>
                     </div>
 
                     <div class="category">
                         <div class="category-title">"Security & Data"</div>
-                        <A href="/hash" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Hash Utility"</A>
-                        <A href="/uuid" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"UUID Gen"</A>
-                        <A href="/timestamp" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Timestamp"</A>
+                        <A href="hash" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Hash Utility"</A>
+                        <A href="uuid" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"UUID Gen"</A>
+                        <A href="timestamp" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Timestamp"</A>
                     </div>
                 </nav>
 
