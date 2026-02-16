@@ -724,6 +724,62 @@ mod tests {
         sha1.update(input);
         assert_eq!(hex::encode(sha1.finalize()), "56b9ebeed4b0c26531b7cbf7aeea2c99afc2e4f0");
     }
+
+    #[test]
+    fn test_jwt_decode() {
+        use base64::{Engine as _, engine::general_purpose};
+        let header = r#"{"alg":"HS256","typ":"JWT"}"#;
+        let payload = r#"{"sub":"1234567890","name":"John Doe","iat":1516239022}"#;
+        
+        let h_b64 = general_purpose::URL_SAFE_NO_PAD.encode(header);
+        let p_b64 = general_purpose::URL_SAFE_NO_PAD.encode(payload);
+        let token = format!("{}.{}.signature", h_b64, p_b64);
+        
+        let parts: Vec<&str> = token.split('.').collect();
+        let h_dec = String::from_utf8(general_purpose::URL_SAFE_NO_PAD.decode(parts[0]).unwrap()).unwrap();
+        let p_dec = String::from_utf8(general_purpose::URL_SAFE_NO_PAD.decode(parts[1]).unwrap()).unwrap();
+        
+        assert_eq!(h_dec, header);
+        assert_eq!(p_dec, payload);
+    }
+
+    #[test]
+    fn test_regex_matching() {
+        use regex::Regex;
+        let re = Regex::new(r"^\d{4}-\d{2}-\d{2}$").unwrap();
+        assert!(re.is_match("2026-02-16"));
+        assert!(!re.is_match("16-02-2026"));
+    }
+
+    #[test]
+    fn test_json_processing() {
+        let input = r#"{"a":1,"b":[2,3]}"#;
+        let v: serde_json::Value = serde_json::from_str(input).unwrap();
+        let minified = serde_json::to_string(&v).unwrap();
+        let prettified = serde_json::to_string_pretty(&v).unwrap();
+        
+        assert_eq!(minified, r#"{"a":1,"b":[2,3]}"#);
+        assert!(prettified.contains('\n'));
+    }
+
+    #[test]
+    fn test_timestamp_conversion() {
+        use chrono::{Utc, TimeZone};
+        let ts = 1700000000i64;
+        let dt = Utc.timestamp_opt(ts, 0).single().unwrap();
+        assert_eq!(dt.to_rfc3339(), "2023-11-14T22:13:20+00:00");
+    }
+
+    #[test]
+    fn test_diff_logic() {
+        use similar::{ChangeTag, TextDiff};
+        let old = "hello\nworld";
+        let new = "hello\ngod";
+        let diff = TextDiff::from_lines(old, new);
+        let changes: Vec<_> = diff.iter_all_changes().collect();
+        assert_eq!(changes.len(), 3);
+        assert_eq!(changes[2].tag(), ChangeTag::Insert);
+    }
 }
 
 #[component]
