@@ -28,11 +28,10 @@ jobs:
       - name: Post-build SEO Optimization
         working-directory: dist
         run: |
-          # The public_url is already handled by Trunk via Trunk.toml or CLI arg.
-          # We only need to inject SEO tags for subdirectories.
+          # Inject Base URL for GitHub Pages
+          sed -i 's|<base href="/"|<base href="/do-everything-like-a-god/"|' index.html
           
-          declare -A titles
-          declare -A descs
+          # Define pages and their specific titles/descriptions
           
           titles["base64"]="Base64 Decoder/Encoder - 高性能 WASM 工具"
           descs["base64"]="極速 Base64 編解碼工具，支援大型文本，純本地運算，隱私安全。"
