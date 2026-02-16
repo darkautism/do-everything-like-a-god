@@ -750,7 +750,7 @@ fn Base64Page(lang: ReadSignal<Lang>) -> impl IntoView {
                 <div class="box">
                     <div class="box-label">
                         {move || match lang.get() {
-                            Lang::En => "Base64",
+                            Lang::En => "Base64 Result",
                             Lang::Zh => "Base64 結果",
                         }}
                     </div>
