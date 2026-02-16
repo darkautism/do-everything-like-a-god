@@ -28,8 +28,21 @@ jobs:
       - name: Post-build SEO Optimization
         working-directory: dist
         run: |
-          # Ensure 404.html exists in dist for SPA routing
-          cp ../404.html ./
+          # The list of all tool routes
+          PAGES=("base64" "html-escape" "url-escape" "json" "hash" "jwt" "uuid" "regex" "timestamp" "base-conv" "diff")
+          
+          # Use absolute paths for all resources in the main index.html
+          # This ensures that even if loaded from /json/, it finds the WASM in root.
+          sed -i 's|href="/|href="/do-everything-like-a-god/|g' index.html
+          sed -i 's|src="/|src="/do-everything-like-a-god/|g' index.html
+          sed -i "s|'/do-everything-like-a-god/|'/do-everything-like-a-god/|g" index.html
+
+          for dir in "${PAGES[@]}"; do
+            mkdir -p "$dir"
+            cp index.html "$dir/index.html"
+          done
+          
+          # No more 404.html redirection hack
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
