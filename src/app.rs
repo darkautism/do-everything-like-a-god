@@ -12,52 +12,81 @@ enum Lang {
 pub fn App() -> impl IntoView {
     provide_meta_context();
     let (lang, set_lang) = create_signal(Lang::Zh);
+    let (is_sidebar_open, set_sidebar_open) = create_signal(false);
 
     view! {
         <Title text="工具箱 | Useful Tools"/>
         <Meta name="description" content="High-performance WASM developer tools: Base64, JSON Formatter, JWT Decoder, Regex Tester and more. Fast and private."/>
         
         <Router trailing_slash=TrailingSlash::Redirect base="/do-everything-like-a-god">
-            <nav class="nav">
-                <div style="display:flex;gap:20px;align-items:center">
-                    <A href="/" class="brand">"UTILITIES"</A>
-                    <A href="/base64" class="nav-link">"Base64"</A>
-                    <A href="/html-escape" class="nav-link">"HTML Escape"</A>
-                    <A href="/url-escape" class="nav-link">"URL Escape"</A>
-                    <A href="/json" class="nav-link">"JSON"</A>
-                    <A href="/hash" class="nav-link">"Hash"</A>
-                    <A href="/jwt" class="nav-link">"JWT"</A>
-                    <A href="/uuid" class="nav-link">"UUID"</A>
-                    <A href="/regex" class="nav-link">"Regex"</A>
-                    <A href="/timestamp" class="nav-link">"Timestamp"</A>
-                    <A href="/base-conv" class="nav-link">"Base"</A>
-                    <A href="/diff" class="nav-link">"Diff"</A>
+            <div class="layout">
+                // Mobile Header
+                <div class="mobile-header">
+                    <button class="menu-toggle" on:click=move |_| set_sidebar_open.update(|v| *v = !*v)>
+                        "Menu"
+                    </button>
+                    <div class="mobile-brand">"UTILITIES"</div>
                 </div>
-                <button class="lang-switch" on:click=move |_| {
-                    set_lang.update(|l| *l = if *l == Lang::En { Lang::Zh } else { Lang::En });
-                }>
-                    {move || match lang.get() {
-                        Lang::En => "中文",
-                        Lang::Zh => "English",
-                    }}
-                </button>
-            </nav>
-            <main>
-                <Routes>
-                    <Route path="" view=move || view! { <HomePage lang=lang /> }/>
-                    <Route path="/base64" view=move || view! { <Base64Page lang=lang /> }/>
-                    <Route path="/html-escape" view=move || view! { <HtmlEscapePage lang=lang /> }/>
-                    <Route path="/url-escape" view=move || view! { <UrlEscapePage lang=lang /> }/>
-                    <Route path="/json" view=move || view! { <JsonPage lang=lang /> }/>
-                    <Route path="/hash" view=move || view! { <HashPage lang=lang /> }/>
-                    <Route path="/jwt" view=move || view! { <JwtPage lang=lang /> }/>
-                    <Route path="/uuid" view=move || view! { <UuidPage lang=lang /> }/>
-                    <Route path="/regex" view=move || view! { <RegexPage lang=lang /> }/>
-                    <Route path="/timestamp" view=move || view! { <TimestampPage lang=lang /> }/>
-                    <Route path="/base-conv" view=move || view! { <BaseConvPage lang=lang /> }/>
-                    <Route path="/diff" view=move || view! { <DiffPage lang=lang /> }/>
-                </Routes>
-            </main>
+
+                // Sidebar
+                <nav class=move || if is_sidebar_open.get() { "sidebar open" } else { "sidebar" }>
+                    <div class="sidebar-header">
+                        <A href="/" class="brand" on:click=move |_| set_sidebar_open.set(false)>"GOD MODE"</A>
+                        <button class="lang-switch" on:click=move |_| {
+                            set_lang.update(|l| *l = if *l == Lang::En { Lang::Zh } else { Lang::En });
+                        }>
+                            {move || match lang.get() {
+                                Lang::En => "中文",
+                                Lang::Zh => "English",
+                            }}
+                        </button>
+                    </div>
+
+                    <div class="category">
+                        <div class="category-title">"Converters"</div>
+                        <A href="/base64" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Base64"</A>
+                        <A href="/html-escape" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"HTML Escape"</A>
+                        <A href="/url-escape" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"URL Escape"</A>
+                        <A href="/base-conv" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Base Converter"</A>
+                    </div>
+
+                    <div class="category">
+                        <div class="category-title">"Development"</div>
+                        <A href="/json" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"JSON Tool"</A>
+                        <A href="/jwt" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"JWT Decoder"</A>
+                        <A href="/regex" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Regex Tester"</A>
+                        <A href="/diff" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Diff Checker"</A>
+                    </div>
+
+                    <div class="category">
+                        <div class="category-title">"Security & Data"</div>
+                        <A href="/hash" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Hash Utility"</A>
+                        <A href="/uuid" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"UUID Gen"</A>
+                        <A href="/timestamp" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Timestamp"</A>
+                    </div>
+                </nav>
+
+                // Overlay for mobile
+                <div class=move || if is_sidebar_open.get() { "overlay show" } else { "overlay" }
+                     on:click=move |_| set_sidebar_open.set(false)></div>
+
+                <main class="main-content">
+                    <Routes>
+                        <Route path="" view=move || view! { <HomePage lang=lang /> }/>
+                        <Route path="/base64" view=move || view! { <Base64Page lang=lang /> }/>
+                        <Route path="/html-escape" view=move || view! { <HtmlEscapePage lang=lang /> }/>
+                        <Route path="/url-escape" view=move || view! { <UrlEscapePage lang=lang /> }/>
+                        <Route path="/json" view=move || view! { <JsonPage lang=lang /> }/>
+                        <Route path="/hash" view=move || view! { <HashPage lang=lang /> }/>
+                        <Route path="/jwt" view=move || view! { <JwtPage lang=lang /> }/>
+                        <Route path="/uuid" view=move || view! { <UuidPage lang=lang /> }/>
+                        <Route path="/regex" view=move || view! { <RegexPage lang=lang /> }/>
+                        <Route path="/timestamp" view=move || view! { <TimestampPage lang=lang /> }/>
+                        <Route path="/base-conv" view=move || view! { <BaseConvPage lang=lang /> }/>
+                        <Route path="/diff" view=move || view! { <DiffPage lang=lang /> }/>
+                    </Routes>
+                </main>
+            </div>
         </Router>
     }
 }
