@@ -29,7 +29,7 @@ jobs:
         working-directory: dist
         run: |
           # Copy index.html to subdirectories for SEO and direct access
-          for dir in base64 html-escape url-escape json hash jwt uuid regex; do
+          for dir in base64 html-escape url-escape json hash jwt uuid regex timestamp base-conv diff; do
             mkdir -p $dir
             cp index.html $dir/
           done
