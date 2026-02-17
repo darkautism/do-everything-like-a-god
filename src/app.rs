@@ -1,6 +1,7 @@
 use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
+use wasm_bindgen::JsCast;
 
 #[derive(Clone, Copy, Debug, PartialEq)]
 enum Lang {
@@ -8,64 +9,183 @@ enum Lang {
     Zh,
 }
 
+#[derive(Clone, Copy, Debug, PartialEq)]
+enum Theme {
+    Dark,
+    Light,
+}
+
+fn copy_to_clipboard(text: &str) {
+    if let Some(window) = web_sys::window() {
+        let clipboard = window.navigator().clipboard();
+        let _ = clipboard.write_text(text);
+    }
+}
+
+fn setup_keyboard_shortcuts() {
+    if let Some(window) = web_sys::window() {
+        let closure =
+            wasm_bindgen::closure::Closure::wrap(Box::new(move |event: web_sys::KeyboardEvent| {
+                if event.ctrl_key() || event.meta_key() && event.key().as_str() == "k" {
+                    event.prevent_default();
+                }
+            }) as Box<dyn FnMut(_)>);
+        let _ =
+            window.add_event_listener_with_callback("keydown", closure.as_ref().unchecked_ref());
+        closure.forget();
+    }
+}
+
+#[component]
+fn CopyButton(text: ReadSignal<String>) -> impl IntoView {
+    let (copied, set_copied) = create_signal(false);
+
+    view! {
+        <button
+            class="copy-btn"
+            on:click=move |_| {
+                copy_to_clipboard(&text.get());
+                set_copied.set(true);
+                set_timeout(move || set_copied.set(false), std::time::Duration::from_millis(2000));
+            }
+        >
+            {move || if copied.get() { "✓" } else { "📋" }}
+        </button>
+    }
+}
+
+#[component]
+fn ClearButton(on_click: impl Fn() + 'static) -> impl IntoView {
+    view! {
+        <button class="clear-btn" on:click=move |_| on_click()>
+            "🗑️"
+        </button>
+    }
+}
+
+#[component]
+fn ToolHeader(
+    lang: ReadSignal<Lang>,
+    title_en: &'static str,
+    title_zh: &'static str,
+) -> impl IntoView {
+    view! {
+        <h2 style="font-size:3rem;font-weight:900;margin:0">
+            {move || match lang.get() {
+                Lang::En => title_en,
+                Lang::Zh => title_zh,
+            }}
+        </h2>
+    }
+}
+
 #[component]
 pub fn App() -> impl IntoView {
     provide_meta_context();
     let (lang, set_lang) = create_signal(Lang::Zh);
+    let (theme, set_theme) = create_signal(Theme::Dark);
     let (is_sidebar_open, set_sidebar_open) = create_signal(false);
+
+    create_effect(move |_| {
+        setup_keyboard_shortcuts();
+    });
+
+    create_effect(move |_| {
+        if let Some(window) = web_sys::window() {
+            let storage = window.local_storage().ok().flatten();
+            if let Some(storage) = storage {
+                if let Ok(Some(theme_val)) = storage.get_item("theme") {
+                    if theme_val == "light" {
+                        set_theme.set(Theme::Light);
+                    } else {
+                        set_theme.set(Theme::Dark);
+                    }
+                }
+            }
+        }
+    });
+
+    let toggle_theme = move |_| {
+        let new_theme = if theme.get() == Theme::Dark {
+            Theme::Light
+        } else {
+            Theme::Dark
+        };
+        set_theme.set(new_theme);
+
+        if let Some(window) = web_sys::window() {
+            let storage = window.local_storage().ok().flatten();
+            if let Some(storage) = storage {
+                let theme_str = if new_theme == Theme::Dark {
+                    "dark"
+                } else {
+                    "light"
+                };
+                let _ = storage.set_item("theme", theme_str);
+            }
+        }
+    };
 
     view! {
         <Title text="工具箱 | Useful Tools"/>
-        <Meta name="description" content="High-performance WASM developer tools: Base64, JSON Formatter, JWT Decoder, Regex Tester and more. Fast and private."/>
-        
-        <Router trailing_slash=TrailingSlash::Redirect base="/do-everything-like-a-god">
-            <div class="layout">
-                // Mobile Header
+
+        <Router>
+            <div class=move || format!("layout {}", match theme.get() { Theme::Light => "light", Theme::Dark => "" })>
                 <div class="mobile-header">
-                    <button class="menu-toggle" on:click=move |_| set_sidebar_open.update(|v| *v = !*v)>
+                    <button class="menu-toggle" aria-label="Toggle menu" on:click=move |_| set_sidebar_open.update(|v| *v = !*v)>
                         "Menu"
                     </button>
-                    <div class="mobile-brand">"UTILITIES"</div>
+                    <div class="mobile-brand" aria-label="Utility Tools">"UTILITIES"</div>
                 </div>
-                // Sidebar
-                <nav class=move || if is_sidebar_open.get() { "sidebar open" } else { "sidebar" }>
+
+                <nav class=move || if is_sidebar_open.get() { "sidebar open" } else { "sidebar" } aria-label="Main navigation">
                     <div class="sidebar-header">
                         <A href="" class="brand" on:click=move |_| set_sidebar_open.set(false)>"GOD MODE"</A>
-                        <button class="lang-switch" on:click=move |_| {
-                            set_lang.update(|l| *l = if *l == Lang::En { Lang::Zh } else { Lang::En });
-                        }>
-                            {move || match lang.get() {
-                                Lang::En => "中文",
-                                Lang::Zh => "English",
-                            }}
-                        </button>
+                        <div class="header-buttons">
+                            <button class="theme-switch" aria-label="Toggle theme" on:click=toggle_theme>
+                                {move || match theme.get() { Theme::Dark => "☀️", Theme::Light => "🌙" }}
+                            </button>
+                            <button class="lang-switch" aria-label="Toggle language" on:click=move |_| {
+                                set_lang.update(|l| *l = if *l == Lang::En { Lang::Zh } else { Lang::En });
+                            }>
+                                {move || match lang.get() { Lang::En => "中文", Lang::Zh => "EN", }}
+                            </button>
+                        </div>
                     </div>
 
                     <div class="category">
-                        <div class="category-title">"Converters"</div>
+                        <div class="category-title">"Encoders"</div>
                         <A href="base64" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Base64"</A>
+                        <A href="base32" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Base32"</A>
+                        <A href="base58" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Base58"</A>
                         <A href="html-escape" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"HTML Escape"</A>
                         <A href="url-escape" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"URL Escape"</A>
-                        <A href="base-conv" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Base Converter"</A>
+                    </div>
+
+                    <div class="category">
+                        <div class="category-title">"Cryptography"</div>
+                        <A href="hash" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Hash"</A>
+                        <A href="aes" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"AES"</A>
+                        <A href="jwt" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"JWT"</A>
                     </div>
 
                     <div class="category">
                         <div class="category-title">"Development"</div>
-                        <A href="json" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"JSON Tool"</A>
-                        <A href="jwt" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"JWT Decoder"</A>
-                        <A href="regex" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Regex Tester"</A>
-                        <A href="diff" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Diff Checker"</A>
+                        <A href="json" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"JSON"</A>
+                        <A href="regex" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Regex"</A>
+                        <A href="diff" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Diff"</A>
+                        <A href="uuid" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"UUID"</A>
+                        <A href="timestamp" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Timestamp"</A>
+                        <A href="base-conv" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Base Conv"</A>
                     </div>
 
                     <div class="category">
-                        <div class="category-title">"Security & Data"</div>
-                        <A href="hash" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Hash Utility"</A>
-                        <A href="uuid" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"UUID Gen"</A>
-                        <A href="timestamp" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Timestamp"</A>
+                        <div class="category-title">"Utilities"</div>
+                        <A href="cron" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Cron"</A>
+                        <A href="image-base64" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Image Base64"</A>
                     </div>
                 </nav>
 
-                // Overlay for mobile
                 <div class=move || if is_sidebar_open.get() { "overlay show" } else { "overlay" }
                      on:click=move |_| set_sidebar_open.set(false)></div>
 
@@ -73,16 +193,22 @@ pub fn App() -> impl IntoView {
                     <Routes>
                         <Route path="" view=move || view! { <HomePage lang=lang /> }/>
                         <Route path="/base64" view=move || view! { <Base64Page lang=lang /> }/>
+                        <Route path="/base32" view=move || view! { <Base32Page lang=lang /> }/>
+                        <Route path="/base58" view=move || view! { <Base58Page lang=lang /> }/>
                         <Route path="/html-escape" view=move || view! { <HtmlEscapePage lang=lang /> }/>
                         <Route path="/url-escape" view=move || view! { <UrlEscapePage lang=lang /> }/>
                         <Route path="/json" view=move || view! { <JsonPage lang=lang /> }/>
                         <Route path="/hash" view=move || view! { <HashPage lang=lang /> }/>
+                        <Route path="/aes" view=move || view! { <AesPage lang=lang /> }/>
                         <Route path="/jwt" view=move || view! { <JwtPage lang=lang /> }/>
                         <Route path="/uuid" view=move || view! { <UuidPage lang=lang /> }/>
                         <Route path="/regex" view=move || view! { <RegexPage lang=lang /> }/>
                         <Route path="/timestamp" view=move || view! { <TimestampPage lang=lang /> }/>
                         <Route path="/base-conv" view=move || view! { <BaseConvPage lang=lang /> }/>
                         <Route path="/diff" view=move || view! { <DiffPage lang=lang /> }/>
+                        <Route path="/cron" view=move || view! { <CronPage lang=lang /> }/>
+                        <Route path="/image-base64" view=move || view! { <ImageBase64Page lang=lang /> }/>
+                        <Route path="/*" view=move || view! { <HomePage lang=lang /> }/>
                     </Routes>
                 </main>
             </div>
@@ -90,6 +216,818 @@ pub fn App() -> impl IntoView {
     }
 }
 
+#[component]
+fn HomePage(lang: ReadSignal<Lang>) -> impl IntoView {
+    view! {
+        <div class="hero">
+            <h1>
+                {move || match lang.get() {
+                    Lang::En => "Do Everything Like a God",
+                    Lang::Zh => "做甚麼都有如神助",
+                }}
+            </h1>
+            <p>
+                {move || match lang.get() {
+                    Lang::En => "Empowering your workflow with divine efficiency.",
+                    Lang::Zh => "賦予你的工作流神一般的效率。",
+                }}
+            </p>
+            <a href="#" class="btn">
+                {move || match lang.get() {
+                    Lang::En => "Get Started",
+                    Lang::Zh => "立即開始",
+                }}
+            </a>
+        </div>
+    }
+}
+
+// ==================== Base64 Page ====================
+#[component]
+fn Base64Page(lang: ReadSignal<Lang>) -> impl IntoView {
+    use base64::{engine::general_purpose, Engine as _};
+
+    let (input, set_input) = create_signal(String::new());
+    let (output, set_output) = create_signal(String::new());
+    let (error, set_error) = create_signal(Option::<String>::None);
+
+    let encode = move |_| {
+        set_error.set(None);
+        let encoded = general_purpose::STANDARD.encode(input.get().as_bytes());
+        set_output.set(encoded);
+    };
+
+    let decode = move |_| {
+        set_error.set(None);
+        match general_purpose::STANDARD.decode(output.get().trim()) {
+            Ok(bytes) => match String::from_utf8(bytes) {
+                Ok(s) => set_input.set(s),
+                Err(e) => set_error.set(Some(format!("UTF-8 Error: {}", e))),
+            },
+            Err(e) => set_error.set(Some(format!("Decode Error: {}", e))),
+        }
+    };
+
+    view! {
+        <div class="tool-container">
+            <ToolHeader lang=lang title_en="Base64" title_zh="Base64 工具"/>
+            <div class="tool-grid">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-label">{move || match lang.get() { Lang::En => "Text", Lang::Zh => "文字", }}</div>
+                        <ClearButton on_click=move || { set_input.set(String::new()); set_output.set(String::new()); }/>
+                    </div>
+                    <textarea
+                        prop:value=input
+                        on:input=move |ev| set_input.set(event_target_value(&ev))
+                        placeholder="..."
+                    ></textarea>
+                    <div class="btn-row">
+                        <button class="btn" on:click=encode>{move || match lang.get() { Lang::En => "Encode →", Lang::Zh => "編碼 →", }}</button>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-label">"Base64"</div>
+                        <CopyButton text=output/>
+                    </div>
+                    <textarea
+                        prop:value=output
+                        on:input=move |ev| set_output.set(event_target_value(&ev))
+                        placeholder="..."
+                    ></textarea>
+                    <div class="btn-row">
+                        <button class="btn" on:click=decode>{move || match lang.get() { Lang::En => "← Decode", Lang::Zh => "← 解碼", }}</button>
+                    </div>
+                </div>
+            </div>
+            {move || error.get().map(|e| view! { <div class="error">{e}</div> })}
+        </div>
+    }
+}
+
+// ==================== Base32 Page ====================
+#[component]
+fn Base32Page(lang: ReadSignal<Lang>) -> impl IntoView {
+    let (input, set_input) = create_signal(String::new());
+    let (output, set_output) = create_signal(String::new());
+    let (error, set_error) = create_signal(Option::<String>::None);
+
+    let encode = move |_| {
+        set_error.set(None);
+        let encoded = base32::encode(base32::Alphabet::Crockford, input.get().as_bytes());
+        set_output.set(encoded);
+    };
+
+    let decode = move |_| {
+        set_error.set(None);
+        match base32::decode(base32::Alphabet::Crockford, output.get().trim()) {
+            Some(bytes) => match String::from_utf8(bytes) {
+                Ok(s) => set_input.set(s),
+                Err(e) => set_error.set(Some(format!("UTF-8 Error: {}", e))),
+            },
+            None => set_error.set(Some("Invalid Base32".to_string())),
+        }
+    };
+
+    view! {
+        <div class="tool-container">
+            <ToolHeader lang=lang title_en="Base32" title_zh="Base32 工具"/>
+            <div class="tool-grid">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-label">{move || match lang.get() { Lang::En => "Text", Lang::Zh => "文字", }}</div>
+                        <ClearButton on_click=move || { set_input.set(String::new()); set_output.set(String::new()); }/>
+                    </div>
+                    <textarea prop:value=input on:input=move |ev| set_input.set(event_target_value(&ev)) placeholder="..."></textarea>
+                    <div class="btn-row">
+                        <button class="btn" on:click=encode>{move || match lang.get() { Lang::En => "Encode →", Lang::Zh => "編碼 →", }}</button>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-label">"Base32"</div>
+                        <CopyButton text=output/>
+                    </div>
+                    <textarea prop:value=output on:input=move |ev| set_output.set(event_target_value(&ev)) placeholder="..."></textarea>
+                    <div class="btn-row">
+                        <button class="btn" on:click=decode>{move || match lang.get() { Lang::En => "← Decode", Lang::Zh => "← 解碼", }}</button>
+                    </div>
+                </div>
+            </div>
+            {move || error.get().map(|e| view! { <div class="error">{e}</div> })}
+        </div>
+    }
+}
+
+// ==================== Base58 Page ====================
+#[component]
+fn Base58Page(lang: ReadSignal<Lang>) -> impl IntoView {
+    let (input, set_input) = create_signal(String::new());
+    let (output, set_output) = create_signal(String::new());
+    let (error, set_error) = create_signal(Option::<String>::None);
+
+    let encode = move |_| {
+        set_error.set(None);
+        let encoded = bs58::encode(input.get().as_bytes()).into_string();
+        set_output.set(encoded);
+    };
+
+    let decode = move |_| {
+        set_error.set(None);
+        match bs58::decode(output.get().trim()).into_vec() {
+            Ok(bytes) => match String::from_utf8(bytes) {
+                Ok(s) => set_input.set(s),
+                Err(e) => set_error.set(Some(format!("UTF-8 Error: {}", e))),
+            },
+            Err(e) => set_error.set(Some(format!("Decode Error: {}", e))),
+        }
+    };
+
+    view! {
+        <div class="tool-container">
+            <ToolHeader lang=lang title_en="Base58" title_zh="Base58 工具"/>
+            <div class="tool-grid">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-label">{move || match lang.get() { Lang::En => "Text", Lang::Zh => "文字", }}</div>
+                        <ClearButton on_click=move || { set_input.set(String::new()); set_output.set(String::new()); }/>
+                    </div>
+                    <textarea prop:value=input on:input=move |ev| set_input.set(event_target_value(&ev)) placeholder="..."></textarea>
+                    <div class="btn-row">
+                        <button class="btn" on:click=encode>{move || match lang.get() { Lang::En => "Encode →", Lang::Zh => "編碼 →", }}</button>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-label">"Base58"</div>
+                        <CopyButton text=output/>
+                    </div>
+                    <textarea prop:value=output on:input=move |ev| set_output.set(event_target_value(&ev)) placeholder="..."></textarea>
+                    <div class="btn-row">
+                        <button class="btn" on:click=decode>{move || match lang.get() { Lang::En => "← Decode", Lang::Zh => "← 解碼", }}</button>
+                    </div>
+                </div>
+            </div>
+            {move || error.get().map(|e| view! { <div class="error">{e}</div> })}
+        </div>
+    }
+}
+
+// ==================== HTML Escape Page ====================
+#[component]
+fn HtmlEscapePage(lang: ReadSignal<Lang>) -> impl IntoView {
+    let (input, set_input) = create_signal(String::new());
+    let (output, set_output) = create_signal(String::new());
+
+    let escape = move |_| {
+        let escaped = html_escape::encode_safe(&input.get()).to_string();
+        set_output.set(escaped);
+    };
+
+    let unescape = move |_| {
+        let unescaped = html_escape::decode_html_entities(&output.get()).to_string();
+        set_input.set(unescaped);
+    };
+
+    view! {
+        <div class="tool-container">
+            <ToolHeader lang=lang title_en="HTML Escape" title_zh="HTML 轉義"/>
+            <div class="tool-grid">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-label">{move || match lang.get() { Lang::En => "Raw HTML", Lang::Zh => "原始 HTML", }}</div>
+                        <ClearButton on_click=move || { set_input.set(String::new()); set_output.set(String::new()); }/>
+                    </div>
+                    <textarea prop:value=input on:input=move |ev| set_input.set(event_target_value(&ev)) placeholder="<div>...</div>"></textarea>
+                    <div class="btn-row">
+                        <button class="btn" on:click=escape>{move || match lang.get() { Lang::En => "Escape →", Lang::Zh => "轉義 →", }}</button>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-label">{move || match lang.get() { Lang::En => "Escaped", Lang::Zh => "轉義結果", }}</div>
+                        <CopyButton text=output/>
+                    </div>
+                    <textarea prop:value=output on:input=move |ev| set_output.set(event_target_value(&ev)) placeholder="&lt;div&gt;..."></textarea>
+                    <div class="btn-row">
+                        <button class="btn" on:click=unescape>{move || match lang.get() { Lang::En => "← Unescape", Lang::Zh => "← 還原", }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+// ==================== URL Escape Page ====================
+#[component]
+fn UrlEscapePage(lang: ReadSignal<Lang>) -> impl IntoView {
+    let (input, set_input) = create_signal(String::new());
+    let (output, set_output) = create_signal(String::new());
+
+    let encode = move |_| {
+        let encoded = urlencoding::encode(&input.get()).to_string();
+        set_output.set(encoded);
+    };
+
+    let decode = move |_| {
+        if let Ok(decoded) = urlencoding::decode(&output.get()) {
+            set_input.set(decoded.into_owned());
+        }
+    };
+
+    view! {
+        <div class="tool-container">
+            <ToolHeader lang=lang title_en="URL Encode" title_zh="URL 編碼"/>
+            <div class="tool-grid">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-label">{move || match lang.get() { Lang::En => "Raw URL", Lang::Zh => "原始 URL", }}</div>
+                        <ClearButton on_click=move || { set_input.set(String::new()); set_output.set(String::new()); }/>
+                    </div>
+                    <textarea prop:value=input on:input=move |ev| set_input.set(event_target_value(&ev)) placeholder="https://example.com/測試"></textarea>
+                    <div class="btn-row">
+                        <button class="btn" on:click=encode>{move || match lang.get() { Lang::En => "Encode →", Lang::Zh => "編碼 →", }}</button>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-label">{move || match lang.get() { Lang::En => "Encoded", Lang::Zh => "編碼結果", }}</div>
+                        <CopyButton text=output/>
+                    </div>
+                    <textarea prop:value=output on:input=move |ev| set_output.set(event_target_value(&ev)) placeholder="https%3A%2F%2F..."></textarea>
+                    <div class="btn-row">
+                        <button class="btn" on:click=decode>{move || match lang.get() { Lang::En => "← Decode", Lang::Zh => "← 解碼", }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+// ==================== JSON Page ====================
+#[component]
+fn JsonPage(lang: ReadSignal<Lang>) -> impl IntoView {
+    let (input, set_input) = create_signal(String::new());
+    let (output, set_output) = create_signal(String::new());
+    let (error, set_error) = create_signal(Option::<String>::None);
+
+    let process = move |minify: bool| {
+        set_error.set(None);
+        match serde_json::from_str::<serde_json::Value>(&input.get()) {
+            Ok(v) => {
+                let res = if minify {
+                    serde_json::to_string(&v).unwrap()
+                } else {
+                    serde_json::to_string_pretty(&v).unwrap()
+                };
+                set_output.set(res);
+            }
+            Err(e) => set_error.set(Some(e.to_string())),
+        }
+    };
+
+    view! {
+        <div class="tool-container">
+            <ToolHeader lang=lang title_en="JSON Tool" title_zh="JSON 工具"/>
+            <div class="tool-grid">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-label">{move || match lang.get() { Lang::En => "Input", Lang::Zh => "輸入", }}</div>
+                        <ClearButton on_click=move || { set_input.set(String::new()); set_output.set(String::new()); set_error.set(None); }/>
+                    </div>
+                    <textarea prop:value=input on:input=move |ev| set_input.set(event_target_value(&ev)) placeholder=r#"{"key":"value"}"#></textarea>
+                    <div class="btn-row">
+                        <button class="btn" on:click=move |_| process(false)>{move || match lang.get() { Lang::En => "Prettify", Lang::Zh => "格式化", }}</button>
+                        <button class="btn" on:click=move |_| process(true)>{move || match lang.get() { Lang::En => "Minify", Lang::Zh => "壓縮", }}</button>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-label">{move || match lang.get() { Lang::En => "Result", Lang::Zh => "結果", }}</div>
+                        <CopyButton text=output/>
+                    </div>
+                    <textarea prop:value=output readonly placeholder="..."></textarea>
+                    {move || error.get().map(|e| view! { <div class="error">{e}</div> })}
+                </div>
+            </div>
+        </div>
+    }
+}
+// ==================== Hash Page ====================
+#[component]
+fn HashPage(lang: ReadSignal<Lang>) -> impl IntoView {
+    use md5::Md5;
+    use sha1::Sha1;
+    use sha2::{Digest, Sha256, Sha512};
+    use sha3::Sha3_256;
+
+    let (input, set_input) = create_signal(String::new());
+    let (md5_res, set_md5) = create_signal(String::new());
+    let (sha1_res, set_sha1) = create_signal(String::new());
+    let (sha256_res, set_sha256) = create_signal(String::new());
+    let (sha512_res, set_sha512) = create_signal(String::new());
+    let (sha3_res, set_sha3) = create_signal(String::new());
+    let (is_loading, set_loading) = create_signal(false);
+
+    let compute_hashes = move |data: &[u8]| {
+        let mut md5_hasher = Md5::new();
+        md5_hasher.update(data);
+        set_md5.set(hex::encode(md5_hasher.finalize()));
+
+        let mut sha1_hasher = Sha1::new();
+        sha1_hasher.update(data);
+        set_sha1.set(hex::encode(sha1_hasher.finalize()));
+
+        let mut sha256_hasher = Sha256::new();
+        sha256_hasher.update(data);
+        set_sha256.set(hex::encode(sha256_hasher.finalize()));
+
+        let mut sha512_hasher = Sha512::new();
+        sha512_hasher.update(data);
+        set_sha512.set(hex::encode(sha512_hasher.finalize()));
+
+        let mut sha3_hasher = Sha3_256::new();
+        sha3_hasher.update(data);
+        set_sha3.set(hex::encode(sha3_hasher.finalize()));
+    };
+
+    let on_text_input = move |val: String| {
+        set_input.set(val.clone());
+        if val.is_empty() {
+            set_md5.set(String::new());
+            set_sha1.set(String::new());
+            set_sha256.set(String::new());
+            set_sha512.set(String::new());
+            set_sha3.set(String::new());
+            return;
+        }
+        compute_hashes(val.as_bytes());
+    };
+
+    let on_file_change = move |ev: ev::Event| {
+        let target = event_target::<web_sys::HtmlInputElement>(&ev);
+        if let Some(files) = target.files() {
+            if let Some(file) = files.get(0) {
+                set_loading.set(true);
+                let reader = web_sys::FileReader::new().unwrap();
+                let reader_c = reader.clone();
+                let onload =
+                    wasm_bindgen::closure::Closure::wrap(Box::new(move |_e: web_sys::Event| {
+                        let array_buffer = reader_c.result().unwrap();
+                        let uint8_array = js_sys::Uint8Array::new(&array_buffer);
+                        let bytes = uint8_array.to_vec();
+                        compute_hashes(&bytes);
+                        set_loading.set(false);
+                    })
+                        as Box<dyn FnMut(_)>);
+                reader.set_onload(Some(onload.as_ref().unchecked_ref()));
+                reader.read_as_array_buffer(&file).unwrap();
+                onload.forget();
+            }
+        }
+    };
+
+    view! {
+        <div class="tool-container">
+            <ToolHeader lang=lang title_en="Hash" title_zh="Hash 工具"/>
+            <div class="tool-grid">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-label">{move || match lang.get() { Lang::En => "Input", Lang::Zh => "輸入", }}</div>
+                        <ClearButton on_click=move || { set_input.set(String::new()); set_md5.set(String::new()); set_sha1.set(String::new()); set_sha256.set(String::new()); set_sha512.set(String::new()); set_sha3.set(String::new()); }/>
+                    </div>
+                    <textarea prop:value=input on:input=move |ev| on_text_input(event_target_value(&ev)) placeholder="..."></textarea>
+                </div>
+                <div class="box">
+                    <div class="box-label">{move || match lang.get() { Lang::En => "File Upload", Lang::Zh => "上傳檔案", }}</div>
+                    <input type="file" on:change=on_file_change class="file-input"/>
+                    {move || if is_loading.get() { view! { <div class="loading">"..."</div> } } else { view! { <div></div> } }}
+                </div>
+            </div>
+            <div class="hash-results">
+                <div class="box"><div class="box-header"><div class="box-label">"MD5"</div><CopyButton text=md5_res/></div><input type="text" prop:value=md5_res readonly class="hash-output"/></div>
+                <div class="box"><div class="box-header"><div class="box-label">"SHA1"</div><CopyButton text=sha1_res/></div><input type="text" prop:value=sha1_res readonly class="hash-output"/></div>
+                <div class="box"><div class="box-header"><div class="box-label">"SHA256"</div><CopyButton text=sha256_res/></div><input type="text" prop:value=sha256_res readonly class="hash-output"/></div>
+                <div class="box"><div class="box-header"><div class="box-label">"SHA512"</div><CopyButton text=sha512_res/></div><input type="text" prop:value=sha512_res readonly class="hash-output"/></div>
+                <div class="box"><div class="box-header"><div class="box-label">"SHA3-256"</div><CopyButton text=sha3_res/></div><input type="text" prop:value=sha3_res readonly class="hash-output"/></div>
+            </div>
+        </div>
+    }
+}
+
+// ==================== AES Page ====================
+#[component]
+fn AesPage(lang: ReadSignal<Lang>) -> impl IntoView {
+    use aes_gcm::{aead::Aead, Aes256Gcm, KeyInit, Nonce};
+    use rand::Rng;
+
+    let (input, set_input) = create_signal(String::new());
+    let (output, set_output) = create_signal(String::new());
+    let (key, set_key) = create_signal(String::new());
+    let (error, set_error) = create_signal(Option::<String>::None);
+
+    let generate_key = move |_| {
+        let random_key: [u8; 32] = rand::thread_rng().gen();
+        set_key.set(hex::encode(random_key));
+    };
+
+    let encrypt = move |_| {
+        set_error.set(None);
+        let key_bytes = match hex::decode(key.get().trim()) {
+            Ok(b) if b.len() == 32 => b,
+            _ => {
+                set_error.set(Some("Key must be 32 bytes (64 hex chars)".into()));
+                return;
+            }
+        };
+        let cipher = Aes256Gcm::new_from_slice(&key_bytes).unwrap();
+        let nonce = Nonce::from_slice(b"unique nonce");
+        match cipher.encrypt(nonce, input.get().as_bytes()) {
+            Ok(encrypted) => set_output.set(hex::encode(encrypted)),
+            Err(e) => set_error.set(Some(e.to_string())),
+        }
+    };
+
+    let decrypt = move |_| {
+        set_error.set(None);
+        let key_bytes = match hex::decode(key.get().trim()) {
+            Ok(b) if b.len() == 32 => b,
+            _ => {
+                set_error.set(Some("Key must be 32 bytes (64 hex chars)".into()));
+                return;
+            }
+        };
+        let encrypted = match hex::decode(output.get().trim()) {
+            Ok(b) => b,
+            Err(e) => {
+                set_error.set(Some(format!("Invalid hex: {}", e)));
+                return;
+            }
+        };
+        let cipher = Aes256Gcm::new_from_slice(&key_bytes).unwrap();
+        let nonce = Nonce::from_slice(b"unique nonce");
+        match cipher.decrypt(nonce, encrypted.as_slice()) {
+            Ok(decrypted) => match String::from_utf8(decrypted) {
+                Ok(s) => set_input.set(s),
+                Err(e) => set_error.set(Some(format!("UTF-8 Error: {}", e))),
+            },
+            Err(e) => set_error.set(Some(e.to_string())),
+        }
+    };
+
+    view! {
+        <div class="tool-container">
+            <ToolHeader lang=lang title_en="AES" title_zh="AES 加密"/>
+            <div class="box" style="margin-bottom:20px">
+                <div class="box-header">
+                    <div class="box-label">{move || match lang.get() { Lang::En => "Key (64 hex chars)", Lang::Zh => "密鑰 (64位十六進制)", }}</div>
+                    <CopyButton text=key/>
+                </div>
+                <div class="btn-row">
+                    <input type="text" prop:value=key on:input=move |ev| set_key.set(event_target_value(&ev)) class="key-input" placeholder="64 hex chars"/>
+                    <button class="btn" on:click=generate_key>{move || match lang.get() { Lang::En => "Generate", Lang::Zh => "生成", }}</button>
+                </div>
+            </div>
+            <div class="tool-grid">
+                <div class="box">
+                    <div class="box-header"><div class="box-label">{move || match lang.get() { Lang::En => "Plaintext", Lang::Zh => "明文", }}</div><ClearButton on_click=move || { set_input.set(String::new()); set_output.set(String::new()); }/></div>
+                    <textarea prop:value=input on:input=move |ev| set_input.set(event_target_value(&ev)) placeholder="..."></textarea>
+                    <div class="btn-row"><button class="btn" on:click=encrypt>{move || match lang.get() { Lang::En => "Encrypt →", Lang::Zh => "加密 →", }}</button></div>
+                </div>
+                <div class="box">
+                    <div class="box-header"><div class="box-label">{move || match lang.get() { Lang::En => "Ciphertext", Lang::Zh => "密文", }}</div><CopyButton text=output/></div>
+                    <textarea prop:value=output on:input=move |ev| set_output.set(event_target_value(&ev)) placeholder="..."></textarea>
+                    <div class="btn-row"><button class="btn" on:click=decrypt>{move || match lang.get() { Lang::En => "← Decrypt", Lang::Zh => "← 解密", }}</button></div>
+                </div>
+            </div>
+            {move || error.get().map(|e| view! { <div class="error">{e}</div> })}
+        </div>
+    }
+}
+
+// ==================== JWT Page ====================
+#[component]
+fn JwtPage(lang: ReadSignal<Lang>) -> impl IntoView {
+    use base64::{engine::general_purpose, Engine as _};
+    use hmac::{Hmac, Mac};
+
+    type HmacSha256 = Hmac<sha2::Sha256>;
+
+    let (input, set_input) = create_signal(String::new());
+    let (secret, set_secret) = create_signal(String::new());
+    let (header, set_header) = create_signal(String::new());
+    let (payload, set_payload) = create_signal(String::new());
+    let (signature, set_signature) = create_signal(String::new());
+    let (error, set_error) = create_signal(Option::<String>::None);
+
+    let decode = move |val: String| {
+        set_input.set(val.clone());
+        set_error.set(None);
+        set_header.set(String::new());
+        set_payload.set(String::new());
+        set_signature.set(String::new());
+
+        let parts: Vec<&str> = val.split('.').collect();
+        if parts.len() < 2 {
+            if !val.is_empty() {
+                set_error.set(Some("Invalid JWT format".into()));
+            }
+            return;
+        }
+
+        let decode_part = |part: &str| -> Result<String, String> {
+            let bytes = general_purpose::URL_SAFE_NO_PAD
+                .decode(part)
+                .map_err(|e| format!("Base64 Error: {}", e))?;
+            let json_str = String::from_utf8(bytes).map_err(|e| format!("UTF-8 Error: {}", e))?;
+            let val: serde_json::Value =
+                serde_json::from_str(&json_str).map_err(|e| format!("JSON Error: {}", e))?;
+            Ok(serde_json::to_string_pretty(&val).unwrap())
+        };
+
+        match decode_part(parts[0]) {
+            Ok(h) => set_header.set(h),
+            Err(e) => {
+                set_error.set(Some(format!("Header: {}", e)));
+                return;
+            }
+        }
+        if let Ok(p) = decode_part(parts[1]) {
+            set_payload.set(p);
+        }
+
+        if parts.len() >= 3 && !secret.get().is_empty() {
+            let secret_key = secret.get();
+            let message = format!("{}.{}", parts[0], parts[1]);
+
+            let mac = HmacSha256::new_from_slice(secret_key.as_bytes())
+                .map_err(|e| format!("HMAC error: {}", e));
+
+            match mac {
+                Ok(mut m) => {
+                    m.update(message.as_bytes());
+                    let result = m.finalize().into_bytes();
+                    let expected_sig = general_purpose::URL_SAFE_NO_PAD.encode(&result[..]);
+                    let actual_sig = parts[2].to_string();
+
+                    if expected_sig == actual_sig {
+                        set_signature.set("✅ Signature Valid".to_string());
+                    } else {
+                        set_signature.set("❌ Signature Invalid".to_string());
+                    }
+                }
+                Err(e) => {
+                    set_signature.set(format!("Error: {}", e));
+                }
+            }
+        }
+    };
+
+    view! {
+        <div class="tool-container">
+            <ToolHeader lang=lang title_en="JWT Decoder" title_zh="JWT 解碼"/>
+            <div class="box" style="margin-bottom:20px">
+                <div class="box-header">
+                    <div class="box-label">{move || match lang.get() { Lang::En => "Secret (for signature verification)", Lang::Zh => "密鑰 (用於簽名驗證)", }}</div>
+                </div>
+                <input
+                    type="text"
+                    class="secret-input"
+                    prop:value=secret
+                    on:input=move |ev| {
+                        set_secret.set(event_target_value(&ev));
+                        decode(input.get());
+                    }
+                    placeholder={move || match lang.get() { Lang::En => "Enter secret key", Lang::Zh => "輸入密鑰", }}
+                />
+            </div>
+            <div class="box">
+                <div class="box-header">
+                    <div class="box-label">"JWT Token"</div>
+                    <ClearButton on_click=move || { set_input.set(String::new()); set_header.set(String::new()); set_payload.set(String::new()); set_signature.set(String::new()); set_error.set(None); }/>
+                </div>
+                <textarea prop:value=input on:input=move |ev| decode(event_target_value(&ev)) placeholder="eyJhbGci..."></textarea>
+                {move || error.get().map(|e| view! { <div class="error">{e}</div> })}
+            </div>
+            <div class="tool-grid">
+                <div class="box">
+                    <div class="box-header"><div class="box-label">"Header"</div><CopyButton text=header/></div>
+                    <textarea prop:value=header readonly placeholder="..."></textarea>
+                </div>
+                <div class="box">
+                    <div class="box-header"><div class="box-label">"Payload"</div><CopyButton text=payload/></div>
+                    <textarea prop:value=payload readonly placeholder="..."></textarea>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-header"><div class="box-label">{move || match lang.get() { Lang::En => "Signature", Lang::Zh => "簽名", }}</div></div>
+                <div class="jwt-signature">{signature}</div>
+            </div>
+        </div>
+    }
+}
+
+// ==================== UUID Page ====================
+#[component]
+fn UuidPage(lang: ReadSignal<Lang>) -> impl IntoView {
+    let (uuid_v4, set_uuid_v4) = create_signal(String::new());
+
+    let generate = move |_| {
+        set_uuid_v4.set(uuid::Uuid::new_v4().to_string());
+    };
+
+    view! {
+        <div class="tool-container">
+            <ToolHeader lang=lang title_en="UUID Generator" title_zh="UUID 生成器"/>
+            <div class="box" style="text-align:center">
+                <div class="box-label">"UUID v4"</div>
+                <div class="uuid-display">
+                    {move || { let current = uuid_v4.get(); if current.is_empty() { "Click to generate".into() } else { current } }}
+                </div>
+                <div class="btn-row" style="justify-content:center;margin-top:20px">
+                    <button class="btn" on:click=generate>{move || match lang.get() { Lang::En => "Generate", Lang::Zh => "生成", }}</button>
+                    <CopyButton text=uuid_v4/>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+// ==================== Regex Page ====================
+#[component]
+fn RegexPage(lang: ReadSignal<Lang>) -> impl IntoView {
+    use regex::Regex;
+
+    let (pattern, set_pattern) = create_signal(String::new());
+    let (text, set_text) = create_signal(String::new());
+    let (result, set_result) = create_signal(String::new());
+    let (error, set_error) = create_signal(Option::<String>::None);
+
+    let test_regex = move |_| {
+        set_error.set(None);
+        match Regex::new(&pattern.get()) {
+            Ok(re) => {
+                let matches: Vec<_> = re
+                    .find_iter(&text.get())
+                    .map(|m| m.as_str().to_string())
+                    .collect();
+                set_result.set(if matches.is_empty() {
+                    "No match".into()
+                } else {
+                    matches.join(", ")
+                });
+            }
+            Err(e) => set_error.set(Some(e.to_string())),
+        }
+    };
+
+    view! {
+        <div class="tool-container">
+            <ToolHeader lang=lang title_en="Regex Tester" title_zh="正則測試"/>
+            <div class="box">
+                <div class="box-label">{move || match lang.get() { Lang::En => "Pattern", Lang::Zh => "正則表達式", }}</div>
+                <input type="text" prop:value=pattern on:input=move |ev| { set_pattern.set(event_target_value(&ev)); test_regex(()); } placeholder="^[a-z]+$" class="regex-input"/>
+                {move || error.get().map(|e| view! { <div class="error">{e}</div> })}
+            </div>
+            <div class="box">
+                <div class="box-label">{move || match lang.get() { Lang::En => "Test Text", Lang::Zh => "測試文本", }}</div>
+                <textarea prop:value=text on:input=move |ev| { set_text.set(event_target_value(&ev)); test_regex(()); } placeholder="..."></textarea>
+                <div class="regex-result">{result}</div>
+            </div>
+        </div>
+    }
+}
+
+// ==================== Timestamp Page ====================
+#[component]
+fn TimestampPage(lang: ReadSignal<Lang>) -> impl IntoView {
+    use chrono::{TimeZone, Utc};
+
+    let (ts, set_ts) = create_signal(Utc::now().timestamp().to_string());
+    let (iso, set_iso) = create_signal(String::new());
+
+    let convert = move || {
+        let s = ts.get();
+        match s.parse::<i64>() {
+            Ok(val) => match Utc.timestamp_opt(val, 0).single() {
+                Some(dt) => set_iso.set(dt.to_rfc3339()),
+                None => set_iso.set("Invalid".to_string()),
+            },
+            Err(_) => set_iso.set("Invalid".to_string()),
+        }
+    };
+
+    let now_ts = move |_| {
+        set_ts.set(Utc::now().timestamp().to_string());
+    };
+
+    view! {
+        <div class="tool-container">
+            <ToolHeader lang=lang title_en="Timestamp" title_zh="時間戳"/>
+            <div class="box">
+                <div class="box-label">"Unix Timestamp"</div>
+                <div class="btn-row">
+                    <input type="text" prop:value=ts on:input=move |ev| { set_ts.set(event_target_value(&ev)); convert(); } class="ts-input"/>
+                    <button class="btn" on:click=now_ts>{move || match lang.get() { Lang::En => "Now", Lang::Zh => "現在", }}</button>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-label">"ISO 8601"</div>
+                <div class="iso-display">{iso}</div>
+            </div>
+        </div>
+    }
+}
+
+// ==================== BaseConv Page ====================
+#[component]
+fn BaseConvPage(lang: ReadSignal<Lang>) -> impl IntoView {
+    let (val, set_val) = create_signal(String::new());
+    let (from_base, set_from) = create_signal(10u32);
+
+    let get_val = move |base: u32| {
+        let current = val.get();
+        if current.is_empty() {
+            return String::new();
+        }
+        u128::from_str_radix(&current, from_base.get())
+            .map(|n| match base {
+                2 => format!("{:b}", n),
+                8 => format!("{:o}", n),
+                10 => format!("{}", n),
+                16 => format!("{:x}", n),
+                _ => String::new(),
+            })
+            .unwrap_or_else(|_| "Error".into())
+    };
+
+    view! {
+        <div class="tool-container">
+            <ToolHeader lang=lang title_en="Base Converter" title_zh="進制轉換"/>
+            <div class="box">
+                <div class="box-label">{move || match lang.get() { Lang::En => "Input Value", Lang::Zh => "輸入值", }}</div>
+                <div class="btn-row">
+                    <input type="text" on:input=move |ev| set_val.set(event_target_value(&ev)) class="base-input"/>
+                    <select on:change=move |ev| set_from.set(event_target_value(&ev).parse().unwrap()) class="base-select">
+                        <option value="10">"Dec"</option>
+                        <option value="16">"Hex"</option>
+                        <option value="2">"Bin"</option>
+                        <option value="8">"Oct"</option>
+                    </select>
+                </div>
+            </div>
+            <div class="tool-grid">
+                <div class="box"><div class="box-label">"Decimal"</div><div class="base-result">{move || get_val(10)}</div></div>
+                <div class="box"><div class="box-label">"Hex"</div><div class="base-result">{move || get_val(16)}</div></div>
+                <div class="box"><div class="box-label">"Binary"</div><div class="base-result">{move || get_val(2)}</div></div>
+                <div class="box"><div class="box-label">"Octal"</div><div class="base-result">{move || get_val(8)}</div></div>
+            </div>
+        </div>
+    }
+}
+
+// ==================== Diff Page ====================
 #[component]
 fn DiffPage(lang: ReadSignal<Lang>) -> impl IntoView {
     use similar::{ChangeTag, TextDiff};
@@ -113,14 +1051,7 @@ fn DiffPage(lang: ReadSignal<Lang>) -> impl IntoView {
 
     view! {
         <div class="tool-container">
-            <Title text="Diff Checker - 工具箱"/>
-            <Meta name="description" content="High-performance text comparison tool powered by Rust WASM. Fast diffing for large documents."/>
-            <h2 style="font-size:3rem;font-weight:900;margin:0">
-                {move || match lang.get() {
-                    Lang::En => "Text Diff",
-                    Lang::Zh => "文本比對",
-                }}
-            </h2>
+            <ToolHeader lang=lang title_en="Diff" title_zh="文本比對"/>
             <div class="tool-grid">
                 <div class="box">
                     <div class="box-label">"Original"</div>
@@ -131,367 +1062,86 @@ fn DiffPage(lang: ReadSignal<Lang>) -> impl IntoView {
                     <textarea on:input=move |ev| set_new.set(event_target_value(&ev))></textarea>
                 </div>
             </div>
-            <div class="box" style="margin-top:20px; font-family:monospace; background:#111; overflow-x:auto; white-space:pre-wrap">
-                {diff_view}
-            </div>
+            <div class="box diff-output">{diff_view}</div>
         </div>
     }
 }
 
+// ==================== Cron Page ====================
 #[component]
-fn BaseConvPage(lang: ReadSignal<Lang>) -> impl IntoView {
-    let _ = lang;
-    let (val, set_val) = create_signal(String::new());
-    let (from_base, set_from) = create_signal(10u32);
+fn CronPage(lang: ReadSignal<Lang>) -> impl IntoView {
+    let (cron_expr, set_cron) = create_signal(String::new());
+    let (description, set_desc) = create_signal(String::new());
 
-    let get_val = move |base: u32| {
-        let current = val.get();
-        if current.is_empty() { return String::new(); }
-        u128::from_str_radix(&current, from_base.get())
-            .map(|n| {
-                match base {
-                    2 => format!("{:b}", n),
-                    8 => format!("{:o}", n),
-                    10 => format!("{}", n),
-                    16 => format!("{:x}", n),
-                    _ => String::new(),
-                }
-            }).unwrap_or_else(|_| "Error".to_string())
-    };
-
-    view! {
-        <div class="tool-container">
-            <Title text="Number Base Converter - 工具箱"/>
-            <h2 style="font-size:3rem;font-weight:900;margin:0">"Base Converter"</h2>
-            <div class="box">
-                <div class="box-label">"Source Value"</div>
-                <div style="display:flex; gap:10px">
-                    <input type="text" on:input=move |ev| set_val.set(event_target_value(&ev)) style="flex:1; padding:10px; background:#111; color:#fff; border:1px solid #333" />
-                    <select on:change=move |ev| set_from.set(event_target_value(&ev).parse().unwrap()) style="background:#111; color:#fff; border:1px solid #333">
-                        <option value="10">"Dec"</option>
-                        <option value="16">"Hex"</option>
-                        <option value="2">"Bin"</option>
-                        <option value="8">"Oct"</option>
-                    </select>
-                </div>
-            </div>
-            <div class="tool-grid">
-                <div class="box"><div class="box-label">"Decimal"</div><div style="color:#0f0">{move || get_val(10)}</div></div>
-                <div class="box"><div class="box-label">"Hex"</div><div style="color:#0f0">{move || get_val(16)}</div></div>
-                <div class="box"><div class="box-label">"Binary"</div><div style="color:#0f0; font-size:0.8rem; word-break:break-all">{move || get_val(2)}</div></div>
-                <div class="box"><div class="box-label">"Octal"</div><div style="color:#0f0">{move || get_val(8)}</div></div>
-            </div>
-        </div>
-    }
-}
-
-#[component]
-fn TimestampPage(lang: ReadSignal<Lang>) -> impl IntoView {
-    let _ = lang;
-    use chrono::{Utc, TimeZone};
-
-    let (ts, set_ts) = create_signal(Utc::now().timestamp().to_string());
-    
-    let date_str = move || {
-        let s = ts.get();
-        s.parse::<i64>().ok()
-            .and_then(|val| Utc.timestamp_opt(val, 0).single())
-            .map(|dt| dt.to_rfc3339())
-            .unwrap_or_else(|| "Invalid Timestamp".to_string())
-    };
-
-    view! {
-        <div class="tool-container">
-            <Title text="Unix Timestamp Converter - 工具箱"/>
-            <h2 style="font-size:3rem;font-weight:900;margin:0">"Timestamp"</h2>
-            <div class="box">
-                <div class="box-label">"Unix Timestamp"</div>
-                <input type="text" prop:value=ts on:input=move |ev| set_ts.set(event_target_value(&ev)) style="width:100%; padding:10px; background:#111; color:#fff; border:1px solid #333" />
-                <button class="btn" on:click=move |_| set_ts.set(Utc::now().timestamp().to_string()) style="margin-top:10px">"Current Time"</button>
-            </div>
-            <div class="box">
-                <div class="box-label">"UTC ISO 8601"</div>
-                <div style="font-size:1.5rem; color:#0f0">{date_str}</div>
-            </div>
-        </div>
-    }
-}
-
-#[component]
-fn RegexPage(lang: ReadSignal<Lang>) -> impl IntoView {
-    use regex::Regex;
-
-    let (pattern, set_pattern) = create_signal(String::new());
-    let (text, set_text) = create_signal(String::new());
-    let (is_match, set_is_match) = create_signal(false);
-    let (error, set_error) = create_signal(Option::<String>::None);
-
-    let test_regex = move |_| {
-        set_error.set(None);
-        match Regex::new(&pattern.get()) {
-            Ok(re) => {
-                set_is_match.set(re.is_match(&text.get()));
-            }
-            Err(e) => set_error.set(Some(e.to_string())),
-        }
-    };
-
-    view! {
-        <div class="tool-container">
-            <h2 style="font-size:3rem;font-weight:900;margin:0">
-                {move || match lang.get() {
-                    Lang::En => "Regex Tester",
-                    Lang::Zh => "正則表達式測試",
-                }}
-            </h2>
-            <div class="box">
-                <div class="box-label">"Regex Pattern"</div>
-                <input 
-                    type="text" 
-                    prop:value=pattern
-                    on:input=move |ev| { set_pattern.set(event_target_value(&ev)); test_regex(()); }
-                    placeholder="^[a-z]+$"
-                    style="width:100%; padding:10px; background:#111; color:#fff; border:1px solid #333"
-                />
-                {move || error.get().map(|e| view! { <div style="color:#f00; margin-top:5px">{e}</div> })}
-            </div>
-            <div class="box">
-                <div class="box-label">"Test Text"</div>
-                <textarea 
-                    prop:value=text
-                    on:input=move |ev| { set_text.set(event_target_value(&ev)); test_regex(()); }
-                    placeholder="text to test..."
-                ></textarea>
-                <div style=format!("margin-top:10px; font-size:1.5rem; font-weight:bold; color:{}", if is_match.get() { "#0f0" } else { "#f00" })>
-                    {move || if is_match.get() { "MATCH" } else { "NO MATCH" }}
-                </div>
-            </div>
-        </div>
-    }
-}
-
-#[component]
-fn UuidPage(lang: ReadSignal<Lang>) -> impl IntoView {
-    use uuid::Uuid;
-
-    let (uuid_v4, set_uuid_v4) = create_signal(String::new());
-
-    let generate = move |_| {
-        set_uuid_v4.set(Uuid::new_v4().to_string());
-    };
-
-    view! {
-        <div class="tool-container">
-            <h2 style="font-size:3rem;font-weight:900;margin:0">
-                {move || match lang.get() {
-                    Lang::En => "UUID Generator",
-                    Lang::Zh => "UUID 生成器",
-                }}
-            </h2>
-            <div class="box" style="text-align:center">
-                <div class="box-label">"UUID v4"</div>
-                <div style="font-size:2rem; font-family:monospace; margin:20px 0; color:#0f0">
-                    {move || {
-                        let current = uuid_v4.get();
-                        if current.is_empty() { "---------点击生成---------".to_string() } else { current }
-                    }}
-                </div>
-                <button class="btn" on:click=generate>"Generate New UUID"</button>
-            </div>
-        </div>
-    }
-}
-
-#[component]
-fn JwtPage(lang: ReadSignal<Lang>) -> impl IntoView {
-    use base64::{Engine as _, engine::general_purpose};
-
-    let (input, set_input) = create_signal(String::new());
-    let (header, set_header) = create_signal(String::new());
-    let (payload, set_payload) = create_signal(String::new());
-    let (error, set_error) = create_signal(Option::<String>::None);
-
-    let decode = move |val: String| {
-        set_input.set(val.clone());
-        set_error.set(None);
-        set_header.set(String::new());
-        set_payload.set(String::new());
-
-        let parts: Vec<&str> = val.split('.').collect();
-        if parts.len() < 2 {
-            if !val.is_empty() {
-                set_error.set(Some("Invalid JWT format (must have at least 2 parts)".to_string()));
-            }
+    let parse_cron = move |_| {
+        let expr = cron_expr.get();
+        let parts: Vec<&str> = expr.split_whitespace().collect();
+        if parts.len() < 5 {
+            set_desc.set("Invalid cron expression".to_string());
             return;
         }
 
-        let decode_part = |part: &str| -> Result<String, String> {
-            let bytes = general_purpose::URL_SAFE_NO_PAD.decode(part)
-                .map_err(|e| format!("Base64 Decode Error: {}", e))?;
-            let json_str = String::from_utf8(bytes)
-                .map_err(|e| format!("UTF-8 Error: {}", e))?;
-            let val: serde_json::Value = serde_json::from_str(&json_str)
-                .map_err(|e| format!("JSON Error: {}", e))?;
-            Ok(serde_json::to_string_pretty(&val).unwrap())
-        };
+        let minute = parts[0];
+        let hour = parts[1];
+        let day = parts[2];
+        let month = parts[3];
+        let weekday = parts[4];
 
-        match decode_part(parts[0]) {
-            Ok(h) => set_header.set(h),
-            Err(e) => { set_error.set(Some(format!("Header: {}", e))); return; }
-        }
-
-        match decode_part(parts[1]) {
-            Ok(p) => set_payload.set(p),
-            Err(e) => { set_error.set(Some(format!("Payload: {}", e))); }
-        }
+        let desc = format!(
+            "Minute: {}, Hour: {}, Day: {}, Month: {}, Weekday: {}",
+            minute, hour, day, month, weekday
+        );
+        set_desc.set(desc);
     };
 
     view! {
         <div class="tool-container">
-            <Title text="JWT Decoder - 工具箱"/>
-            <Meta name="description" content="Decode JSON Web Tokens (JWT) Header and Payload instantly. No data leaves your browser. Fast WASM implementation."/>
-            <h2 style="font-size:3rem;font-weight:900;margin:0">
-                {move || match lang.get() {
-                    Lang::En => "JWT Decoder",
-                    Lang::Zh => "JWT 解碼",
-                }}
-            </h2>
+            <ToolHeader lang=lang title_en="Cron Parser" title_zh="Cron 解析"/>
             <div class="box">
-                <div class="box-label">"JWT Token"</div>
-                <textarea 
-                    prop:value=input
-                    on:input=move |ev| decode(event_target_value(&ev))
-                    placeholder="eyJhbGci..."
-                ></textarea>
-                {move || error.get().map(|e| view! { <div style="color:#f00; margin-top:5px">{e}</div> })}
+                <div class="box-label">"Cron Expression"</div>
+                <div class="btn-row">
+                    <input type="text" prop:value=cron_expr on:input=move |ev| set_cron.set(event_target_value(&ev)) placeholder="* * * * *" class="cron-input"/>
+                    <button class="btn" on:click=move |_| parse_cron(())>{move || match lang.get() { Lang::En => "Parse", Lang::Zh => "解析", }}</button>
+                </div>
             </div>
-            <div class="tool-grid">
-                <div class="box">
-                    <div class="box-label">"Header"</div>
-                    <textarea prop:value=header readonly placeholder="..."></textarea>
-                </div>
-                <div class="box">
-                    <div class="box-label">"Payload"</div>
-                    <textarea prop:value=payload readonly placeholder="..."></textarea>
-                </div>
+            <div class="box">
+                <div class="box-label">{move || match lang.get() { Lang::En => "Description", Lang::Zh => "描述", }}</div>
+                <div class="cron-desc">{description}</div>
             </div>
         </div>
     }
 }
 
+// ==================== Image Base64 Page ====================
 #[component]
-fn JsonPage(lang: ReadSignal<Lang>) -> impl IntoView {
-    let (input, set_input) = create_signal(String::new());
-    let (output, set_output) = create_signal(String::new());
-    let (error, set_error) = create_signal(Option::<String>::None);
+fn ImageBase64Page(lang: ReadSignal<Lang>) -> impl IntoView {
+    use base64::{engine::general_purpose, Engine as _};
 
-    let process = move |minify: bool| {
-        set_error.set(None);
-        let val: Result<serde_json::Value, _> = serde_json::from_str(&input.get());
-        match val {
-            Ok(v) => {
-                let res = if minify {
-                    serde_json::to_string(&v).unwrap()
-                } else {
-                    serde_json::to_string_pretty(&v).unwrap()
-                };
-                set_output.set(res);
-            }
-            Err(e) => set_error.set(Some(e.to_string())),
-        }
-    };
-
-    view! {
-        <div class="tool-container">
-            <Title text="JSON Formatter - 工具箱"/>
-            <Meta name="description" content="Fastest WASM-powered JSON Prettifier and Minifier. Professional developer tool for formatting large JSON data instantly."/>
-            <h2 style="font-size:3rem;font-weight:900;margin:0">
-                {move || match lang.get() {
-                    Lang::En => "JSON Formatter",
-                    Lang::Zh => "JSON 格式化",
-                }}
-            </h2>
-            <div class="tool-grid">
-                <div class="box">
-                    <div class="box-label">"Input"</div>
-                    <textarea 
-                        prop:value=input
-                        on:input=move |ev| set_input.set(event_target_value(&ev))
-                        placeholder=r#"{"key":"value"}"#
-                    ></textarea>
-                    <div style="display:flex; gap:10px; margin-top:10px">
-                        <button class="btn" on:click=move |_| process(false)>"Prettify"</button>
-                        <button class="btn" on:click=move |_| process(true)>"Minify"</button>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="box-label">"Result"</div>
-                    <textarea 
-                        prop:value=output
-                        readonly
-                        placeholder="..."
-                    ></textarea>
-                    {move || error.get().map(|e| view! { <div style="color:#f00; margin-top:5px">{e}</div> })}
-                </div>
-            </div>
-        </div>
-    }
-}
-
-#[component]
-fn HashPage(lang: ReadSignal<Lang>) -> impl IntoView {
-    use sha2::{Sha256, Digest};
-    use sha1::Sha1;
-    use md5::Md5;
-    use wasm_bindgen::JsCast;
-
-    let (input, set_input) = create_signal(String::new());
-    let (md5_res, set_md5) = create_signal(String::new());
-    let (sha1_res, set_sha1) = create_signal(String::new());
-    let (sha256_res, set_sha256) = create_signal(String::new());
+    let (base64_out, set_base64) = create_signal(String::new());
+    let (data_uri, set_data_uri) = create_signal(String::new());
     let (is_loading, set_loading) = create_signal(false);
-
-    let compute_hashes = move |data: &[u8]| {
-        let mut md5_hasher = Md5::new();
-        md5_hasher.update(data);
-        set_md5.set(hex::encode(md5_hasher.finalize()));
-
-        let mut sha1_hasher = Sha1::new();
-        sha1_hasher.update(data);
-        set_sha1.set(hex::encode(sha1_hasher.finalize()));
-
-        let mut sha256_hasher = Sha256::new();
-        sha256_hasher.update(data);
-        set_sha256.set(hex::encode(sha256_hasher.finalize()));
-    };
-
-    let on_text_input = move |val: String| {
-        set_input.set(val.clone());
-        if val.is_empty() {
-            set_md5.set(String::new());
-            set_sha1.set(String::new());
-            set_sha256.set(String::new());
-            return;
-        }
-        compute_hashes(val.as_bytes());
-    };
 
     let on_file_change = move |ev: ev::Event| {
         let target = event_target::<web_sys::HtmlInputElement>(&ev);
         if let Some(files) = target.files() {
             if let Some(file) = files.get(0) {
                 set_loading.set(true);
+                let file_type = file.type_();
                 let reader = web_sys::FileReader::new().unwrap();
                 let reader_c = reader.clone();
-                
-                let onload = wasm_bindgen::closure::Closure::wrap(Box::new(move |_e: web_sys::Event| {
-                    let array_buffer = reader_c.result().unwrap();
-                    let uint8_array = js_sys::Uint8Array::new(&array_buffer);
-                    let bytes = uint8_array.to_vec();
-                    compute_hashes(&bytes);
-                    set_loading.set(false);
-                }) as Box<dyn FnMut(_)>);
-                
+
+                let onload =
+                    wasm_bindgen::closure::Closure::wrap(Box::new(move |_e: web_sys::Event| {
+                        let array_buffer = reader_c.result().unwrap();
+                        let uint8_array = js_sys::Uint8Array::new(&array_buffer);
+                        let bytes = uint8_array.to_vec();
+                        let encoded = general_purpose::STANDARD.encode(&bytes);
+                        set_base64.set(encoded.clone());
+                        set_data_uri.set(format!("data:{};base64,{}", file_type, encoded));
+                        set_loading.set(false);
+                    })
+                        as Box<dyn FnMut(_)>);
+
                 reader.set_onload(Some(onload.as_ref().unchecked_ref()));
                 reader.read_as_array_buffer(&file).unwrap();
                 onload.forget();
@@ -501,385 +1151,22 @@ fn HashPage(lang: ReadSignal<Lang>) -> impl IntoView {
 
     view! {
         <div class="tool-container">
-            <h2 style="font-size:3rem;font-weight:900;margin:0">
-                {move || match lang.get() {
-                    Lang::En => "Hash Utility",
-                    Lang::Zh => "Hash 工具",
-                }}
-            </h2>
+            <ToolHeader lang=lang title_en="Image Base64" title_zh="圖片 Base64"/>
+            <div class="box">
+                <div class="box-label">{move || match lang.get() { Lang::En => "Upload Image", Lang::Zh => "上傳圖片", }}</div>
+                <input type="file" accept="image/*" on:change=on_file_change class="file-input"/>
+                {move || if is_loading.get() { view! { <div class="loading">"..."</div> } } else { view! { <div></div> } }}
+            </div>
             <div class="tool-grid">
                 <div class="box">
-                    <div class="box-label">"Input Text"</div>
-                    <textarea 
-                        prop:value=input
-                        on:input=move |ev| on_text_input(event_target_value(&ev))
-                        placeholder="Enter text to hash..."
-                    ></textarea>
+                    <div class="box-header"><div class="box-label">"Base64"</div><CopyButton text=base64_out/></div>
+                    <textarea prop:value=base64_out readonly placeholder="..."></textarea>
                 </div>
                 <div class="box">
-                    <div class="box-label">"Or Upload File"</div>
-                    <input 
-                        type="file" 
-                        on:change=on_file_change 
-                        style="width:100%; padding:20px; background:#111; border:2px dashed #333; color:#fff; border-radius:12px"
-                    />
-                    {move || if is_loading.get() { view! { <div style="color:#38bdf8; margin-top:10px">"Processing large file..."</div> } } else { view! { <div></div> } }}
+                    <div class="box-header"><div class="box-label">"Data URI"</div><CopyButton text=data_uri/></div>
+                    <textarea prop:value=data_uri readonly placeholder="..."></textarea>
                 </div>
             </div>
-            
-            <div style="margin-top:40px; display:flex; flex-direction:column; gap:20px">
-                <div class="box">
-                    <div class="box-label">"MD5"</div>
-                    <input type="text" prop:value=md5_res readonly style="width:100%; background:#111; color:#0f0; border:1px solid #333; padding:10px; font-family:monospace" />
-                </div>
-                <div class="box">
-                    <div class="box-label">"SHA1"</div>
-                    <input type="text" prop:value=sha1_res readonly style="width:100%; background:#111; color:#0f0; border:1px solid #333; padding:10px; font-family:monospace" />
-                </div>
-                <div class="box">
-                    <div class="box-label">"SHA256"</div>
-                    <input type="text" prop:value=sha256_res readonly style="width:100%; background:#111; color:#0f0; border:1px solid #333; padding:10px; font-family:monospace" />
-                </div>
-            </div>
-        </div>
-    }
-}
-
-#[component]
-fn UrlEscapePage(lang: ReadSignal<Lang>) -> impl IntoView {
-    let (input, set_input) = create_signal(String::new());
-    let (output, set_output) = create_signal(String::new());
-
-    let encode = move |_| {
-        let encoded = urlencoding::encode(&input.get()).to_string();
-        set_output.set(encoded);
-    };
-
-    let decode = move |_| {
-        if let Ok(decoded) = urlencoding::decode(&output.get()) {
-            set_input.set(decoded.into_owned());
-        }
-    };
-
-    view! {
-        <div class="tool-container">
-            <h2 style="font-size:3rem;font-weight:900;margin:0">
-                {move || match lang.get() {
-                    Lang::En => "URL Utility",
-                    Lang::Zh => "URL 工具",
-                }}
-            </h2>
-            <div class="tool-grid">
-                <div class="box">
-                    <div class="box-label">"Raw Text"</div>
-                    <textarea 
-                        prop:value=input
-                        on:input=move |ev| set_input.set(event_target_value(&ev))
-                        placeholder="https://example.com/測試"
-                    ></textarea>
-                    <button class="btn" style="margin-top:10px; width:100%" on:click=encode>
-                        {move || match lang.get() {
-                            Lang::En => "Encode ➔",
-                            Lang::Zh => "編碼 ➔",
-                        }}
-                    </button>
-                </div>
-                <div class="box">
-                    <div class="box-label">"Encoded"</div>
-                    <textarea 
-                        prop:value=output
-                        on:input=move |ev| set_output.set(event_target_value(&ev))
-                        placeholder="https%3A%2F%2Fexample.com%2F%E6%B8%AC%E8%A9%A6"
-                    ></textarea>
-                    <button class="btn" style="margin-top:10px; width:100%" on:click=decode>
-                        {move || match lang.get() {
-                            Lang::En => "⬅ Decode",
-                            Lang::Zh => "⬅ 解碼",
-                        }}
-                    </button>
-                </div>
-            </div>
-        </div>
-    }
-}
-
-#[component]
-fn HtmlEscapePage(lang: ReadSignal<Lang>) -> impl IntoView {
-    let (input, set_input) = create_signal(String::new());
-    let (output, set_output) = create_signal(String::new());
-
-    let escape = move |_| {
-        let escaped = html_escape::encode_safe(&input.get()).to_string();
-        set_output.set(escaped);
-    };
-
-    let unescape = move |_| {
-        let unescaped = html_escape::decode_html_entities(&output.get()).to_string();
-        set_input.set(unescaped);
-    };
-
-    view! {
-        <div class="tool-container">
-            <h2 style="font-size:3rem;font-weight:900;margin:0">
-                {move || match lang.get() {
-                    Lang::En => "HTML Escape Utility",
-                    Lang::Zh => "HTML 轉義工具",
-                }}
-            </h2>
-            <div class="tool-grid">
-                <div class="box">
-                    <div class="box-label">
-                        {move || match lang.get() {
-                            Lang::En => "Unescaped / Raw",
-                            Lang::Zh => "原始 HTML",
-                        }}
-                    </div>
-                    <textarea 
-                        prop:value=input
-                        on:input=move |ev| set_input.set(event_target_value(&ev))
-                        placeholder="<div>...</div>"
-                    ></textarea>
-                    <button class="btn" style="margin-top:10px; width:100%" on:click=escape>
-                        {move || match lang.get() {
-                            Lang::En => "Escape ➔",
-                            Lang::Zh => "轉義 ➔",
-                        }}
-                    </button>
-                </div>
-                <div class="box">
-                    <div class="box-label">
-                        {move || match lang.get() {
-                            Lang::En => "Escaped Entities",
-                            Lang::Zh => "轉義結果",
-                        }}
-                    </div>
-                    <textarea 
-                        prop:value=output
-                        on:input=move |ev| set_output.set(event_target_value(&ev))
-                        placeholder="&lt;div&gt;...&lt;/div&gt;"
-                    ></textarea>
-                    <button class="btn" style="margin-top:10px; width:100%" on:click=unescape>
-                        {move || match lang.get() {
-                            Lang::En => "⬅ Unescape",
-                            Lang::Zh => "⬅ 還原",
-                        }}
-                    </button>
-                </div>
-            </div>
-        </div>
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use base64::{Engine as _, engine::general_purpose};
-    use sha2::{Sha256, Digest};
-    use sha1::Sha1;
-    use md5::Md5;
-
-    #[test]
-    fn test_base64_logic() {
-        let input = "Hello 🚀";
-        let encoded = general_purpose::STANDARD.encode(input.as_bytes());
-        assert_eq!(encoded, "SGVsbG8g8J+agA==");
-        
-        let decoded_bytes = general_purpose::STANDARD.decode(encoded).unwrap();
-        let decoded_str = String::from_utf8(decoded_bytes).unwrap();
-        assert_eq!(decoded_str, input);
-    }
-
-    #[test]
-    fn test_html_escape_logic() {
-        let input = "<script>alert('god')</script>";
-        let escaped = html_escape::encode_safe(input).to_string();
-        assert_eq!(escaped, "&lt;script&gt;alert(&#x27;god&#x27;)&lt;&#x2F;script&gt;");
-        
-        let unescaped = html_escape::decode_html_entities(&escaped).to_string();
-        assert_eq!(unescaped, input);
-    }
-
-    #[test]
-    fn test_url_encoding() {
-        let input = "https://example.com/測試?a=1&b=2";
-        let encoded = urlencoding::encode(input);
-        assert_eq!(encoded, "https%3A%2F%2Fexample.com%2F%E6%B8%AC%E8%A9%A6%3Fa%3D1%26b%3D2");
-        
-        let decoded = urlencoding::decode(&encoded).unwrap();
-        assert_eq!(decoded, input);
-    }
-
-    #[test]
-    fn test_hashes() {
-        let input = "godmode";
-        
-        let mut md5 = Md5::new();
-        md5.update(input);
-        assert_eq!(hex::encode(md5.finalize()), "70b47b4d69f4c312098b57b8ee0c718b");
-
-        let mut sha256 = Sha256::new();
-        sha256.update(input);
-        assert_eq!(hex::encode(sha256.finalize()), "e150c2e5c5421f42105081b58c282ad5a89c30781c99bcfe71913a5adaa88b52");
-
-        let mut sha1 = Sha1::new();
-        sha1.update(input);
-        assert_eq!(hex::encode(sha1.finalize()), "56b9ebeed4b0c26531b7cbf7aeea2c99afc2e4f0");
-    }
-
-    #[test]
-    fn test_jwt_decode() {
-        use base64::{Engine as _, engine::general_purpose};
-        let header = r#"{"alg":"HS256","typ":"JWT"}"#;
-        let payload = r#"{"sub":"1234567890","name":"John Doe","iat":1516239022}"#;
-        
-        let h_b64 = general_purpose::URL_SAFE_NO_PAD.encode(header);
-        let p_b64 = general_purpose::URL_SAFE_NO_PAD.encode(payload);
-        let token = format!("{}.{}.signature", h_b64, p_b64);
-        
-        let parts: Vec<&str> = token.split('.').collect();
-        let h_dec = String::from_utf8(general_purpose::URL_SAFE_NO_PAD.decode(parts[0]).unwrap()).unwrap();
-        let p_dec = String::from_utf8(general_purpose::URL_SAFE_NO_PAD.decode(parts[1]).unwrap()).unwrap();
-        
-        assert_eq!(h_dec, header);
-        assert_eq!(p_dec, payload);
-    }
-
-    #[test]
-    fn test_regex_matching() {
-        use regex::Regex;
-        let re = Regex::new(r"^\d{4}-\d{2}-\d{2}$").unwrap();
-        assert!(re.is_match("2026-02-16"));
-        assert!(!re.is_match("16-02-2026"));
-    }
-
-    #[test]
-    fn test_json_processing() {
-        let input = r#"{"a":1,"b":[2,3]}"#;
-        let v: serde_json::Value = serde_json::from_str(input).unwrap();
-        let minified = serde_json::to_string(&v).unwrap();
-        let prettified = serde_json::to_string_pretty(&v).unwrap();
-        
-        assert_eq!(minified, r#"{"a":1,"b":[2,3]}"#);
-        assert!(prettified.contains('\n'));
-    }
-
-    #[test]
-    fn test_timestamp_conversion() {
-        use chrono::{Utc, TimeZone};
-        let ts = 1700000000i64;
-        let dt = Utc.timestamp_opt(ts, 0).single().unwrap();
-        assert_eq!(dt.to_rfc3339(), "2023-11-14T22:13:20+00:00");
-    }
-
-    #[test]
-    fn test_diff_logic() {
-        use similar::{ChangeTag, TextDiff};
-        let old = "hello\nworld";
-        let new = "hello\ngod";
-        let diff = TextDiff::from_lines(old, new);
-        let changes: Vec<_> = diff.iter_all_changes().collect();
-        assert_eq!(changes.len(), 3);
-        assert_eq!(changes[2].tag(), ChangeTag::Insert);
-    }
-}
-
-#[component]
-fn Base64Page(lang: ReadSignal<Lang>) -> impl IntoView {
-    use base64::{Engine as _, engine::general_purpose};
-
-    let (input, set_input) = create_signal(String::new());
-    let (output, set_output) = create_signal(String::new());
-
-    let encode = move |_| {
-        let encoded = general_purpose::STANDARD.encode(input.get().as_bytes());
-        set_output.set(encoded);
-    };
-
-    let decode = move |_| {
-        if let Ok(bytes) = general_purpose::STANDARD.decode(output.get().trim()) {
-            if let Ok(s) = String::from_utf8(bytes) {
-                set_input.set(s);
-            }
-        }
-    };
-
-    view! {
-        <div class="tool-container">
-            <Title text="Base64 Decoder/Encoder - 工具箱"/>
-            <Meta name="description" content="Encode and decode text to Base64 format with high performance WASM logic. Secure and local processing."/>
-            <h2 style="font-size:3rem;font-weight:900;margin:0">
-                {move || match lang.get() {
-                    Lang::En => "Base64 Utility",
-                    Lang::Zh => "Base64 工具",
-                }}
-            </h2>
-            <div class="tool-grid">
-                <div class="box">
-                    <div class="box-label">
-                        {move || match lang.get() {
-                            Lang::En => "Text / UTF-8",
-                            Lang::Zh => "原始文字 / UTF-8",
-                        }}
-                    </div>
-                    <textarea 
-                        prop:value=input
-                        on:input=move |ev| set_input.set(event_target_value(&ev))
-                        placeholder="..."
-                    ></textarea>
-                    <button class="btn" style="margin-top:10px; width:100%" on:click=encode>
-                        {move || match lang.get() {
-                            Lang::En => "Encode ➔",
-                            Lang::Zh => "編碼 ➔",
-                        }}
-                    </button>
-                </div>
-                <div class="box">
-                    <div class="box-label">
-                        {move || match lang.get() {
-                            Lang::En => "Base64 Result",
-                            Lang::Zh => "Base64 結果",
-                        }}
-                    </div>
-                    <textarea 
-                        prop:value=output
-                        on:input=move |ev| set_output.set(event_target_value(&ev))
-                        placeholder="..."
-                    ></textarea>
-                    <button class="btn" style="margin-top:10px; width:100%" on:click=decode>
-                        {move || match lang.get() {
-                            Lang::En => "⬅ Decode",
-                            Lang::Zh => "⬅ 解碼",
-                        }}
-                    </button>
-                </div>
-            </div>
-        </div>
-    }
-}
-
-#[component]
-fn HomePage(lang: ReadSignal<Lang>) -> impl IntoView {
-    view! {
-        <div class="hero">
-            <Title text="WASM 工具箱 | Do Everything Like a God"/>
-            <Meta name="description" content="All-in-one developer toolbox powered by Rust WASM. Fast, secure, and SEO-friendly tools for daily development."/>
-            <h1>
-                {move || match lang.get() {
-                    Lang::En => "Do Everything Like a God",
-                    Lang::Zh => "做甚麼都有如神助",
-                }}
-            </h1>
-            <p>
-                {move || match lang.get() {
-                    Lang::En => "Empowering your workflow with divine efficiency. Simple, clean, and ridiculously fast.",
-                    Lang::Zh => "賦予你的工作流神一般的效率。簡單、乾淨、快得不可思議。",
-                }}
-            </p>
-            <a href="#" class="btn">
-                {move || match lang.get() {
-                    Lang::En => "Get Started",
-                    Lang::Zh => "立即開始",
-                }}
-            </a>
         </div>
     }
 }

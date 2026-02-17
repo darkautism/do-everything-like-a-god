@@ -28,21 +28,79 @@ jobs:
       - name: Post-build SEO Optimization
         working-directory: dist
         run: |
-          # Robust SEO directory creation
           declare -A titles
-          titles["base64"]="Base64 Utility"
-          titles["json"]="JSON Tool"
-          titles["hash"]="Hash Utility"
-          # ... add others as needed for verification
+          declare -A descriptions
+          
+          titles["base64"]="Base64 編碼解碼工具 | Base64 Encoder/Decoder"
+          descriptions["base64"]="線上 Base64 編碼解碼工具，免費、快速、客戶端處理。支援標準 Base64 編碼解碼。"
+          
+          titles["base32"]="Base32 編碼工具 | Base32 Encoder"
+          descriptions["base32"]="線上 Base32 編碼工具，安全的資料編碼方式。"
+          
+          titles["base58"]="Base58 編碼工具 | Base58 Encoder"
+          descriptions["base58"]="線上 Base58 編碼工具，比特幣地址使用的編碼方式。"
+          
+          titles["html-escape"]="HTML Escape 轉義工具 | HTML Entity Encoder"
+          descriptions["html-escape"]="線上 HTML 特殊字元轉義工具，防止 XSS 攻擊。"
+          
+          titles["url-escape"]="URL Escape 編碼工具 | URL Encoder"
+          descriptions["url-escape"]="線上 URL 編碼解碼工具，處理特殊字元。"
+          
+          titles["json"]="JSON 格式化工具 | JSON Formatter"
+          descriptions["json"]="線上 JSON 格式化、驗證、壓縮工具，支援語法高亮。"
+          
+          titles["hash"]="Hash 產生器 | Hash Generator"
+          descriptions["hash"]="線上 Hash 產生器，支援 MD5、SHA-1、SHA-256、SHA-512、bcrypt 等。"
+          
+          titles["aes"]="AES 加密解密工具 | AES Encryption"
+          descriptions["aes"]="線上 AES 加密解密工具，支援 AES-128/192/256，客戶端處理確保安全。"
+          
+          titles["jwt"]="JWT 解碼工具 | JWT Decoder"
+          descriptions["jwt"]="線上 JWT 解碼工具，解析 JSON Web Token 標頭和payload，不會驗證簽章。"
+          
+          titles["uuid"]="UUID 產生器 | UUID Generator"
+          descriptions["uuid"]="線上 UUID 產生器，支援 UUID v1、v4，批量產生。"
+          
+          titles["regex"]="正則表達式測試工具 | Regex Tester"
+          descriptions["regex"]="線上正則表達式測試工具，即時匹配，即時預覽。"
+          
+          titles["timestamp"]="時間戳轉換工具 | Timestamp Converter"
+          descriptions["timestamp"]="線上 Unix 時間戳轉換工具，支援多種格式互相轉換。"
+          
+          titles["base-conv"]="進制轉換工具 | Base Converter"
+          descriptions["base-conv"]="線上進制轉換工具，支援二進制、八進制、十進制、十六進制互相轉換。"
+          
+          titles["diff"]="文字差異比較工具 | Diff Checker"
+          descriptions["diff"]="線上文字差異比較工具，顯示新增、刪除、修改行。"
+          
+          titles["cron"]="Cron 表達式解析工具 | Cron Expression Parser"
+          descriptions["cron"]="線上 Cron 表達式解析工具，解释 Cron 排程語法。"
+          
+          titles["image-base64"]="圖片 Base64 轉換工具 | Image to Base64"
+          descriptions["image-base64"]="線上圖片轉 Base64 編碼工具，適用於 CSS 和 HTML 內嵌圖片。"
           
           echo "Starting directory creation..."
-          for dir in base64 html-escape url-escape json hash jwt uuid regex timestamp base-conv diff; do
+          for dir in base64 html-escape url-escape json hash jwt uuid regex timestamp base-conv diff cron image-base64; do
             mkdir -p "$dir"
             cp index.html "$dir/index.html"
-            echo "Created $dir/index.html"
+            
+            title="${titles[$dir]}"
+            desc="${descriptions[$dir]}"
+            
+            sed -i "s|<title>.*</title>|<title>$title</title>|g" "$dir/index.html"
+            sed -i "s|<meta name=\"title\" content=\"[^\"]*\"|<meta name=\"title\" content=\"$title\"|g" "$dir/index.html"
+            sed -i "s|<meta name=\"description\" content=\"[^\"]*\"|<meta name=\"description\" content=\"$desc\"|g" "$dir/index.html"
+            sed -i "s|<meta property=\"og:title\" content=\"[^\"]*\"|<meta property=\"og:title\" content=\"$title\"|g" "$dir/index.html"
+            sed -i "s|<meta property=\"og:description\" content=\"[^\"]*\"|<meta property=\"og:description\" content=\"$desc\"|g" "$dir/index.html"
+            sed -i "s|<meta property=\"twitter:title\" content=\"[^\"]*\"|<meta property=\"twitter:title\" content=\"$title\"|g" "$dir/index.html"
+            sed -i "s|<meta property=\"twitter:description\" content=\"[^\"]*\"|<meta property=\"twitter:description\" content=\"$desc\"|g" "$dir/index.html"
+            
+            echo "Created $dir/index.html with SEO"
           done
           
-          # Final check of what will be deployed
+          cp ../public/sitemap.xml ./
+          cp ../public/robots.txt ./
+          
           echo "DIST CONTENTS:"
           find . -maxdepth 2
 

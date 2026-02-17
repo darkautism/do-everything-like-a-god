@@ -4,8 +4,82 @@
         <base href="/do-everything-like-a-god/"/>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        
+        <!-- Primary Meta Tags -->
+        <title>做甚麼都有如神助 - 線上開發者工具箱</title>
+        <meta name="title" content="做甚麼都有如神助 - 線上開發者工具箱"/>
+        <meta name="description" content="免費線上工具箱：Base64、JSON、Hash、UUID、正則表達式、時間戳轉換、AES 加密、JWT 解碼等開發者必備工具。快速、安全、客戶端處理。"/>
+        <meta name="keywords" content="線上工具,開發者工具,Base64,JSON,Hash,UUID,正則表達式,時間戳,AES加密,JWT,密碼學工具"/>
+        <meta name="author" content="Utility Tools"/>
+        <meta name="robots" content="index, follow"/>
+        
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="https://kautism.github.io/do-everything-like-a-god/"/>
+        <meta property="og:title" content="做甚麼都有如神助 - 線上開發者工具箱"/>
+        <meta property="og:description" content="免費線上工具箱：Base64、JSON、Hash、UUID、正則表達式、時間戳轉換、AES 加密、JWT 解碼等開發者必備工具。"/>
+        <meta property="og:site_name" content="做甚麼都有如神助"/>
+        
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image"/>
+        <meta property="twitter:url" content="https://kautism.github.io/do-everything-like-a-god/"/>
+        <meta property="twitter:title" content="做甚麼都有如神助 - 線上開發者工具箱"/>
+        <meta property="twitter:description" content="免費線上工具箱：Base64、JSON、Hash、UUID、正則表達式、時間戳轉換、AES 加密、JWT 解碼等開發者必備工具。"/>
+        
+        <!-- Hreflang for multilingual SEO -->
+        <link rel="alternate" hreflang="zh-TW" href="https://kautism.github.io/do-everything-like-a-god/"/>
+        <link rel="alternate" hreflang="en" href="https://kautism.github.io/do-everything-like-a-god/"/>
+        <link rel="alternate" hreflang="x-default" href="https://kautism.github.io/do-everything-like-a-god/"/>
+        
+        <!-- Canonical -->
+        <link rel="canonical" href="https://kautism.github.io/do-everything-like-a-god/"/>
+        
+        <!-- Favicon -->
+        <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>"/>
+        
+        <!-- PWA -->
+        <link rel="manifest" href="/do-everything-like-a-god/manifest.json"/>
+        <meta name="theme-color" content="#4ade80"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+        
+        <!-- JSON-LD Structured Data -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "做甚麼都有如神助",
+            "alternateName": "Developer Utilities",
+            "description": "免費線上開發者工具箱：Base64、JSON、Hash、UUID、正則表達式、時間戳轉換、AES 加密、JWT 解碼等",
+            "url": "https://kautism.github.io/do-everything-like-a-god/",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": [
+                "Base64 編碼解碼",
+                "JSON 格式化",
+                "Hash 產生器",
+                "UUID 產生器",
+                "正則表達式測試",
+                "時間戳轉換",
+                "AES 加密解密",
+                "JWT 解碼"
+            ]
+        }
+        </script>
+        
         <link data-trunk rel="scss" href="style/main.scss"/>
-        <title>做甚麼都有如神助</title>
+        <script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/do-everything-like-a-god/sw.js');
+                });
+            }
+        </script>
     </head>
     <body></body>
 </html>

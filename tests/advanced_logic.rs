@@ -1,8 +1,7 @@
 #[cfg(test)]
 mod advanced_tests {
-    use base64::{Engine as _, engine::general_purpose};
-    use sha2::{Sha256, Digest};
-    
+    use base64::{engine::general_purpose, Engine as _};
+
     #[test]
     fn test_large_base64() {
         let large_input = "a".repeat(1024 * 1024); // 1MB
@@ -24,8 +23,9 @@ mod advanced_tests {
             json_str.push_str("}");
         }
         json_str.push_str("}");
-        
-        let v: serde_json::Value = serde_json::from_str(&json_str).expect("Failed to parse deep JSON");
+
+        let v: serde_json::Value =
+            serde_json::from_str(&json_str).expect("Failed to parse deep JSON");
         let prettified = serde_json::to_string_pretty(&v).unwrap();
         assert!(prettified.lines().count() > depth);
     }

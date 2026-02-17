@@ -11,18 +11,32 @@ console_error_panic_hook = "0.1"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 base64 = "0.22"
+base32 = "0.5"
+bs58 = "0.5"
 html-escape = "0.2"
 urlencoding = "2.1"
-proptest = "1.4"
 wasm-bindgen = "0.2"
 wasm-bindgen-test = "0.3"
+wasm-bindgen-futures = "0.4"
 js-sys = "0.3"
-web-sys = { version = "0.3", features = ["File", "Blob", "FileReader", "FileList", "HtmlInputElement"] }
+web-sys = { version = "0.3", features = ["Document", "HtmlElement", "Window", "File", "Blob", "FileReader", "FileList", "HtmlInputElement", "HtmlTextAreaElement", "HtmlButtonElement", "Clipboard", "Navigator", "Location", "Storage"] }
 sha2 = "0.10"
 sha1 = "0.10"
+sha3 = "0.10"
 md-5 = "0.10"
+hmac = "0.12"
 hex = "0.4"
 uuid = { version = "1.8", features = ["v4", "js"] }
 regex = "1.10"
 chrono = "0.4"
 similar = "2.5"
+aes-gcm = "0.10"
+rand = "0.8"
+getrandom = { version = "0.2", features = ["js"] }
+
+[target.'cfg(not(target_arch = "wasm32"))'.dev-dependencies]
+proptest = "1.4"
+
+[features]
+default = []
+wasm = []
