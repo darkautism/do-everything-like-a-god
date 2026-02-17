@@ -31,53 +31,53 @@ jobs:
           declare -A titles
           declare -A descriptions
           
-          titles["base64"]="Base64 編碼解碼工具 | Base64 Encoder/Decoder"
-          descriptions["base64"]="線上 Base64 編碼解碼工具，免費、快速、客戶端處理。支援標準 Base64 編碼解碼。"
+          titles["base64"]="Base64 Encoder/Decoder"
+          descriptions["base64"]="Online Base64 encoder and decoder tool."
           
-          titles["base32"]="Base32 編碼工具 | Base32 Encoder"
-          descriptions["base32"]="線上 Base32 編碼工具，安全的資料編碼方式。"
+          titles["base32"]="Base32 Encoder"
+          descriptions["base32"]="Online Base32 encoding tool."
           
-          titles["base58"]="Base58 編碼工具 | Base58 Encoder"
-          descriptions["base58"]="線上 Base58 編碼工具，比特幣地址使用的編碼方式。"
+          titles["base58"]="Base58 Encoder"
+          descriptions["base58"]="Online Base58 encoding tool."
           
-          titles["html-escape"]="HTML Escape 轉義工具 | HTML Entity Encoder"
-          descriptions["html-escape"]="線上 HTML 特殊字元轉義工具，防止 XSS 攻擊。"
+          titles["html-escape"]="HTML Entity Encoder"
+          descriptions["html-escape"]="Online HTML escape tool for special characters."
           
-          titles["url-escape"]="URL Escape 編碼工具 | URL Encoder"
-          descriptions["url-escape"]="線上 URL 編碼解碼工具，處理特殊字元。"
+          titles["url-escape"]="URL Encoder"
+          descriptions["url-escape"]="Online URL encoding and decoding tool."
           
-          titles["json"]="JSON 格式化工具 | JSON Formatter"
-          descriptions["json"]="線上 JSON 格式化、驗證、壓縮工具，支援語法高亮。"
+          titles["json"]="JSON Formatter"
+          descriptions["json"]="Online JSON formatter, validator, and minifier."
           
-          titles["hash"]="Hash 產生器 | Hash Generator"
-          descriptions["hash"]="線上 Hash 產生器，支援 MD5、SHA-1、SHA-256、SHA-512、bcrypt 等。"
+          titles["hash"]="Hash Generator"
+          descriptions["hash"]="Online hash generator with MD5, SHA-1, SHA-256, etc."
           
-          titles["aes"]="AES 加密解密工具 | AES Encryption"
-          descriptions["aes"]="線上 AES 加密解密工具，支援 AES-128/192/256，客戶端處理確保安全。"
+          titles["aes"]="AES Encryption"
+          descriptions["aes"]="Online AES encryption and decryption tool."
           
-          titles["jwt"]="JWT 解碼工具 | JWT Decoder"
-          descriptions["jwt"]="線上 JWT 解碼工具，解析 JSON Web Token 標頭和payload，不會驗證簽章。"
+          titles["jwt"]="JWT Decoder"
+          descriptions["jwt"]="Online JWT decoder tool."
           
-          titles["uuid"]="UUID 產生器 | UUID Generator"
-          descriptions["uuid"]="線上 UUID 產生器，支援 UUID v1、v4，批量產生。"
+          titles["uuid"]="UUID Generator"
+          descriptions["uuid"]="Online UUID generator tool."
           
-          titles["regex"]="正則表達式測試工具 | Regex Tester"
-          descriptions["regex"]="線上正則表達式測試工具，即時匹配，即時預覽。"
+          titles["regex"]="Regex Tester"
+          descriptions["regex"]="Online regular expression tester."
           
-          titles["timestamp"]="時間戳轉換工具 | Timestamp Converter"
-          descriptions["timestamp"]="線上 Unix 時間戳轉換工具，支援多種格式互相轉換。"
+          titles["timestamp"]="Timestamp Converter"
+          descriptions["timestamp"]="Online Unix timestamp converter."
           
-          titles["base-conv"]="進制轉換工具 | Base Converter"
-          descriptions["base-conv"]="線上進制轉換工具，支援二進制、八進制、十進制、十六進制互相轉換。"
+          titles["base-conv"]="Base Converter"
+          descriptions["base-conv"]="Online number base converter."
           
-          titles["diff"]="文字差異比較工具 | Diff Checker"
-          descriptions["diff"]="線上文字差異比較工具，顯示新增、刪除、修改行。"
+          titles["diff"]="Diff Checker"
+          descriptions["diff"]="Online text difference comparison tool."
           
-          titles["cron"]="Cron 表達式解析工具 | Cron Expression Parser"
-          descriptions["cron"]="線上 Cron 表達式解析工具，解释 Cron 排程語法。"
+          titles["cron"]="Cron Expression Parser"
+          descriptions["cron"]="Online cron expression parser."
           
-          titles["image-base64"]="圖片 Base64 轉換工具 | Image to Base64"
-          descriptions["image-base64"]="線上圖片轉 Base64 編碼工具，適用於 CSS 和 HTML 內嵌圖片。"
+          titles["image-base64"]="Image to Base64"
+          descriptions["image-base64"]="Online image to Base64 converter."
           
           echo "Starting directory creation..."
           for dir in base64 html-escape url-escape json hash jwt uuid regex timestamp base-conv diff cron image-base64; do
@@ -87,13 +87,13 @@ jobs:
             title="${titles[$dir]}"
             desc="${descriptions[$dir]}"
             
-            sed -i "s|<title>.*</title>|<title>$title</title>|g" "$dir/index.html"
-            sed -i "s|<meta name=\"title\" content=\"[^\"]*\"|<meta name=\"title\" content=\"$title\"|g" "$dir/index.html"
-            sed -i "s|<meta name=\"description\" content=\"[^\"]*\"|<meta name=\"description\" content=\"$desc\"|g" "$dir/index.html"
-            sed -i "s|<meta property=\"og:title\" content=\"[^\"]*\"|<meta property=\"og:title\" content=\"$title\"|g" "$dir/index.html"
-            sed -i "s|<meta property=\"og:description\" content=\"[^\"]*\"|<meta property=\"og:description\" content=\"$desc\"|g" "$dir/index.html"
-            sed -i "s|<meta property=\"twitter:title\" content=\"[^\"]*\"|<meta property=\"twitter:title\" content=\"$title\"|g" "$dir/index.html"
-            sed -i "s|<meta property=\"twitter:description\" content=\"[^\"]*\"|<meta property=\"twitter:description\" content=\"$desc\"|g" "$dir/index.html"
+            perl -i -pe "s|<title>.*</title>|<title>\$title</title>|g" "$dir/index.html"
+            perl -i -pe "s|<meta name=\"title\" content=\"[^\"]*\"|<meta name=\"title\" content=\"\$title\"|g" "$dir/index.html"
+            perl -i -pe "s|<meta name=\"description\" content=\"[^\"]*\"|<meta name=\"description\" content=\"\$desc\"|g" "$dir/index.html"
+            perl -i -pe "s|<meta property=\"og:title\" content=\"[^\"]*\"|<meta property=\"og:title\" content=\"\$title\"|g" "$dir/index.html"
+            perl -i -pe "s|<meta property=\"og:description\" content=\"[^\"]*\"|<meta property=\"og:description\" content=\"\$desc\"|g" "$dir/index.html"
+            perl -i -pe "s|<meta property=\"twitter:title\" content=\"[^\"]*\"|<meta property=\"twitter:title\" content=\"\$title\"|g" "$dir/index.html"
+            perl -i -pe "s|<meta property=\"twitter:description\" content=\"[^\"]*\"|<meta property=\"twitter:description\" content=\"\$desc\"|g" "$dir/index.html"
             
             echo "Created $dir/index.html with SEO"
           done
