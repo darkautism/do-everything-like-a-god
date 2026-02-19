@@ -1,0 +1,12 @@
+{
+  "name": "do-everything-like-a-god",
+  "version": "1.0.0",
+  "description": "Developer utilities toolkit - E2E tests",
+  "private": true,
+  "devDependencies": {
+    "playwright": "^1.58.2"
+  },
+  "scripts": {
+    "test": "node e2e.test.js"
+  }
+}
