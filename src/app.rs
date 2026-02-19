@@ -129,7 +129,7 @@ pub fn App() -> impl IntoView {
     view! {
         <Title text="工具箱 | Useful Tools"/>
 
-        <Router>
+        <Router base="do-everything-like-a-god" trailing_slash=TrailingSlash::Redirect>
             <div class=move || format!("layout {}", match theme.get() { Theme::Light => "light", Theme::Dark => "" })>
                 <div class="mobile-header">
                     <button class="menu-toggle" aria-label="Toggle menu" on:click=move |_| set_sidebar_open.update(|v| *v = !*v)>
