@@ -1,6 +1,7 @@
 use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
+use std::sync::OnceLock;
 use wasm_bindgen::JsCast;
 
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -79,6 +80,100 @@ fn ToolHeader(
     }
 }
 
+fn resolve_router_base() -> &'static str {
+    static ROUTER_BASE: OnceLock<String> = OnceLock::new();
+    ROUTER_BASE
+        .get_or_init(|| {
+            let Some(window) = web_sys::window() else {
+                return String::new();
+            };
+            let Some(document) = window.document() else {
+                return String::new();
+            };
+            let Some(base_href) = document
+                .query_selector("base")
+                .ok()
+                .flatten()
+                .and_then(|el| el.get_attribute("href"))
+            else {
+                return String::new();
+            };
+            parse_router_base(&base_href)
+        })
+        .as_str()
+}
+
+fn parse_router_base(base_href: &str) -> String {
+    let href_lower = base_href.to_ascii_lowercase();
+    let mut path = if href_lower.starts_with("http://") || href_lower.starts_with("https://") {
+        let without_scheme = base_href
+            .find("://")
+            .map(|idx| &base_href[idx + 3..])
+            .unwrap_or(base_href);
+        format!(
+            "/{}",
+            without_scheme.split_once('/').map(|(_, p)| p).unwrap_or("")
+        )
+    } else {
+        base_href.to_string()
+    };
+
+    path = path
+        .split(['?', '#'])
+        .next()
+        .unwrap_or_default()
+        .to_string();
+
+    if !path.starts_with('/') && !path.is_empty() {
+        path = format!("/{path}");
+    }
+
+    if path.ends_with('/') {
+        path.pop();
+    }
+
+    path
+}
+
+#[cfg(test)]
+mod router_base_tests {
+    use super::parse_router_base;
+
+    #[test]
+    fn test_parse_router_base_gh_pages_subpath() {
+        assert_eq!(
+            parse_router_base("/do-everything-like-a-god/"),
+            "/do-everything-like-a-god".to_string()
+        );
+    }
+
+    #[test]
+    fn test_parse_router_base_custom_domain_root() {
+        assert_eq!(parse_router_base("/"), "".to_string());
+    }
+
+    #[test]
+    fn test_parse_router_base_absolute_url() {
+        assert_eq!(
+            parse_router_base("https://tools.example.com/app/"),
+            "/app".to_string()
+        );
+    }
+
+    #[test]
+    fn test_parse_router_base_relative_path() {
+        assert_eq!(parse_router_base("app/"), "/app".to_string());
+    }
+
+    #[test]
+    fn test_parse_router_base_with_port_query_and_fragment() {
+        assert_eq!(
+            parse_router_base("http://localhost:8080/app/?x=1#y"),
+            "/app".to_string()
+        );
+    }
+}
+
 #[component]
 pub fn App() -> impl IntoView {
     provide_meta_context();
@@ -129,7 +224,7 @@ pub fn App() -> impl IntoView {
     view! {
         <Title text="工具箱 | Useful Tools"/>
 
-        <Router base="do-everything-like-a-god" trailing_slash=TrailingSlash::Redirect>
+        <Router base=resolve_router_base() trailing_slash=TrailingSlash::Redirect>
             <div class=move || format!("layout {}", match theme.get() { Theme::Light => "light", Theme::Dark => "" })>
                 <div class="mobile-header">
                     <button class="menu-toggle" aria-label="Toggle menu" on:click=move |_| set_sidebar_open.update(|v| *v = !*v)>
