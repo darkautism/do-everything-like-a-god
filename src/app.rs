@@ -82,8 +82,23 @@ fn ToolHeader(
 
 const ROUTER_BASE: &str = "/do-everything-like-a-god";
 
+static ROUTER_BASE_ONCE: OnceLock<String> = OnceLock::new();
+
 fn resolve_router_base() -> &'static str {
-    ROUTER_BASE
+    let s = ROUTER_BASE_ONCE.get_or_init(|| {
+        if let Some(window) = web_sys::window() {
+            if let Some(doc) = window.document() {
+                if let Ok(Some(base_el)) = doc.query_selector("base") {
+                    if let Some(href) = base_el.get_attribute("href") {
+                        let parsed = parse_router_base(&href);
+                        return parsed;
+                    }
+                }
+            }
+        }
+        ROUTER_BASE.to_string()
+    });
+    s.as_str()
 }
 
 fn parse_router_base(base_href: &str) -> String {
