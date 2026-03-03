@@ -83,6 +83,37 @@ body {
   color: var(--text);
 }
 
+.support-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  line-height: 1;
+}
+
+.support-btn:hover {
+  border-color: var(--accent);
+  transform: scale(1.05);
+}
+
+.support-btn.kofi:hover {
+  background: #F16061;
+  border-color: #F16061;
+}
+
+.support-btn.paypal:hover {
+  background: #00457C;
+  border-color: #00457C;
+}
+
 .category {
   margin-bottom: 24px;
 }
@@ -315,6 +346,43 @@ textarea {
   border-radius: 8px;
   color: var(--text);
   cursor: pointer;
+}
+
+.drop-zone {
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  color: var(--muted);
+  background: var(--bg);
+  transition: border-color 0.2s, color 0.2s, background-color 0.2s;
+}
+
+.drop-zone.active {
+  border-color: var(--accent);
+  color: var(--text);
+  background: var(--box-bg);
+}
+
+.convert-separator {
+  margin: 14px 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.convert-meta {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  word-break: break-word;
+}
+
+.download-btn {
+  display: inline-block;
+  margin-top: 14px;
+  text-decoration: none;
 }
 
 .hash-results {
