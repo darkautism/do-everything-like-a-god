@@ -133,6 +133,28 @@ fn parse_router_base(base_href: &str) -> String {
     path
 }
 
+fn output_wav_name(input_name: &str) -> String {
+    let stem = input_name
+        .rsplit_once('.')
+        .map(|(base, _)| base)
+        .unwrap_or(input_name)
+        .trim();
+    if stem.is_empty() {
+        "converted.wav".to_string()
+    } else {
+        format!("{stem}.wav")
+    }
+}
+
+fn convert_audio_to_wav_bytes(input: Vec<u8>) -> Result<Vec<u8>, String> {
+    let decoder = rodio::Decoder::try_from(std::io::Cursor::new(input))
+        .map_err(|e| format!("Decode failed: {e}"))?;
+    let mut writer = std::io::Cursor::new(Vec::new());
+    rodio::wav_to_writer(decoder, &mut writer)
+        .map_err(|e| format!("WAV conversion failed: {e}"))?;
+    Ok(writer.into_inner())
+}
+
 #[cfg(test)]
 mod router_base_tests {
     use super::parse_router_base;
@@ -235,6 +257,8 @@ pub fn App() -> impl IntoView {
                     <div class="sidebar-header">
                         <A href="" class="brand" on:click=move |_| set_sidebar_open.set(false)>"GOD MODE"</A>
                         <div class="header-buttons">
+                            <a href="https://ko-fi.com/kautism" target="_blank" rel="noopener" class="support-btn kofi" aria-label="Support on Ko-fi">"☕"</a>
+                            <a href="https://paypal.me/kautism" target="_blank" rel="noopener" class="support-btn paypal" aria-label="Support on PayPal">"💳"</a>
                             <button class="theme-switch" aria-label="Toggle theme" on:click=toggle_theme>
                                 {move || match theme.get() { Theme::Dark => "☀️", Theme::Light => "🌙" }}
                             </button>
@@ -244,6 +268,11 @@ pub fn App() -> impl IntoView {
                                 {move || match lang.get() { Lang::En => "中文", Lang::Zh => "EN", }}
                             </button>
                         </div>
+                    </div>
+
+                    <div class="category">
+                        <div class="category-title">"Convert"</div>
+                        <A href="audio-convert" class="nav-link" on:click=move |_| set_sidebar_open.set(false)>"Audio Convert"</A>
                     </div>
 
                     <div class="category">
@@ -285,6 +314,7 @@ pub fn App() -> impl IntoView {
                 <main class="main-content">
                     <Routes>
                         <Route path="" view=move || view! { <HomePage lang=lang /> }/>
+                        <Route path="/audio-convert" view=move || view! { <AudioConvertPage lang=lang /> }/>
                         <Route path="/base64" view=move || view! { <Base64Page lang=lang /> }/>
                         <Route path="/base32" view=move || view! { <Base32Page lang=lang /> }/>
                         <Route path="/base58" view=move || view! { <Base58Page lang=lang /> }/>
@@ -1200,6 +1230,189 @@ fn CronPage(lang: ReadSignal<Lang>) -> impl IntoView {
             <div class="box">
                 <div class="box-label">{move || match lang.get() { Lang::En => "Description", Lang::Zh => "描述", }}</div>
                 <div class="cron-desc">{description}</div>
+            </div>
+        </div>
+    }
+}
+
+// ==================== Audio Convert Page ====================
+#[component]
+fn AudioConvertPage(lang: ReadSignal<Lang>) -> impl IntoView {
+    let (download_url, set_download_url) = create_signal(String::new());
+    let (output_name, set_output_name) = create_signal(String::new());
+    let (status, set_status) = create_signal(String::new());
+    let (error, set_error) = create_signal(Option::<String>::None);
+    let (is_loading, set_loading) = create_signal(false);
+    let (drag_active, set_drag_active) = create_signal(false);
+
+    on_cleanup(move || {
+        let stale_url = download_url.get_untracked();
+        if !stale_url.is_empty() {
+            let _ = web_sys::Url::revoke_object_url(&stale_url);
+        }
+    });
+
+    let process_file: std::rc::Rc<dyn Fn(web_sys::File)> =
+        std::rc::Rc::new(move |file: web_sys::File| {
+            set_error.set(None);
+            set_loading.set(true);
+            set_status.set(format!("Converting {}", file.name()));
+            let stale_url = download_url.get_untracked();
+            if !stale_url.is_empty() {
+                let _ = web_sys::Url::revoke_object_url(&stale_url);
+            }
+            set_download_url.set(String::new());
+            set_output_name.set(String::new());
+
+            let output_file_name = output_wav_name(&file.name());
+            let original_size = file.size() as usize;
+            let reader = match web_sys::FileReader::new() {
+                Ok(r) => r,
+                Err(_) => {
+                    set_error.set(Some("Failed to initialize FileReader.".to_string()));
+                    set_loading.set(false);
+                    return;
+                }
+            };
+            let reader_c = reader.clone();
+
+            let onload = wasm_bindgen::closure::Closure::wrap(Box::new(move |_e: web_sys::Event| {
+                let array_buffer = match reader_c.result() {
+                    Ok(buf) => buf,
+                    Err(_) => {
+                        set_error.set(Some("Failed to read file bytes.".to_string()));
+                        set_loading.set(false);
+                        return;
+                    }
+                };
+                let input_bytes = js_sys::Uint8Array::new(&array_buffer).to_vec();
+                match convert_audio_to_wav_bytes(input_bytes) {
+                    Ok(wav_bytes) => {
+                        let stale_url = download_url.get_untracked();
+                        if !stale_url.is_empty() {
+                            let _ = web_sys::Url::revoke_object_url(&stale_url);
+                        }
+
+                        let wav_array = js_sys::Uint8Array::from(wav_bytes.as_slice());
+                        let chunks = js_sys::Array::new();
+                        chunks.push(&wav_array.buffer());
+                        match web_sys::Blob::new_with_u8_array_sequence(&chunks)
+                            .and_then(|blob| web_sys::Url::create_object_url_with_blob(&blob))
+                        {
+                            Ok(url) => {
+                                set_download_url.set(url);
+                                set_output_name.set(output_file_name.clone());
+                                set_status.set(format!(
+                                    "Input {} bytes -> Output {} bytes",
+                                    original_size,
+                                    wav_bytes.len()
+                                ));
+                            }
+                            Err(_) => {
+                                set_error
+                                    .set(Some("Failed to build downloadable file.".to_string()));
+                            }
+                        }
+                    }
+                    Err(e) => {
+                        set_error.set(Some(e));
+                    }
+                }
+
+                set_loading.set(false);
+            }) as Box<dyn FnMut(_)>);
+
+            let onerror =
+                wasm_bindgen::closure::Closure::wrap(Box::new(move |_e: web_sys::Event| {
+                    set_error.set(Some("Failed to read file.".to_string()));
+                    set_loading.set(false);
+                }) as Box<dyn FnMut(_)>);
+
+            reader.set_onload(Some(onload.as_ref().unchecked_ref()));
+            reader.set_onerror(Some(onerror.as_ref().unchecked_ref()));
+            if reader.read_as_array_buffer(&file).is_err() {
+                set_error.set(Some("Failed to start file read.".to_string()));
+                set_loading.set(false);
+            }
+            onload.forget();
+            onerror.forget();
+        });
+
+    let process_file_for_input = process_file.clone();
+    let on_file_change = move |ev: ev::Event| {
+        let target = event_target::<web_sys::HtmlInputElement>(&ev);
+        if let Some(files) = target.files() {
+            if let Some(file) = files.get(0) {
+                process_file_for_input(file);
+            }
+        }
+    };
+
+    let process_file_for_drop = process_file.clone();
+    let on_drop = move |ev: ev::DragEvent| {
+        ev.prevent_default();
+        set_drag_active.set(false);
+        if let Some(files) = ev.data_transfer().and_then(|transfer| transfer.files()) {
+            if let Some(file) = files.get(0) {
+                process_file_for_drop(file);
+            }
+        }
+    };
+
+    let on_drag_over = move |ev: ev::DragEvent| {
+        ev.prevent_default();
+        set_drag_active.set(true);
+    };
+    let on_drag_leave = move |ev: ev::DragEvent| {
+        ev.prevent_default();
+        set_drag_active.set(false);
+    };
+
+    view! {
+        <div class="tool-container">
+            <ToolHeader lang=lang title_en="Audio Converter" title_zh="音訊轉換器"/>
+            <div class="box">
+                <div class="box-label">{move || match lang.get() { Lang::En => "rodio capability", Lang::Zh => "rodio 能力說明", }}</div>
+                <div class="convert-meta">{move || match lang.get() {
+                    Lang::En => "Input decode support in this build: FLAC, MP3, MP4/AAC, OGG/Vorbis, WAV.",
+                    Lang::Zh => "此版本可解碼輸入：FLAC、MP3、MP4/AAC、OGG/Vorbis、WAV。",
+                }}</div>
+                <div class="convert-meta">{move || match lang.get() {
+                    Lang::En => "Output support: WAV only (rodio has no general multi-format encoder API).",
+                    Lang::Zh => "輸出目前僅支援 WAV（rodio 沒有通用多格式編碼 API）。",
+                }}</div>
+            </div>
+            <div class="box">
+                <div
+                    class=move || if drag_active.get() { "drop-zone active" } else { "drop-zone" }
+                    on:dragover=on_drag_over
+                    on:dragleave=on_drag_leave
+                    on:drop=on_drop
+                >
+                    {move || match lang.get() {
+                        Lang::En => "Drop an audio file here",
+                        Lang::Zh => "將音訊檔拖曳到這裡",
+                    }}
+                </div>
+                <div class="convert-separator">{move || match lang.get() { Lang::En => "or upload", Lang::Zh => "或上傳檔案", }}</div>
+                <input type="file" accept=".flac,.mp3,.mp4,.m4a,.ogg,.wav,audio/*" on:change=on_file_change class="file-input"/>
+                {move || if is_loading.get() { view! { <div class="loading">"..."</div> } } else { view! { <div></div> } }}
+                <div class="convert-meta">{status}</div>
+                {move || error.get().map(|e| view! { <div class="error">{e}</div> })}
+                {move || {
+                    if download_url.get().is_empty() {
+                        view! { <div></div> }.into_view()
+                    } else {
+                        view! {
+                            <div>
+                                <a class="btn download-btn" href=download_url download=move || output_name.get()>
+                                    {move || match lang.get() { Lang::En => "Download WAV", Lang::Zh => "下載 WAV", }}
+                                </a>
+                            </div>
+                        }
+                            .into_view()
+                    }
+                }}
             </div>
         </div>
     }

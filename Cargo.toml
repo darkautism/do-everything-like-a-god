@@ -19,7 +19,7 @@ wasm-bindgen = "0.2"
 wasm-bindgen-test = "0.3"
 wasm-bindgen-futures = "0.4"
 js-sys = "0.3"
-web-sys = { version = "0.3", features = ["Document", "HtmlElement", "Window", "File", "Blob", "FileReader", "FileList", "HtmlInputElement", "HtmlTextAreaElement", "HtmlButtonElement", "Clipboard", "Navigator", "Location", "Storage"] }
+web-sys = { version = "0.3", features = ["Document", "HtmlElement", "Window", "File", "Blob", "FileReader", "FileList", "HtmlInputElement", "HtmlTextAreaElement", "HtmlButtonElement", "Clipboard", "Navigator", "Location", "Storage", "DataTransfer", "DragEvent", "Url"] }
 sha2 = "0.10"
 sha1 = "0.10"
 sha3 = "0.10"
@@ -33,9 +33,12 @@ similar = "2.5"
 aes-gcm = "0.10"
 rand = "0.8"
 getrandom = { version = "0.2", features = ["js"] }
+rodio = { version = "0.22", default-features = false, features = ["flac", "mp3", "mp4", "vorbis", "wav", "wav_output"] }
 
 [target.'cfg(not(target_arch = "wasm32"))'.dev-dependencies]
 proptest = "1.4"
+thirtyfour = "0.32"
+tokio = { version = "1", features = ["full"] }
 
 [features]
 default = []

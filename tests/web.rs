@@ -93,6 +93,7 @@ fn test_all_tool_pages_exist() {
     let html = body.inner_html();
 
     assert!(html.contains("Base64"));
+    assert!(html.contains("Audio Convert"));
     assert!(html.contains("Base32"));
     assert!(html.contains("Base58"));
     assert!(html.contains("Hash"));
@@ -117,6 +118,7 @@ fn test_category_sections() {
     let html = body.inner_html();
 
     assert!(html.contains("Encoders"));
+    assert!(html.contains("Convert"));
     assert!(html.contains("Cryptography"));
     assert!(html.contains("Development"));
     assert!(html.contains("Utilities"));

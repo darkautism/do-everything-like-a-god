@@ -5,10 +5,6 @@
 .DS_Store
 .env
 .env.local
-node_modules/
 *.swp
 *.swo
 *~
-*.mjs
-!e2e.test.js
-package-lock.json
